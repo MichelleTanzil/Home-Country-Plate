@@ -1,5 +1,6 @@
+using Domain;
 using Microsoft.EntityFrameworkCore;
-// using Domain;
+
 
 namespace Persistence
 {
@@ -7,6 +8,13 @@ namespace Persistence
   {
     public DataContext(DbContextOptions options) : base(options)
     {
+    }
+    public DbSet<Product> Products { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+      base.OnModelCreating(builder);
+
     }
   }
 }

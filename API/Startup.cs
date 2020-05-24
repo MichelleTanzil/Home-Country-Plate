@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Persistence;
 using Microsoft.EntityFrameworkCore;
+using MediatR;
 
 namespace API
 {
@@ -31,6 +32,7 @@ namespace API
       {
         opt.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
       });
+      // services.AddMediatR(typeof(List.Handler).Assembly);
       services.AddControllers();
     }
 

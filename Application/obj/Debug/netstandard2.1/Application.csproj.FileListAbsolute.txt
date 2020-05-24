@@ -1,0 +1,14 @@
+C:\Users\MTanzil\Documents\projects\home_country_plate\Application\bin\Debug\netstandard2.1\Application.deps.json
+C:\Users\MTanzil\Documents\projects\home_country_plate\Application\bin\Debug\netstandard2.1\Application.dll
+C:\Users\MTanzil\Documents\projects\home_country_plate\Application\bin\Debug\netstandard2.1\Application.pdb
+C:\Users\MTanzil\Documents\projects\home_country_plate\Application\bin\Debug\netstandard2.1\Domain.dll
+C:\Users\MTanzil\Documents\projects\home_country_plate\Application\bin\Debug\netstandard2.1\Persistence.dll
+C:\Users\MTanzil\Documents\projects\home_country_plate\Application\bin\Debug\netstandard2.1\Domain.pdb
+C:\Users\MTanzil\Documents\projects\home_country_plate\Application\bin\Debug\netstandard2.1\Persistence.pdb
+C:\Users\MTanzil\Documents\projects\home_country_plate\Application\obj\Debug\netstandard2.1\Application.csprojAssemblyReference.cache
+C:\Users\MTanzil\Documents\projects\home_country_plate\Application\obj\Debug\netstandard2.1\Application.csproj.CoreCompileInputs.cache
+C:\Users\MTanzil\Documents\projects\home_country_plate\Application\obj\Debug\netstandard2.1\Application.AssemblyInfoInputs.cache
+C:\Users\MTanzil\Documents\projects\home_country_plate\Application\obj\Debug\netstandard2.1\Application.AssemblyInfo.cs
+C:\Users\MTanzil\Documents\projects\home_country_plate\Application\obj\Debug\netstandard2.1\Application.csproj.CopyComplete
+C:\Users\MTanzil\Documents\projects\home_country_plate\Application\obj\Debug\netstandard2.1\Application.dll
+C:\Users\MTanzil\Documents\projects\home_country_plate\Application\obj\Debug\netstandard2.1\Application.pdb

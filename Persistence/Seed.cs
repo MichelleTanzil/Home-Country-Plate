@@ -4,13 +4,13 @@ using Domain;
 
 namespace Persistence
 {
-  public class Seed
-  {
-    public static void SeedData(DataContext context)
+    public class Seed
     {
-      if (!context.Products.Any())
-      {
-        var products = new List<Product>
+        public static void SeedData(DataContext context)
+        {
+            if (!context.Products.Any())
+            {
+                var products = new List<Product>
         {
           new Product
           {
@@ -19,6 +19,7 @@ namespace Persistence
             Category="Japanese",
             City="Torrance",
             State = "CA",
+            Price= 10.15f
           },
           new Product
           {
@@ -27,6 +28,7 @@ namespace Persistence
             Category="Italian",
             City="Los Angeles",
             State = "CA",
+            Price=6.0f
           },
           new Product
           {
@@ -35,6 +37,7 @@ namespace Persistence
             Category="Hotpot",
             City="Lake Forest",
             State = "CA",
+            Price=16.99f
           },
           new Product
           {
@@ -43,6 +46,7 @@ namespace Persistence
             Category="Drink",
             City="Irvine",
             State = "CA",
+            Price=6.05f
           },
           new Product
           {
@@ -51,12 +55,13 @@ namespace Persistence
             Category="Mexican",
             City="Santa Ana",
             State = "CA",
+            Price=7.5f
           },
         };
 
-        context.Products.AddRange(products);
-        context.SaveChanges();
-      }
+                context.Products.AddRange(products);
+                context.SaveChanges();
+            }
+        }
     }
-  }
 }

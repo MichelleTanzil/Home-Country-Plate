@@ -26,4 +26,3 @@ const App: React.FC<RouteComponentProps> = ({ location }) => {
 }
 
 export default withRouter(App);
-

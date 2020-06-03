@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Nadia nguyen\\OneDrive\\Documents\\Projects\\Home-Country-Plate\\Domain\\Domain.csproj": {}
+    "C:\\Users\\MTanzil\\Documents\\projects\\home_country_plate\\Domain\\Domain.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Nadia nguyen\\OneDrive\\Documents\\Projects\\Home-Country-Plate\\Domain\\Domain.csproj": {
+    "C:\\Users\\MTanzil\\Documents\\projects\\home_country_plate\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Nadia nguyen\\OneDrive\\Documents\\Projects\\Home-Country-Plate\\Domain\\Domain.csproj",
+        "projectUniqueName": "C:\\Users\\MTanzil\\Documents\\projects\\home_country_plate\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "C:\\Users\\Nadia nguyen\\OneDrive\\Documents\\Projects\\Home-Country-Plate\\Domain\\Domain.csproj",
-        "packagesPath": "C:\\Users\\Nadia nguyen\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Nadia nguyen\\OneDrive\\Documents\\Projects\\Home-Country-Plate\\Domain\\obj\\",
+        "projectPath": "C:\\Users\\MTanzil\\Documents\\projects\\home_country_plate\\Domain\\Domain.csproj",
+        "packagesPath": "C:\\Users\\MTanzil\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\MTanzil\\Documents\\projects\\home_country_plate\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Nadia nguyen\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\MTanzil\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.1"
@@ -53,7 +53,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.200\\RuntimeIdentifierGraph.json"
         }
       }
     }

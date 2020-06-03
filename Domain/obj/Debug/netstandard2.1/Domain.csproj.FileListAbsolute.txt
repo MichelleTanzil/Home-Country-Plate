@@ -7,12 +7,3 @@ C:\Users\MTanzil\Documents\projects\home_country_plate\Domain\obj\Debug\netstand
 C:\Users\MTanzil\Documents\projects\home_country_plate\Domain\obj\Debug\netstandard2.1\Domain.AssemblyInfo.cs
 C:\Users\MTanzil\Documents\projects\home_country_plate\Domain\obj\Debug\netstandard2.1\Domain.dll
 C:\Users\MTanzil\Documents\projects\home_country_plate\Domain\obj\Debug\netstandard2.1\Domain.pdb
-C:\Users\Nadia nguyen\OneDrive\Documents\Projects\Home-Country-Plate\Domain\bin\Debug\netstandard2.1\Domain.deps.json
-C:\Users\Nadia nguyen\OneDrive\Documents\Projects\Home-Country-Plate\Domain\bin\Debug\netstandard2.1\Domain.dll
-C:\Users\Nadia nguyen\OneDrive\Documents\Projects\Home-Country-Plate\Domain\bin\Debug\netstandard2.1\Domain.pdb
-C:\Users\Nadia nguyen\OneDrive\Documents\Projects\Home-Country-Plate\Domain\obj\Debug\netstandard2.1\Domain.csprojAssemblyReference.cache
-C:\Users\Nadia nguyen\OneDrive\Documents\Projects\Home-Country-Plate\Domain\obj\Debug\netstandard2.1\Domain.csproj.CoreCompileInputs.cache
-C:\Users\Nadia nguyen\OneDrive\Documents\Projects\Home-Country-Plate\Domain\obj\Debug\netstandard2.1\Domain.AssemblyInfoInputs.cache
-C:\Users\Nadia nguyen\OneDrive\Documents\Projects\Home-Country-Plate\Domain\obj\Debug\netstandard2.1\Domain.AssemblyInfo.cs
-C:\Users\Nadia nguyen\OneDrive\Documents\Projects\Home-Country-Plate\Domain\obj\Debug\netstandard2.1\Domain.dll
-C:\Users\Nadia nguyen\OneDrive\Documents\Projects\Home-Country-Plate\Domain\obj\Debug\netstandard2.1\Domain.pdb

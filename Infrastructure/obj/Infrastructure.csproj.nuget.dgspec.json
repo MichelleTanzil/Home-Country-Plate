@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Nadia nguyen\\OneDrive\\Documents\\Projects\\Home-Country-Plate\\Infrastructure\\Infrastructure.csproj": {}
+    "C:\\Users\\MTanzil\\Documents\\projects\\home_country_plate\\Infrastructure\\Infrastructure.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Nadia nguyen\\OneDrive\\Documents\\Projects\\Home-Country-Plate\\Application\\Application.csproj": {
+    "C:\\Users\\MTanzil\\Documents\\projects\\home_country_plate\\Application\\Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Nadia nguyen\\OneDrive\\Documents\\Projects\\Home-Country-Plate\\Application\\Application.csproj",
+        "projectUniqueName": "C:\\Users\\MTanzil\\Documents\\projects\\home_country_plate\\Application\\Application.csproj",
         "projectName": "Application",
-        "projectPath": "C:\\Users\\Nadia nguyen\\OneDrive\\Documents\\Projects\\Home-Country-Plate\\Application\\Application.csproj",
-        "packagesPath": "C:\\Users\\Nadia nguyen\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Nadia nguyen\\OneDrive\\Documents\\Projects\\Home-Country-Plate\\Application\\obj\\",
+        "projectPath": "C:\\Users\\MTanzil\\Documents\\projects\\home_country_plate\\Application\\Application.csproj",
+        "packagesPath": "C:\\Users\\MTanzil\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\MTanzil\\Documents\\projects\\home_country_plate\\Application\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Nadia nguyen\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\MTanzil\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.1"
@@ -28,11 +28,11 @@
         "frameworks": {
           "netstandard2.1": {
             "projectReferences": {
-              "C:\\Users\\Nadia nguyen\\OneDrive\\Documents\\Projects\\Home-Country-Plate\\Domain\\Domain.csproj": {
-                "projectPath": "C:\\Users\\Nadia nguyen\\OneDrive\\Documents\\Projects\\Home-Country-Plate\\Domain\\Domain.csproj"
+              "C:\\Users\\MTanzil\\Documents\\projects\\home_country_plate\\Domain\\Domain.csproj": {
+                "projectPath": "C:\\Users\\MTanzil\\Documents\\projects\\home_country_plate\\Domain\\Domain.csproj"
               },
-              "C:\\Users\\Nadia nguyen\\OneDrive\\Documents\\Projects\\Home-Country-Plate\\Persistence\\Persistence.csproj": {
-                "projectPath": "C:\\Users\\Nadia nguyen\\OneDrive\\Documents\\Projects\\Home-Country-Plate\\Persistence\\Persistence.csproj"
+              "C:\\Users\\MTanzil\\Documents\\projects\\home_country_plate\\Persistence\\Persistence.csproj": {
+                "projectPath": "C:\\Users\\MTanzil\\Documents\\projects\\home_country_plate\\Persistence\\Persistence.csproj"
               }
             }
           }
@@ -70,24 +70,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.200\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Nadia nguyen\\OneDrive\\Documents\\Projects\\Home-Country-Plate\\Domain\\Domain.csproj": {
+    "C:\\Users\\MTanzil\\Documents\\projects\\home_country_plate\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Nadia nguyen\\OneDrive\\Documents\\Projects\\Home-Country-Plate\\Domain\\Domain.csproj",
+        "projectUniqueName": "C:\\Users\\MTanzil\\Documents\\projects\\home_country_plate\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "C:\\Users\\Nadia nguyen\\OneDrive\\Documents\\Projects\\Home-Country-Plate\\Domain\\Domain.csproj",
-        "packagesPath": "C:\\Users\\Nadia nguyen\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Nadia nguyen\\OneDrive\\Documents\\Projects\\Home-Country-Plate\\Domain\\obj\\",
+        "projectPath": "C:\\Users\\MTanzil\\Documents\\projects\\home_country_plate\\Domain\\Domain.csproj",
+        "packagesPath": "C:\\Users\\MTanzil\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\MTanzil\\Documents\\projects\\home_country_plate\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Nadia nguyen\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\MTanzil\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.1"
@@ -123,24 +123,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.200\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Nadia nguyen\\OneDrive\\Documents\\Projects\\Home-Country-Plate\\Infrastructure\\Infrastructure.csproj": {
+    "C:\\Users\\MTanzil\\Documents\\projects\\home_country_plate\\Infrastructure\\Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Nadia nguyen\\OneDrive\\Documents\\Projects\\Home-Country-Plate\\Infrastructure\\Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\MTanzil\\Documents\\projects\\home_country_plate\\Infrastructure\\Infrastructure.csproj",
         "projectName": "Infrastructure",
-        "projectPath": "C:\\Users\\Nadia nguyen\\OneDrive\\Documents\\Projects\\Home-Country-Plate\\Infrastructure\\Infrastructure.csproj",
-        "packagesPath": "C:\\Users\\Nadia nguyen\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Nadia nguyen\\OneDrive\\Documents\\Projects\\Home-Country-Plate\\Infrastructure\\obj\\",
+        "projectPath": "C:\\Users\\MTanzil\\Documents\\projects\\home_country_plate\\Infrastructure\\Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\MTanzil\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\MTanzil\\Documents\\projects\\home_country_plate\\Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Nadia nguyen\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\MTanzil\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.1"
@@ -151,8 +151,8 @@
         "frameworks": {
           "netstandard2.1": {
             "projectReferences": {
-              "C:\\Users\\Nadia nguyen\\OneDrive\\Documents\\Projects\\Home-Country-Plate\\Application\\Application.csproj": {
-                "projectPath": "C:\\Users\\Nadia nguyen\\OneDrive\\Documents\\Projects\\Home-Country-Plate\\Application\\Application.csproj"
+              "C:\\Users\\MTanzil\\Documents\\projects\\home_country_plate\\Application\\Application.csproj": {
+                "projectPath": "C:\\Users\\MTanzil\\Documents\\projects\\home_country_plate\\Application\\Application.csproj"
               }
             }
           }
@@ -180,24 +180,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.200\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Nadia nguyen\\OneDrive\\Documents\\Projects\\Home-Country-Plate\\Persistence\\Persistence.csproj": {
+    "C:\\Users\\MTanzil\\Documents\\projects\\home_country_plate\\Persistence\\Persistence.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Nadia nguyen\\OneDrive\\Documents\\Projects\\Home-Country-Plate\\Persistence\\Persistence.csproj",
+        "projectUniqueName": "C:\\Users\\MTanzil\\Documents\\projects\\home_country_plate\\Persistence\\Persistence.csproj",
         "projectName": "Persistence",
-        "projectPath": "C:\\Users\\Nadia nguyen\\OneDrive\\Documents\\Projects\\Home-Country-Plate\\Persistence\\Persistence.csproj",
-        "packagesPath": "C:\\Users\\Nadia nguyen\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Nadia nguyen\\OneDrive\\Documents\\Projects\\Home-Country-Plate\\Persistence\\obj\\",
+        "projectPath": "C:\\Users\\MTanzil\\Documents\\projects\\home_country_plate\\Persistence\\Persistence.csproj",
+        "packagesPath": "C:\\Users\\MTanzil\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\MTanzil\\Documents\\projects\\home_country_plate\\Persistence\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Nadia nguyen\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\MTanzil\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.1"
@@ -208,8 +208,8 @@
         "frameworks": {
           "netstandard2.1": {
             "projectReferences": {
-              "C:\\Users\\Nadia nguyen\\OneDrive\\Documents\\Projects\\Home-Country-Plate\\Domain\\Domain.csproj": {
-                "projectPath": "C:\\Users\\Nadia nguyen\\OneDrive\\Documents\\Projects\\Home-Country-Plate\\Domain\\Domain.csproj"
+              "C:\\Users\\MTanzil\\Documents\\projects\\home_country_plate\\Domain\\Domain.csproj": {
+                "projectPath": "C:\\Users\\MTanzil\\Documents\\projects\\home_country_plate\\Domain\\Domain.csproj"
               }
             }
           }
@@ -247,7 +247,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.200\\RuntimeIdentifierGraph.json"
         }
       }
     }

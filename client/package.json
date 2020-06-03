@@ -3,31 +3,25 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.5.0",
+    "@testing-library/user-event": "^7.2.1",
     "@types/jest": "^24.9.1",
-    "@types/node": "^12.12.30",
-    "@types/react": "^16.9.25",
-    "@types/react-dom": "^16.9.5",
-    "@types/react-router-dom": "^5.1.4",
-    "@types/react-widgets": "^4.4.2",
-    "@types/revalidate": "^1.1.2",
-    "@types/uuid": "^7.0.2",
+    "@types/node": "^12.12.38",
+    "@types/react": "^16.9.34",
+    "@types/react-dom": "^16.9.7",
     "axios": "^0.19.2",
+<<<<<<< HEAD
     "date-fns": "^2.14.0",
     "final-form": "^4.19.1",
     "mobx": "^5.15.4",
     "mobx-react-lite": "^2.0.7",
+=======
+>>>>>>> parent of dbc3283... added react component and changed the product model
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-final-form": "^6.3.0",
-    "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
-    "react-toastify": "^5.5.0",
-    "react-widgets": "^4.5.0",
-    "react-widgets-date-fns": "^4.1.0",
-    "revalidate": "^1.2.0",
-    "semantic-ui-react": "^0.88.1",
-    "typescript": "^3.7.5",
-    "uuid": "^7.0.3"
+    "typescript": "^3.7.5"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -34,9 +34,6 @@ namespace Persistence.Migrations
                     b.Property<string>("Image")
                         .HasColumnType("TEXT");
 
-                    b.Property<float>("Price")
-                        .HasColumnType("REAL");
-
                     b.Property<string>("State")
                         .HasColumnType("TEXT");
 

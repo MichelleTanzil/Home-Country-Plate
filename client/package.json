@@ -11,13 +11,10 @@
     "@types/react": "^16.9.34",
     "@types/react-dom": "^16.9.7",
     "axios": "^0.19.2",
-<<<<<<< HEAD
     "date-fns": "^2.14.0",
     "final-form": "^4.19.1",
     "mobx": "^5.15.4",
     "mobx-react-lite": "^2.0.7",
-=======
->>>>>>> parent of dbc3283... added react component and changed the product model
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",

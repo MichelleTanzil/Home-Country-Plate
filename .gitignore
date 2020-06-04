@@ -10,7 +10,6 @@ nupkg/
 
 bin
 obj
-appsettings.json
 *.db
 
 

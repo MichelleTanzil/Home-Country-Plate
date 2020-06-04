@@ -7,6 +7,7 @@ class ProductStore {
   @observable productRegistry = new Map();
   @observable products: IProduct[] = [];
   @observable product: IProduct | null = null;
+  @observable loadingInitial = false;
 
   @computed get productsByCategories() {
     return this.groupProductsByCategory(
@@ -14,7 +15,8 @@ class ProductStore {
     );
   }
 
-  groupProductsByCategory(products: IProduct[]) { // sorts all activities are reduces them into categories
+  groupProductsByCategory(products: IProduct[]) {
+    // sorts all products and reduces them into categories
     const productsSorted = products.sort((a, b) => {
       return a.category.localeCompare(b.category);
     });
@@ -31,13 +33,20 @@ class ProductStore {
 
   @action loadProducts = async () => {
     try {
+      this.loadingInitial = true;
       const products = await agent.Products.list();
       runInAction("loading products", () => {
         products.forEach((product) => {
           this.productRegistry.set(product.id, product);
         });
+        this.loadingInitial = false;
       });
-    } catch (error) {}
+    } catch (error) {
+      runInAction("load activities error", () => {
+        this.loadingInitial = false;
+      });
+      console.log(error);
+    }
   };
 }
 

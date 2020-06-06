@@ -32,8 +32,9 @@ class ProductStore {
   }
 
   @action loadProducts = async () => {
+    this.loadingInitial = true;
+
     try {
-      this.loadingInitial = true;
       const products = await agent.Products.list();
       runInAction("loading products", () => {
         products.forEach((product) => {

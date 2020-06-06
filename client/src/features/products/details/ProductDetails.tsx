@@ -5,7 +5,6 @@ import {
   Icon,
   Image,
   Grid,
-  GridColumn,
   Button,
   Segment,
   Divider,

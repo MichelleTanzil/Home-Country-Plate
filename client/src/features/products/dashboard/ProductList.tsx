@@ -7,6 +7,9 @@ import {
   Grid,
   Button,
   Icon,
+  Segment,
+  Header,
+  GridColumn,
 } from "semantic-ui-react";
 import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
@@ -20,14 +23,18 @@ const ProductList: React.FC = () => {
   }, [loadProducts]);
   return (
     <Fragment>
-      <p>Search bar will go here...</p>
-      <Grid divided>
-        {products.map(([group, products]) => (
-          <Grid.Column width={3} key={group}>
-            <Label size="large" color="olive">
+      <Segment>
+        <Icon name="search"></Icon>
+      </Segment>
+      {products.map(([group, products]) => (
+        <Grid>
+          <Grid.Column width={16}>
+            <Header dividing as="h1">
               {group}
-            </Label>
-            <Item.Group divided>
+            </Header>
+          </Grid.Column>
+          <Grid.Column width={3} key={group}>
+            <Item.Group>
               {products.map((product) => (
                 <List key={product.id}>
                   <Image
@@ -37,25 +44,29 @@ const ProductList: React.FC = () => {
                     to={`/products/${product.id}`}
                     rounded
                   />
-                  <List.Header as="h2">{product.title}</List.Header>
+                  <List.Header as="h3">{product.title}</List.Header>
                   <List.Item>
                     <List.Icon name="marker" />
                     <List.Content>
                       {product.city}, {product.state}
                     </List.Content>
                   </List.Item>
+                  <List.Item>
+                    <List.Icon name="dollar" />
+                    <List.Content>{product.price}</List.Content>
+                  </List.Item>
+                  <Button animated="vertical" color="teal" size="big" fluid>
+                    <Button.Content hidden>Add to cart</Button.Content>
+                    <Button.Content visible>
+                      <Icon name="shop" />
+                    </Button.Content>
+                  </Button>
                 </List>
               ))}
-              <Button animated="vertical" color="teal" size="large">
-                <Button.Content hidden>Add to cart</Button.Content>
-                <Button.Content visible>
-                  <Icon name="shop" />
-                </Button.Content>
-              </Button>
             </Item.Group>
           </Grid.Column>
-        ))}
-      </Grid>
+        </Grid>
+      ))}
     </Fragment>
   );
 };

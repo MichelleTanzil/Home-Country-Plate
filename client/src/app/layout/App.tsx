@@ -9,12 +9,14 @@ import {
 } from "react-router-dom";
 import { Container } from "semantic-ui-react";
 import ProductList from "../../features/products/dashboard/ProductList";
-import { ProductDetails } from "../../features/products/dashboard/ProductDetails";
+import ProductDetails from "../../features/products/dashboard/ProductDetails";
 import NotFound from "./NotFound";
+import { ToastContainer } from 'react-toastify';
 
 const App: React.FC<RouteComponentProps> = ({ location }) => {
   return (
     <>
+      <ToastContainer position='bottom-right' />
       <Navbar />
       <Route exact path="/" component={HomePage} />
       <Route

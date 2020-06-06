@@ -10,19 +10,19 @@ namespace Persistence {
             if (!userManager.Users.Any ()) {
                 var users = new List<AppUser> {
                     new AppUser {
-                        DisplayName = "Admin",
-                        UserName = "admin",
-                        Email = "admin@admin.com"
+                    DisplayName = "Admin",
+                    UserName = "admin",
+                    Email = "admin@admin.com"
                     },
                     new AppUser {
-                        DisplayName = "Nadia",
-                        UserName = "nadia",
-                        Email = "nadia@nadia.com"
+                    DisplayName = "Nadia",
+                    UserName = "nadia",
+                    Email = "nadia@nadia.com"
                     },
                     new AppUser {
-                        DisplayName = "Michelle",
-                        UserName = "michelle",
-                        Email = "michelle@michelle.com"
+                    DisplayName = "Michelle",
+                    UserName = "michelle",
+                    Email = "michelle@michelle.com"
                     }
                 };
 
@@ -39,6 +39,7 @@ namespace Persistence {
                     Category = "Japanese",
                     City = "Torrance",
                     State = "CA",
+                    Price = 10.15f
                     },
                     new Product {
                     Title = "Pizza",
@@ -46,6 +47,7 @@ namespace Persistence {
                     Category = "Italian",
                     City = "Los Angeles",
                     State = "CA",
+                    Price = 5.10f
                     },
                     new Product {
                     Title = "Hotpot",
@@ -53,6 +55,7 @@ namespace Persistence {
                     Category = "Hotpot",
                     City = "Lake Forest",
                     State = "CA",
+                    Price = 21.5f
                     },
                     new Product {
                     Title = "Boba",
@@ -60,6 +63,7 @@ namespace Persistence {
                     Category = "Drink",
                     City = "Irvine",
                     State = "CA",
+                    Price = 8
                     },
                     new Product {
                     Title = "Burrito",
@@ -67,6 +71,7 @@ namespace Persistence {
                     Category = "Mexican",
                     City = "Santa Ana",
                     State = "CA",
+                    Price = 5
                     },
                 };
 

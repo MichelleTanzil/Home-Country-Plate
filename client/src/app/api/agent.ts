@@ -1,7 +1,29 @@
 import axios, { AxiosResponse } from "axios";
 import { IProduct } from "../models/product";
+import { history } from "../..";
+import { toast } from "react-toastify";
 
 axios.defaults.baseURL = "http://localhost:5000/api";
+
+axios.interceptors.response.use(undefined, (error) => {
+  const { status, data, config } = error.response;
+  if (error.message === "Network error" && error.response === undefined) {
+    toast.error("Network error");
+  }
+  if (status === 404) {
+    history.push("/notfount"); //this works because in index.tsx App is wrapped in Router, makes it accessible in the agent
+  }
+  if (
+    status === 400 &&
+    config.method === "get" &&
+    data.errors.hasOenProperty("id")
+  ) {
+    history.push("/notfount");
+  }
+  if (status === 500) {
+    toast.error("Server error - check the terminal for more info");
+  }
+});
 
 const responseBody = (response: AxiosResponse) => response.data;
 
@@ -13,7 +35,7 @@ const requests = {
 };
 
 const Products = {
-  list: () :Promise<IProduct[]>=> requests.get("/products"),
+  list: (): Promise<IProduct[]> => requests.get("/products"),
   details: (id: string) => requests.get(`/products/${id}`),
   create: (product: IProduct) => requests.post("/activities", product),
   update: (id: string, product: IProduct) =>

@@ -2,9 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './app/layout/styles.css';
 import App from './app/layout/App';
+import 'react-toastify/dist/ReactToastify.min.css'
 import * as serviceWorker from './serviceWorker';
 import { Router } from 'react-router-dom';
-import {createBrowserHistory} from 'history';
+import { createBrowserHistory } from 'history';
 
 export const history = createBrowserHistory();
 

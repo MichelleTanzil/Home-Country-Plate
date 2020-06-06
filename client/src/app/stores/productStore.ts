@@ -42,7 +42,23 @@ class ProductStore {
         this.loadingInitial = false;
       });
     } catch (error) {
-      runInAction("load activities error", () => {
+      runInAction("load products error", () => {
+        this.loadingInitial = false;
+      });
+      console.log(error);
+    }
+  };
+
+  @action loadProduct = async (id: string) => {
+    try {
+      this.loadingInitial = true;
+      const product = await agent.Products.details(id);
+      runInAction("loading product", () => {
+        this.product = product;
+      });
+      this.loadingInitial = false;
+    } catch (error) {
+      runInAction("load product error", () => {
         this.loadingInitial = false;
       });
       console.log(error);

@@ -1,6 +1,8 @@
 using System;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using Application.Errors;
 using Domain;
 using FluentValidation;
 using MediatR;
@@ -33,15 +35,15 @@ namespace Application.User {
                 var user = await _userManager.FindByEmailAsync (request.Email);
 
                 if (user == null)
-                    throw new Exception ();
+                    throw new RestException (HttpStatusCode.Unauthorized);
 
-                var result = await _signInManager.CheckPasswordSignInAsync(user, request.Password, false);
+                var result = await _signInManager.CheckPasswordSignInAsync (user, request.Password, false);
 
-                if(result.Succeeded){
+                if (result.Succeeded) {
                     //generate token
                     return user;
                 }
-                throw new Exception();
+                throw new RestException (HttpStatusCode.Unauthorized);
             }
         }
     }

@@ -1,6 +1,7 @@
 using API.Middleware;
 using Application.Products;
 using Domain;
+using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -35,9 +36,8 @@ namespace API {
                 });
             });
             services.AddMediatR (typeof (List.Handler).Assembly);
-            services.AddControllers (opt => {
-                var policy = new AuthorizationPolicyBuilder ().RequireAuthenticatedUser ().Build ();
-                opt.Filters.Add (new AuthorizeFilter (policy));
+            services.AddControllers ().AddFluentValidation( cfg => {
+                cfg.RegisterValidatorsFromAssemblyContaining<Create>();
             });
 
             var builder = services.AddIdentityCore<AppUser> ();
@@ -52,7 +52,9 @@ namespace API {
         public void Configure (IApplicationBuilder app, IWebHostEnvironment env) {
             app.UseMiddleware<ErrorHandlingMiddleware>();
             if (env.IsDevelopment ()) {
-                app.UseDeveloperExceptionPage ();
+                // app.UseDeveloperExceptionPage ();
+            }else{
+                app.UseHsts();
             }
 
             // app.UseHttpsRedirection();

@@ -47,7 +47,7 @@ const ProductList: React.FC = () => {
                 </List>
               ))}
               <Button animated="vertical" color="teal" size="large">
-                <Button.Content hidden>Shop</Button.Content>
+                <Button.Content hidden>Add to cart</Button.Content>
                 <Button.Content visible>
                   <Icon name="shop" />
                 </Button.Content>

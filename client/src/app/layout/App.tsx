@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React from "react";
 import { HomePage } from "../../features/home/HomePage";
 import { Navbar } from "../../features/navbar/Navbar";
 import {
@@ -13,8 +13,6 @@ import ProductDetails from "../../features/products/details/ProductDetails";
 import NotFound from "./NotFound";
 import ProductForm from "../../features/products/form/ProductForm";
 import { ToastContainer } from "react-toastify";
-import LoadingComponent from "./LoadingComponent";
-import CommonStore from "../stores/commonStore";
 
 const App: React.FC<RouteComponentProps> = ({ location }) => {
   //TODO: Add when jwt is configured

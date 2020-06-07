@@ -11,14 +11,14 @@ axios.interceptors.response.use(undefined, (error) => {
     toast.error("Network error");
   }
   if (status === 404) {
-    history.push("/notfount"); //this works because in index.tsx App is wrapped in Router, makes it accessible in the agent
+    history.push("/notfound"); //this works because in index.tsx App is wrapped in Router, makes it accessible in the agent
   }
   if (
     status === 400 &&
     config.method === "get" &&
     data.errors.hasOenProperty("id")
   ) {
-    history.push("/notfount");
+    history.push("/notfound");
   }
   if (status === 500) {
     toast.error("Server error - check the terminal for more info");
@@ -38,8 +38,8 @@ const Products = {
   list: (): Promise<IProduct[]> => requests.get("/products"),
   details: (id: string) => requests.get(`/products/${id}`),
   create: (product: IProduct) => requests.post("/activities", product),
-  update: (id: string, product: IProduct) =>
-    requests.put(`/products/${id}`, product),
+  update: (product: IProduct) =>
+    requests.put(`/products/${product.id}`, product),
   delete: (id: string) => requests.delete(`/products/${id}`),
 };
 

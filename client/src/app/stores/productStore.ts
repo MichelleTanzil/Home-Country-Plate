@@ -2,12 +2,15 @@ import { observable, action, runInAction, computed } from "mobx";
 import { createContext } from "react";
 import { IProduct } from "../models/product";
 import agent from "../api/agent";
+import { history } from "../..";
+import { toast } from "react-toastify";
 
 class ProductStore {
   @observable productRegistry = new Map();
   @observable products: IProduct[] = [];
   @observable product: IProduct | null = null;
   @observable loadingInitial = false;
+  @observable submitting = false;
 
   @computed get productsByCategories() {
     return this.groupProductsByCategory(
@@ -51,16 +54,67 @@ class ProductStore {
   };
 
   @action loadProduct = async (id: string) => {
-    try {
+    let product = this.getProduct(id);
+    if (product) {
+      this.product = product;
+      return product;
+    } else {
       this.loadingInitial = true;
-      const product = await agent.Products.details(id);
-      runInAction("loading product", () => {
-        this.product = product;
+      try {
+        const product = await agent.Products.details(id);
+        runInAction("loading product", () => {
+          this.product = product;
+          this.productRegistry.set(product.id, product);
+          this.loadingInitial = false;
+        });
+      } catch (error) {
+        runInAction("load product error", () => {
+          this.loadingInitial = false;
+        });
+        console.log(error);
+      }
+    }
+  };
+
+  @action clearProduct = () => {
+    this.product = null;
+  };
+
+  getProduct = (id: string) => {
+    return this.productRegistry.get(id);
+  };
+
+  @action createProduct = async (product: IProduct) => {
+    this.submitting = true;
+    try {
+      await agent.Products.create(product);
+      runInAction("creating product", () => {
+        this.productRegistry.set(product.id, product);
+        this.submitting = false;
       });
-      this.loadingInitial = false;
+      history.push(`/products/${product.id}`);
     } catch (error) {
-      runInAction("load product error", () => {
-        this.loadingInitial = false;
+      runInAction("create activity error", () => {
+        this.submitting = false;
+      });
+      toast.error("Problem submitting data");
+      console.log(error.response);
+    }
+  };
+
+  @action editProduct = async (product: IProduct) => {
+    this.submitting = true;
+    try {
+      await agent.Products.update(product);
+      runInAction("editing product", () => {
+        this.productRegistry.set(product.id, product);
+        this.product = product;
+        this.submitting = false;
+      });
+      history.push(`/products/${product.id}`);
+    } catch (error) {
+      runInAction("edit product error", () => {
+        this.submitting = false;
       });
       console.log(error);
     }

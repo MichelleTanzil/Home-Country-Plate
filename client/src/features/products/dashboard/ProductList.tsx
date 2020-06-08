@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, Fragment } from "react";
 import {
   List,
-  Label,
   Item,
   Image,
   Grid,
@@ -9,18 +8,26 @@ import {
   Icon,
   Segment,
   Header,
-  GridColumn,
 } from "semantic-ui-react";
 import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
 import ProductStore from "../../../app/stores/productStore";
+import LoadingComponent from "../../../app/layout/LoadingComponent";
 
 const ProductList: React.FC = () => {
   const productStore = useContext(ProductStore);
-  const { loadProducts, productsByCategories: products } = productStore;
+  const {
+    loadProducts,
+    productsByCategories: products,
+    loadingInitial,
+  } = productStore;
   useEffect(() => {
     loadProducts();
   }, [loadProducts]);
+
+  if (loadingInitial)
+    return <LoadingComponent content="Loading delicious dishes..." />;
+
   return (
     <Fragment>
       <Segment>

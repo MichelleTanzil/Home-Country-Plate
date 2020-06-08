@@ -5,7 +5,6 @@ import {
   Icon,
   Image,
   Grid,
-  GridColumn,
   Button,
   Segment,
   Divider,
@@ -14,6 +13,7 @@ import ProductStore from "../../../app/stores/productStore";
 import { RouteComponentProps } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
+import { Link } from "react-router-dom";
 
 interface DetailParams {
   id: string;
@@ -68,7 +68,6 @@ const ProductDetails: React.FC<RouteComponentProps<DetailParams>> = ({
       </Grid.Column>
       <Grid.Column width={6}>
         <Card>
-          {/* Link to user's profile */}
           <Image src="/assets/userPlaceholder.png" fluid size="small" />
           <Card.Content>
             <Card.Header>Anonymous</Card.Header>
@@ -81,22 +80,17 @@ const ProductDetails: React.FC<RouteComponentProps<DetailParams>> = ({
             </Card.Description>
           </Card.Content>
           <Card.Content extra>
-            <a>
-              <Icon name="user" />
-              22 Following
-            </a>
+            {/* TODO: Link to user's profile */}
+            <Icon name="user" as={Link} to={`/products`} />
+            22 Following
           </Card.Content>
           <Card.Content extra>
-            <a>
-              <Icon name="thumbs up" />
-              11 Liked
-            </a>
-          </Card.Content>{" "}
+            <Icon name="thumbs up" as={Link} to={`/products`} />
+            11 Liked
+          </Card.Content>
           <Card.Content extra>
-            <a>
-              <Icon name="food" />
-              150 dishes sold
-            </a>
+            <Icon name="food" as={Link} to={`/products`} />
+            150 dishes sold
           </Card.Content>
         </Card>
       </Grid.Column>

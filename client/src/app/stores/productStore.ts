@@ -1,5 +1,5 @@
 import { observable, action, runInAction, computed } from "mobx";
-import { createContext } from "react";
+import { createContext, SyntheticEvent } from "react";
 import { IProduct } from "../models/product";
 import agent from "../api/agent";
 import { history } from "../..";
@@ -9,6 +9,7 @@ class ProductStore {
   @observable productRegistry = new Map();
   @observable products: IProduct[] = [];
   @observable product: IProduct | null = null;
+  @observable deleteTarget = "";
   @observable loadingInitial = false;
   @observable submitting = false;
 
@@ -94,7 +95,7 @@ class ProductStore {
       });
       history.push(`/products/${product.id}`);
     } catch (error) {
-      runInAction("create activity error", () => {
+      runInAction("create product error", () => {
         this.submitting = false;
       });
       toast.error("Problem submitting data");
@@ -115,6 +116,28 @@ class ProductStore {
     } catch (error) {
       runInAction("edit product error", () => {
         this.submitting = false;
+      });
+      console.log(error);
+    }
+  };
+
+  @action deleteActivity = async (
+    event: SyntheticEvent<HTMLButtonElement>,
+    id: string
+  ) => {
+    this.submitting = true;
+    this.deleteTarget = event.currentTarget.name;
+    try {
+      await agent.Products.delete(id);
+      runInAction("deleting product", () => {
+        this.productRegistry.delete(id);
+        this.submitting = false;
+        this.deleteTarget = "";
+      });
+    } catch (error) {
+      runInAction("delete product error", () => {
+        this.submitting = false;
+        this.deleteTarget = "";
       });
       console.log(error);
     }

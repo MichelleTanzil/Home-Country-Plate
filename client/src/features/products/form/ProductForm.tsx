@@ -28,14 +28,11 @@ const validate = combineValidators({
       message: "Description needs to be at least 5 characters",
     })
   )(),
-  city: isRequired({ message: "Name the city this dish will originate from" }),
+  city: isRequired({ message: "The city this dish will originate from" }),
   state: isRequired({
-    message: "Name the state this dish will originate from",
+    message: "The state this dish will originate from",
   }),
-  price: composeValidators(
-    isRequired({ message: "A price is required" }),
-    isNumeric({ message: "The price should be a number" })
-  ),
+  price: isRequired({ message: "A price is required" }),
 });
 
 interface DetailParams {
@@ -102,7 +99,6 @@ const ProductForm: React.FC<RouteComponentProps<DetailParams>> = ({
                   value={product.description}
                   component={TextAreaInput}
                 />
-                {/* TODO: Search bar select Inputs */}
                 <Field
                   name="category"
                   placeholder="Cuisine for this dish"
@@ -110,22 +106,24 @@ const ProductForm: React.FC<RouteComponentProps<DetailParams>> = ({
                   value={product.category}
                   component={SelectInput}
                 />
-                <Field
-                  name="city"
-                  placeholder="City where this dish will originate"
-                  value={product.city}
-                  component={TextInput}
-                />
-                <Field
-                  name="state"
-                  placeholder="State where this dish will originate"
-                  value={product.state}
-                  component={TextInput}
-                />
+                <Form.Group widths="equal">
+                  <Field
+                    name="city"
+                    placeholder="City"
+                    value={product.city}
+                    component={TextInput}
+                  />
+                  <Field
+                    name="state"
+                    placeholder="State"
+                    value={product.state}
+                    component={TextInput}
+                  />
+                </Form.Group>
                 {/* TODO: Fix Price Input */}
                 <Field
                   name="price"
-                  placeholder="Price"
+                  placeholder="Price of the dish per quantity"
                   value={product.price}
                   component={PriceInput}
                 />

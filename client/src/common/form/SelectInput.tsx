@@ -20,6 +20,9 @@ const SelectInput: React.FC<IProps> = ({
         onChange={(e, data) => input.onChange(data.value)}
         placeholder={placeholder}
         options={options}
+        search
+        fluid
+        focus
       />
       {touched && error && (
         <Label basic color="red">

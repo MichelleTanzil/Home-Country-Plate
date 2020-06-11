@@ -6,16 +6,17 @@ interface IProps
   extends FieldRenderProps<number, HTMLElement>,
     FormFieldProps {}
 
-const TextInput: React.FC<IProps> = ({
+const PriceInput: React.FC<IProps> = ({
   input,
   width,
   type,
   placeholder,
   meta: { touched, error },
+  name,
 }) => {
   return (
     <Form.Field error={touched && !!error} type={type} width={width}>
-      <input {...input} placeholder={placeholder} />
+      <Form.Input {...input} placeholder={placeholder} focus fluid />
       {touched && error && (
         <Label basic color="red">
           {error}
@@ -25,4 +26,4 @@ const TextInput: React.FC<IProps> = ({
   );
 };
 
-export default TextInput;
+export default PriceInput;

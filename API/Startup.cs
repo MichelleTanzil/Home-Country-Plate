@@ -41,9 +41,9 @@ namespace API {
                 });
             });
             services.AddMediatR (typeof (List.Handler).Assembly);
-            services.AddControllers (opt => {
-                var policy = new AuthorizationPolicyBuilder ().RequireAuthenticatedUser ().Build (); // every request requires authenticated user
-                opt.Filters.Add (new AuthorizeFilter (policy));
+            services.AddControllers (opt => { // To make any request to be dependent on user's JWT, uncomment the lines bellow
+                // var policy = new AuthorizationPolicyBuilder ().RequireAuthenticatedUser ().Build (); // every request requires authenticated user
+                // opt.Filters.Add (new AuthorizeFilter (policy));
             }).AddFluentValidation (cfg => {
                 cfg.RegisterValidatorsFromAssemblyContaining<Create> ();
             });

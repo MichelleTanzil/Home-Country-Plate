@@ -91,6 +91,7 @@ export default class ProductStore {
   };
 
   @action createProduct = async (product: IProduct) => {
+    console.log(product)
     this.submitting = true;
     try {
       await agent.Products.create(product);
@@ -104,7 +105,7 @@ export default class ProductStore {
         this.submitting = false;
       });
       toast.error("Problem submitting data");
-      console.log(error.response);
+      console.log(error);
     }
   };
 

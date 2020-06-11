@@ -4,18 +4,18 @@ import { Form as FinalForm, Field } from "react-final-form";
 import { RouteComponentProps } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 import { ProductFormValues } from "../../../app/models/product";
-import TextInput from "../../../common/form/TextInput";
-import TextAreaInput from "../../../common/form/TextAreaInput";
-import SelectInput from "../../../common/form/SelectInput";
-import PriceInput from "../../../common/form/PriceInput";
-import { category } from "../../../common/options/categoryOptions";
+import TextInput from "../../../app/common/form/TextInput";
+import TextAreaInput from "../../../app/common/form/TextAreaInput";
+import SelectInput from "../../../app/common/form/SelectInput";
+import PriceInput from "../../../app/common/form/PriceInput";
+import { category } from "../../../app/common/options/categoryOptions";
+import { RootStoreContext } from "../../../app/stores/rootStore";
 import {
   combineValidators,
   isRequired,
   hasLengthGreaterThan,
   composeValidators,
 } from "revalidate";
-import { RootStoreContext } from "../../../app/stores/rootStore";
 
 const validate = combineValidators({
   title: isRequired({ message: "This dish needs a title" }),
@@ -62,6 +62,8 @@ const ProductForm: React.FC<RouteComponentProps<DetailParams>> = ({
   }, [setLoading, loadProduct, match.params.id]);
 
   const handleFinalFormSubmit = (values: any) => {
+    console.log(values);
+    const {...product} = values; //need to have this in order to create the new product object with the id
     if (!product.id) {
       let newProduct = {
         ...product,
@@ -72,6 +74,8 @@ const ProductForm: React.FC<RouteComponentProps<DetailParams>> = ({
       editProduct(product);
     }
   };
+
+  console.log(product)
 
   return (
     <Grid>
@@ -88,7 +92,7 @@ const ProductForm: React.FC<RouteComponentProps<DetailParams>> = ({
                   name="title"
                   placeholder="Title of this dish"
                   value={product.title}
-                  component={TextInput}
+                  component={TextInput}           
                 />
                 <Field
                   name="description"

@@ -22,7 +22,6 @@ const SelectInput: React.FC<IProps> = ({
         options={options}
         search
         fluid
-        focus
       />
       {touched && error && (
         <Label basic color="red">

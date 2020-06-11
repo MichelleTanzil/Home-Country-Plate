@@ -1,7 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Grid, Segment, Form, Button, Header } from "semantic-ui-react";
 import { Form as FinalForm, Field } from "react-final-form";
-import ProductStore from "../../../app/stores/productStore";
 import { RouteComponentProps } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 import { ProductFormValues } from "../../../app/models/product";
@@ -17,6 +16,7 @@ import {
   composeValidators,
   isNumeric,
 } from "revalidate";
+import { RootStoreContext } from "../../../app/stores/rootStore";
 
 // TODO: add validation for price
 const validate = combineValidators({
@@ -46,8 +46,13 @@ const ProductForm: React.FC<RouteComponentProps<DetailParams>> = ({
   match,
   history,
 }) => {
-  const productStore = useContext(ProductStore);
-  const { submitting, createProduct, loadProduct, editProduct } = productStore;
+  const rootStore = useContext(RootStoreContext);
+  const {
+    submitting,
+    createProduct,
+    loadProduct,
+    editProduct,
+  } = rootStore.productStore;
 
   const [product, setProduct] = useState(new ProductFormValues());
   const [loading, setLoading] = useState(false);

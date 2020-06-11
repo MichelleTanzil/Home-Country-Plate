@@ -11,16 +11,16 @@ import {
 } from "semantic-ui-react";
 import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
-import ProductStore from "../../../app/stores/productStore";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
+import { RootStoreContext } from "../../../app/stores/rootStore";
 
 const ProductList: React.FC = () => {
-  const productStore = useContext(ProductStore);
+  const rootStore = useContext(RootStoreContext);
   const {
     loadProducts,
     productsByCategories: products,
     loadingInitial,
-  } = productStore;
+  } = rootStore.productStore;
   useEffect(() => {
     loadProducts();
   }, [loadProducts]);

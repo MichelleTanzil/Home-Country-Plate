@@ -1,7 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Grid, Segment, Form, Button, Header } from "semantic-ui-react";
 import { Form as FinalForm, Field } from "react-final-form";
-import ProductStore from "../../../app/stores/productStore";
 import { RouteComponentProps } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 import { ProductFormValues } from "../../../app/models/product";
@@ -15,27 +14,23 @@ import {
   isRequired,
   hasLengthGreaterThan,
   composeValidators,
-  isNumeric,
 } from "revalidate";
+import { RootStoreContext } from "../../../app/stores/rootStore";
 
-// TODO: add validation for price
 const validate = combineValidators({
   title: isRequired({ message: "This dish needs a title" }),
   category: isRequired("Category"),
   description: composeValidators(
-    isRequired({ message: "Add a description to this dish." }),
+    // isRequired({ message: "Add a description to this dish." }),
     hasLengthGreaterThan(4)({
       message: "Description needs to be at least 5 characters",
     })
   )(),
-  city: isRequired({ message: "Name the city this dish will originate from" }),
+  city: isRequired({ message: "The city this dish will originate from" }),
   state: isRequired({
-    message: "Name the state this dish will originate from",
+    message: "The state this dish will originate from",
   }),
-  price: composeValidators(
-    isRequired({ message: "A price is required" }),
-    isNumeric({ message: "The price should be a number" })
-  ),
+  price: isRequired({ message: "A price is required" }),
 });
 
 interface DetailParams {
@@ -46,8 +41,13 @@ const ProductForm: React.FC<RouteComponentProps<DetailParams>> = ({
   match,
   history,
 }) => {
-  const productStore = useContext(ProductStore);
-  const { submitting, createProduct, loadProduct, editProduct } = productStore;
+  const rootStore = useContext(RootStoreContext);
+  const {
+    submitting,
+    createProduct,
+    loadProduct,
+    editProduct,
+  } = rootStore.productStore;
 
   const [product, setProduct] = useState(new ProductFormValues());
   const [loading, setLoading] = useState(false);
@@ -92,12 +92,11 @@ const ProductForm: React.FC<RouteComponentProps<DetailParams>> = ({
                 />
                 <Field
                   name="description"
-                  placeholder="Description - Add details about the dish like the quantity in 1 portion, flavors, origin etc."
+                  placeholder="Description - Add details about the dish such as the quantity in 1 portion, flavors, origin etc."
                   rows={3}
                   value={product.description}
                   component={TextAreaInput}
                 />
-                {/* TODO: Search bar select Inputs */}
                 <Field
                   name="category"
                   placeholder="Cuisine for this dish"
@@ -105,22 +104,23 @@ const ProductForm: React.FC<RouteComponentProps<DetailParams>> = ({
                   value={product.category}
                   component={SelectInput}
                 />
-                <Field
-                  name="city"
-                  placeholder="City where this dish will originate"
-                  value={product.city}
-                  component={TextInput}
-                />
-                <Field
-                  name="state"
-                  placeholder="State where this dish will originate"
-                  value={product.state}
-                  component={TextInput}
-                />
-                {/* TODO: Fix Price Input */}
+                <Form.Group widths="equal">
+                  <Field
+                    name="city"
+                    placeholder="City"
+                    value={product.city}
+                    component={TextInput}
+                  />
+                  <Field
+                    name="state"
+                    placeholder="State"
+                    value={product.state}
+                    component={TextInput}
+                  />
+                </Form.Group>
                 <Field
                   name="price"
-                  placeholder="Price"
+                  placeholder="Price of the dish"
                   value={product.price}
                   component={PriceInput}
                 />

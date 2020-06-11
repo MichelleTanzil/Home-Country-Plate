@@ -1,13 +1,13 @@
 import React from "react";
 import { FieldRenderProps } from "react-final-form";
 import { FormFieldProps, Form, Label } from "semantic-ui-react";
+import CurrencyInput from "react-currency-input-field";
 
 interface IProps
   extends FieldRenderProps<number, HTMLElement>,
     FormFieldProps {}
 
-const TextInput: React.FC<IProps> = ({
-  input,
+const PriceInput: React.FC<IProps> = ({
   width,
   type,
   placeholder,
@@ -15,7 +15,12 @@ const TextInput: React.FC<IProps> = ({
 }) => {
   return (
     <Form.Field error={touched && !!error} type={type} width={width}>
-      <input {...input} placeholder={placeholder} />
+      <CurrencyInput
+        placeholder={placeholder}
+        allowDecimals={true}
+        decimalsLimit={2}
+        prefix="$"
+      />
       {touched && error && (
         <Label basic color="red">
           {error}
@@ -25,4 +30,4 @@ const TextInput: React.FC<IProps> = ({
   );
 };
 
-export default TextInput;
+export default PriceInput;

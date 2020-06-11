@@ -1,11 +1,16 @@
 import { observable, action, runInAction, computed } from "mobx";
-import { createContext, SyntheticEvent } from "react";
+import { SyntheticEvent } from "react";
 import { IProduct } from "../models/product";
 import agent from "../api/agent";
 import { history } from "../..";
 import { toast } from "react-toastify";
+import { RootStore } from "./rootStore";
 
-class ProductStore {
+export default class ProductStore {
+  rootStore: RootStore;
+  constructor(rootStore: RootStore) {
+    this.rootStore = rootStore;
+  }
   @observable productRegistry = new Map();
   @observable products: IProduct[] = [];
   @observable product: IProduct | null = null;
@@ -143,5 +148,3 @@ class ProductStore {
     }
   };
 }
-
-export default createContext(new ProductStore()); // this will allow the store to be accessible between components

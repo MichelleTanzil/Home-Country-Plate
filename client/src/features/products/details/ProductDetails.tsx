@@ -9,11 +9,11 @@ import {
   Segment,
   Divider,
 } from "semantic-ui-react";
-import ProductStore from "../../../app/stores/productStore";
 import { RouteComponentProps } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { Link } from "react-router-dom";
+import { RootStoreContext } from "../../../app/stores/rootStore";
 
 interface DetailParams {
   id: string;
@@ -23,8 +23,8 @@ const ProductDetails: React.FC<RouteComponentProps<DetailParams>> = ({
   match,
   history,
 }) => {
-  const productStore = useContext(ProductStore);
-  const { product, loadProduct, loadingInitial } = productStore;
+  const rootStore = useContext(RootStoreContext);
+  const { product, loadProduct, loadingInitial } = rootStore.productStore;
 
   useEffect(() => {
     loadProduct(match.params.id);

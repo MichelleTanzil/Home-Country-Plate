@@ -14,16 +14,14 @@ import {
   isRequired,
   hasLengthGreaterThan,
   composeValidators,
-  isNumeric,
 } from "revalidate";
 import { RootStoreContext } from "../../../app/stores/rootStore";
 
-// TODO: add validation for price
 const validate = combineValidators({
   title: isRequired({ message: "This dish needs a title" }),
   category: isRequired("Category"),
   description: composeValidators(
-    isRequired({ message: "Add a description to this dish." }),
+    // isRequired({ message: "Add a description to this dish." }),
     hasLengthGreaterThan(4)({
       message: "Description needs to be at least 5 characters",
     })
@@ -94,7 +92,7 @@ const ProductForm: React.FC<RouteComponentProps<DetailParams>> = ({
                 />
                 <Field
                   name="description"
-                  placeholder="Description - Add details about the dish like the quantity in 1 portion, flavors, origin etc."
+                  placeholder="Description - Add details about the dish such as the quantity in 1 portion, flavors, origin etc."
                   rows={3}
                   value={product.description}
                   component={TextAreaInput}
@@ -120,10 +118,9 @@ const ProductForm: React.FC<RouteComponentProps<DetailParams>> = ({
                     component={TextInput}
                   />
                 </Form.Group>
-                {/* TODO: Fix Price Input */}
                 <Field
                   name="price"
-                  placeholder="Price of the dish per quantity"
+                  placeholder="Price of the dish"
                   value={product.price}
                   component={PriceInput}
                 />

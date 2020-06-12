@@ -6,7 +6,7 @@ export interface IProduct {
   category: string;
   city: string;
   state: string;
-  price: number;
+  price: number | null;
 }
 
 export class ProductFormValues implements IProduct {
@@ -17,5 +17,5 @@ export class ProductFormValues implements IProduct {
   category: string = "";
   city: string = "";
   state: string = "";
-  price: number = 0;
+  price: number | null = null;
 }

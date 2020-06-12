@@ -15,13 +15,15 @@ import {
   isRequired,
   hasLengthGreaterThan,
   composeValidators,
+  matchesPattern,
 } from "revalidate";
+
+var reg = new RegExp('^[0-9]+(\.[0-9]{1,2})?$')
 
 const validate = combineValidators({
   title: isRequired({ message: "This dish needs a title" }),
   category: isRequired("Category"),
   description: composeValidators(
-    // isRequired({ message: "Add a description to this dish." }),
     hasLengthGreaterThan(4)({
       message: "Description needs to be at least 5 characters",
     })
@@ -30,6 +32,12 @@ const validate = combineValidators({
   state: isRequired({
     message: "The state this dish will originate from",
   }),
+  price: composeValidators(
+    isRequired("Price is required"),
+    matchesPattern(reg)({ 
+      message: "Price format is incorrect" 
+    })
+  )(),
 });
 
 interface DetailParams {
@@ -61,7 +69,7 @@ const ProductForm: React.FC<RouteComponentProps<DetailParams>> = ({
   }, [setLoading, loadProduct, match.params.id]);
 
   const handleFinalFormSubmit = (values: any) => {
-    console.log(typeof values.price);
+    console.log(values);
     values.price = parseFloat(values.price);
     const { ...product } = values; //need to have this in order to create the new product object with the id
     if (!product.id) {
@@ -74,8 +82,6 @@ const ProductForm: React.FC<RouteComponentProps<DetailParams>> = ({
       editProduct(product);
     }
   };
-
-  console.log(product);
 
   return (
     <Grid>
@@ -127,14 +133,12 @@ const ProductForm: React.FC<RouteComponentProps<DetailParams>> = ({
                     component={TextInput}
                   />
                 </Form.Group>
-
                 <Field
-                  label="Price"
                   name="price"
                   placeholder="Price of the dish"
                   value={product.price}
                   component={PriceInput}
-                  type="number"
+                  type="decimal"
                 />
 
                 {/* TODO: Image upload */}

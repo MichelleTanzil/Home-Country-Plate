@@ -4,29 +4,30 @@ import { FormFieldProps, Form, Label } from "semantic-ui-react";
 
 interface IProps
   extends FieldRenderProps<number, HTMLElement>,
-    FormFieldProps {}
+  FormFieldProps { }
 
 const PriceInput: React.FC<IProps> = ({
-  input: { name, type },
+  input,
+  width,
   placeholder,
   meta: { touched, error },
 }) => {
   return (
-    <Form.Input
-      type={type}
-      error={touched && !!error}
-      labelPosition="right"
-      placeholder={placeholder}
-      fluid
-    >
+    <Form.Field error={touched && !!error} width={width} inline>
+      <Form.Input
+        {...input}
+        labelPosition="right"
+        placeholder={placeholder}
+        fluid
+        focus
+      />
       <Label basic>$</Label>
-      <input name={name} step="0.01" />
       {touched && error && (
         <Label basic color="red">
           {error}
         </Label>
       )}
-    </Form.Input>
+    </Form.Field>
   );
 };
 

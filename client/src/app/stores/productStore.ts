@@ -91,7 +91,7 @@ export default class ProductStore {
   };
 
   @action createProduct = async (product: IProduct) => {
-    console.log(product)
+    console.log("product from PRODUCTSTORE", product);
     this.submitting = true;
     try {
       await agent.Products.create(product);

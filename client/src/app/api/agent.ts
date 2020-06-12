@@ -37,12 +37,14 @@ const requests = {
 const Products = {
   list: (): Promise<IProduct[]> => requests.get("/products"),
   details: (id: string) => requests.get(`/products/${id}`),
-  create: (product: IProduct) => requests.post("/products", product),
+  create: (product: IProduct) => {
+    console.log("PRODUCT FROM AGENT.TS", product);
+    requests.post("/products", product);
+  },
   update: (product: IProduct) =>
     requests.put(`/products/${product.id}`, product),
   delete: (id: string) => requests.delete(`/products/${id}`),
 };
-
 
 export default {
   Products,

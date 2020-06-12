@@ -77,6 +77,7 @@ const ProductForm: React.FC<RouteComponentProps<DetailParams>> = ({
         ...product,
         id: uuid(),
       };
+      console.log("product from PRODUCTFORM", product);
       createProduct(newProduct);
     } else {
       editProduct(product);
@@ -138,9 +139,7 @@ const ProductForm: React.FC<RouteComponentProps<DetailParams>> = ({
                   placeholder="Price of the dish"
                   value={product.price}
                   component={PriceInput}
-                  type="decimal"
                 />
-
                 {/* TODO: Image upload */}
                 <p>Image upload goes here</p>
                 <Button

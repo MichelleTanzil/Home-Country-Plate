@@ -68,7 +68,7 @@ const ProductDetails: React.FC<RouteComponentProps<DetailParams>> = ({
       </Grid.Column>
       <Grid.Column width={6}>
         <Card>
-          <Image src="/assets/userPlaceholder.png" fluid size="small" />
+          <Image src="/assets/userPlaceholder.png" size="small" />
           <Card.Content>
             <Card.Header>Anonymous</Card.Header>
             <Card.Meta>

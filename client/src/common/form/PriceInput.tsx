@@ -4,7 +4,7 @@ import { FormFieldProps, Form, Label, Input } from "semantic-ui-react";
 import NumberFormat from "react-number-format";
 
 interface IProps
-  extends FieldRenderProps<number, HTMLElement>,
+  extends FieldRenderProps<string, HTMLElement>,
     FormFieldProps {}
 
 const PriceInput: React.FC<IProps> = ({
@@ -20,7 +20,11 @@ const PriceInput: React.FC<IProps> = ({
       <label>{label}</label>
       <Input {...input} placeholder={placeholder} labelPosition="right">
         <Label basic>$</Label>
-        <NumberFormat thousandSeparator={true} precision={2} />
+        <NumberFormat
+          thousandSeparator={true}
+          precision={2}
+          value={input.value}
+        />
       </Input>
       {touched && error && (
         <Label basic color="red">

@@ -130,8 +130,7 @@ const ProductForm: React.FC<RouteComponentProps<DetailParams>> = ({
                   label="Price"
                   name="price"
                   placeholder="Price of the dish"
-                  initialValues={null}
-                  value={product.price}
+                  value={product.cost}
                   component={PriceInput}
                 />
                 {/* TODO: Image upload */}

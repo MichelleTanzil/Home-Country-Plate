@@ -13,3 +13,9 @@
   align-items: center;
   height: 100vh;
 }
+
+.ui[class*="right labeled"].input>input{
+  border-top-right-radius : 5px !important;
+  border-bottom-right-radius: 5px !important;
+  border-right-color: rgba(34,36,38,.15) !important;
+}

@@ -9,14 +9,15 @@ interface IProps
 const PriceInput: React.FC<IProps> = ({
   input,
   width,
+  type,
   placeholder,
   meta: { touched, error },
   label,
 }) => {
   return (
-    <Form.Field error={touched && !!error} width={width} inline>
+    <Form.Field error={touched && !!error} type={type} width={width} inline>
       <label>{label}</label>
-      <Form.Input placeholder={placeholder} fluid focus labelPosition="right">
+      <Form.Input placeholder={placeholder} focus labelPosition="right" fluid>
         <Label basic>$</Label>
         <input {...input} />
       </Form.Input>

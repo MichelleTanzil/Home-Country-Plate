@@ -40,7 +40,7 @@ const ProductDetails: React.FC<RouteComponentProps<DetailParams>> = ({
         <Image src={"/assets/foodPlaceholder.png"} wrapped size="large" />
       </Grid.Column>
       <Grid.Column width={8}>
-        <Segment fluid>
+        <Segment>
           <Header as="h1" textAlign="center">
             {product.title}
           </Header>
@@ -59,7 +59,7 @@ const ProductDetails: React.FC<RouteComponentProps<DetailParams>> = ({
           </Divider>
           <p>Vegan, Dairy Free, Contains Nuts</p>
         </Segment>
-        <Button animated="vertical" color="teal" fluid size="large" relaxed>
+        <Button animated="vertical" color="teal" fluid size="large">
           <Button.Content hidden>Add to cart</Button.Content>
           <Button.Content visible>
             <Icon name="shop" size="large" />

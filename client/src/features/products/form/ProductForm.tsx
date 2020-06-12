@@ -18,7 +18,7 @@ import {
   matchesPattern,
 } from "revalidate";
 
-var reg = new RegExp('^[0-9]+(\.[0-9]{1,2})?$')
+var reg = new RegExp("^[0-9]+(.[0-9]{1,2})?$");
 
 const validate = combineValidators({
   title: isRequired({ message: "This dish needs a title" }),
@@ -34,8 +34,8 @@ const validate = combineValidators({
   }),
   price: composeValidators(
     isRequired("Price is required"),
-    matchesPattern(reg)({ 
-      message: "Price format is incorrect" 
+    matchesPattern(reg)({
+      message: "Price format is incorrect",
     })
   )(),
 });
@@ -136,6 +136,7 @@ const ProductForm: React.FC<RouteComponentProps<DetailParams>> = ({
                 </Form.Group>
                 <Field
                   name="price"
+                  label="Price"
                   placeholder="Price of the dish"
                   value={product.price}
                   component={PriceInput}

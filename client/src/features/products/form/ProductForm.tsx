@@ -16,7 +16,6 @@ import {
   hasLengthGreaterThan,
   composeValidators,
 } from "revalidate";
-import { convertStringToCurrency } from "../../../common/util/util";
 
 const validate = combineValidators({
   title: isRequired({ message: "This dish needs a title" }),
@@ -133,7 +132,7 @@ const ProductForm: React.FC<RouteComponentProps<DetailParams>> = ({
                   label="Price"
                   name="price"
                   placeholder="Price of the dish"
-                  value={product.cost}
+                  value={product.price}
                   component={PriceInput}
                   type="number"
                 />

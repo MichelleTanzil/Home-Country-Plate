@@ -4,33 +4,34 @@ import { FormFieldProps, Form, Label, Input } from "semantic-ui-react";
 import NumberFormat from "react-number-format";
 
 interface IProps
-  extends FieldRenderProps<string, HTMLElement>,
+  extends FieldRenderProps<number, HTMLElement>,
     FormFieldProps {}
 
 const PriceInput: React.FC<IProps> = ({
-  input,
-  width,
+  input: { name },
   type,
   placeholder,
   meta: { touched, error },
   label,
 }) => {
   return (
-    <Form.Field error={touched && !!error} type={type} width={width}>
+    <Form.Field>
       <label>{label}</label>
-      <Input {...input} placeholder={placeholder} labelPosition="right">
+      <Input
+        type={type}
+        error={touched && !!error}
+        labelPosition="right"
+        placeholder={placeholder}
+        fluid
+      >
         <Label basic>$</Label>
-        <NumberFormat
-          thousandSeparator={true}
-          precision={2}
-          value={input.value}
-        />
+        <input name={name} step="0.1" />
+        {touched && error && (
+          <Label basic color="red">
+            {error}
+          </Label>
+        )}
       </Input>
-      {touched && error && (
-        <Label basic color="red">
-          {error}
-        </Label>
-      )}
     </Form.Field>
   );
 };

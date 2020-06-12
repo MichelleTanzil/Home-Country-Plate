@@ -62,9 +62,9 @@ const ProductForm: React.FC<RouteComponentProps<DetailParams>> = ({
   }, [setLoading, loadProduct, match.params.id]);
 
   const handleFinalFormSubmit = (values: any) => {
-    const setPrice = convertStringToCurrency(values.cost);
-    const { cost, ...product } = values;
-    product.price = setPrice;
+    console.log(typeof values.price);
+    values.price = parseFloat(values.price);
+    const { ...product } = values; //need to have this in order to create the new product object with the id
     if (!product.id) {
       let newProduct = {
         ...product,
@@ -128,13 +128,16 @@ const ProductForm: React.FC<RouteComponentProps<DetailParams>> = ({
                     component={TextInput}
                   />
                 </Form.Group>
+
                 <Field
                   label="Price"
                   name="price"
                   placeholder="Price of the dish"
                   value={product.cost}
                   component={PriceInput}
+                  type="number"
                 />
+
                 {/* TODO: Image upload */}
                 <p>Image upload goes here</p>
                 <Button

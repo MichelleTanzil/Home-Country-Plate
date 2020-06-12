@@ -4,18 +4,20 @@ import { FormFieldProps, Form, Label } from "semantic-ui-react";
 
 interface IProps
   extends FieldRenderProps<string, HTMLElement>,
-  FormFieldProps { }
+    FormFieldProps {}
 
 const TextInput: React.FC<IProps> = ({
   input,
   width,
   type,
   placeholder,
-  meta: { touched, error }
+  meta: { touched, error },
+  label,
 }) => {
   return (
-    <Form.Field error={touched && !!error} type={type} width={width} fluid="true">
-      <input {...input} placeholder={placeholder} />
+    <Form.Field error={touched && !!error} type={type} width={width} inline>
+      <label>{label}</label>
+      <Form.Input {...input} placeholder={placeholder} fluid focus />
       {touched && error && (
         <Label basic color="red">
           {error}

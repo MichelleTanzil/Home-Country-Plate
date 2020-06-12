@@ -16,6 +16,7 @@ import {
   hasLengthGreaterThan,
   composeValidators,
 } from "revalidate";
+import { convertStringToCurrency } from "../../../common/util/util";
 
 const validate = combineValidators({
   title: isRequired({ message: "This dish needs a title" }),
@@ -30,7 +31,6 @@ const validate = combineValidators({
   state: isRequired({
     message: "The state this dish will originate from",
   }),
-  price: isRequired({ message: "A price is required" }),
 });
 
 interface DetailParams {
@@ -62,8 +62,9 @@ const ProductForm: React.FC<RouteComponentProps<DetailParams>> = ({
   }, [setLoading, loadProduct, match.params.id]);
 
   const handleFinalFormSubmit = (values: any) => {
-    console.log(values);
-    const {...product} = values; //need to have this in order to create the new product object with the id
+    const setPrice = convertStringToCurrency(values.cost);
+    const { cost, ...product } = values;
+    product.price = setPrice;
     if (!product.id) {
       let newProduct = {
         ...product,
@@ -75,7 +76,7 @@ const ProductForm: React.FC<RouteComponentProps<DetailParams>> = ({
     }
   };
 
-  console.log(product)
+  console.log(product);
 
   return (
     <Grid>
@@ -90,12 +91,14 @@ const ProductForm: React.FC<RouteComponentProps<DetailParams>> = ({
               <Form onSubmit={handleSubmit} loading={loading}>
                 <Field
                   name="title"
+                  label="Title"
                   placeholder="Title of this dish"
                   value={product.title}
-                  component={TextInput}           
+                  component={TextInput}
                 />
                 <Field
                   name="description"
+                  label="Description"
                   placeholder="Description - Add details about the dish such as the quantity in 1 portion, flavors, origin etc."
                   rows={3}
                   value={product.description}
@@ -103,6 +106,7 @@ const ProductForm: React.FC<RouteComponentProps<DetailParams>> = ({
                 />
                 <Field
                   name="category"
+                  label="Cuisine"
                   placeholder="Cuisine for this dish"
                   options={category}
                   value={product.category}
@@ -111,21 +115,24 @@ const ProductForm: React.FC<RouteComponentProps<DetailParams>> = ({
                 <Form.Group widths="equal">
                   <Field
                     name="city"
+                    label="City"
                     placeholder="City"
                     value={product.city}
                     component={TextInput}
                   />
                   <Field
                     name="state"
+                    label="State"
                     placeholder="State"
                     value={product.state}
                     component={TextInput}
                   />
                 </Form.Group>
                 <Field
+                  label="Price"
                   name="price"
                   placeholder="Price of the dish"
-                  value={product.price}
+                  value={product.cost}
                   component={PriceInput}
                 />
                 {/* TODO: Image upload */}

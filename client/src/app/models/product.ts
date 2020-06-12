@@ -9,7 +9,11 @@ export interface IProduct {
   price: number;
 }
 
-export class ProductFormValues implements IProduct {
+export interface IProductFormValues extends Partial<IProduct> {
+  cost: string;
+}
+
+export class ProductFormValues implements IProductFormValues {
   id: string = "";
   title: string = "";
   image: string = "";
@@ -17,5 +21,13 @@ export class ProductFormValues implements IProduct {
   category: string = "";
   city: string = "";
   state: string = "";
-  price: number = 0;
+  cost: string = "";
+  price?: number = undefined;
+
+  constructor(init?: IProductFormValues) {
+    if (init && init.price) {
+      init.price = parseFloat(init.cost);
+    }
+    Object.assign(this, init);
+  }
 }

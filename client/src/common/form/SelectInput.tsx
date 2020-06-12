@@ -12,9 +12,11 @@ const SelectInput: React.FC<IProps> = ({
   options,
   placeholder,
   meta: { touched, error },
+  label,
 }) => {
   return (
     <Form.Field error={touched && !!error} width={width}>
+      <label>{label}</label>
       <Select
         value={input.value}
         onChange={(e, data) => input.onChange(data.value)}
@@ -22,7 +24,6 @@ const SelectInput: React.FC<IProps> = ({
         options={options}
         search
         fluid
-        focus
       />
       {touched && error && (
         <Label basic color="red">

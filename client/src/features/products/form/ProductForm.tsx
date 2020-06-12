@@ -139,6 +139,7 @@ const ProductForm: React.FC<RouteComponentProps<DetailParams>> = ({
                   label="Price"
                   placeholder="Price of the dish"
                   value={product.price}
+                  type="number"
                   component={PriceInput}
                 />
                 {/* TODO: Image upload */}

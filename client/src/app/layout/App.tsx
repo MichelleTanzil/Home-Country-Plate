@@ -13,9 +13,9 @@ import ProductDetails from "../../features/products/details/ProductDetails";
 import NotFound from "./NotFound";
 import ProductForm from "../../features/products/form/ProductForm";
 import { ToastContainer } from "react-toastify";
-
 import { RootStoreContext } from "../stores/rootStore";
 import LoadingComponent from "./LoadingComponent";
+import { observer } from "mobx-react-lite";
 
 const App: React.FC<RouteComponentProps> = ({ location }) => {
   const rootStore = useContext(RootStoreContext);
@@ -24,11 +24,15 @@ const App: React.FC<RouteComponentProps> = ({ location }) => {
 
   useEffect(() => {
     if (token) {
-      getUser().finally(() => setAppLoaded());
+      setAppLoaded();
     } else {
       setAppLoaded();
     }
   }, [getUser, setAppLoaded, token]);
+
+  // useEffect(() => {
+  //   setAppLoaded();
+  // }, [setAppLoaded]);
 
   if (!appLoaded)
     return <LoadingComponent content="Loading Home Country Plate..." />;
@@ -60,4 +64,4 @@ const App: React.FC<RouteComponentProps> = ({ location }) => {
   );
 };
 
-export default withRouter(App);
+export default withRouter(observer(App));

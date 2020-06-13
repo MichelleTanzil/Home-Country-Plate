@@ -2,6 +2,7 @@ import axios, { AxiosResponse } from "axios";
 import { IProduct } from "../models/product";
 import { history } from "../..";
 import { toast } from "react-toastify";
+import { IUser, IUserFormValues } from "../models/user";
 
 axios.defaults.baseURL = "http://localhost:5000/api";
 
@@ -46,6 +47,15 @@ const Products = {
   delete: (id: string) => requests.delete(`/products/${id}`),
 };
 
+const User = {
+  current: (): Promise<IUser> => requests.get("/user"),
+  login: (user: IUserFormValues): Promise<IUser> =>
+    requests.post(`/user/login`, user),
+  register: (user: IUserFormValues): Promise<IUser> =>
+    requests.post(`/user/register`, user),
+};
+
 export default {
   Products,
+  User,
 };

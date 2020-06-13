@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { HomePage } from "../../features/home/HomePage";
 import { Navbar } from "../../features/navbar/Navbar";
 import {
@@ -14,20 +14,24 @@ import NotFound from "./NotFound";
 import ProductForm from "../../features/products/form/ProductForm";
 import { ToastContainer } from "react-toastify";
 
-const App: React.FC<RouteComponentProps> = ({ location }) => {
-  //TODO: Add when jwt is configured
-  // const commonStore = useContext(CommonStore);
-  // const { appLoaded, setAppLoaded } = commonStore;
-  // useEffect(() => {
-  //   if (token) {
-  //     getUser().finally(() => setAppLoaded());
-  //   } else {
-  //     setAppLoaded();
-  //   }
-  // }, [getUser, setAppLoaded, token]);
+import { RootStoreContext } from "../stores/rootStore";
+import LoadingComponent from "./LoadingComponent";
 
-  // if (!appLoaded)
-  //   return <LoadingComponent content="Loading Home Country Plate..." />;
+const App: React.FC<RouteComponentProps> = ({ location }) => {
+  const rootStore = useContext(RootStoreContext);
+  const { appLoaded, setAppLoaded, token } = rootStore.commonStore;
+  const { getUser } = rootStore.userStore;
+
+  useEffect(() => {
+    if (token) {
+      getUser().finally(() => setAppLoaded());
+    } else {
+      setAppLoaded();
+    }
+  }, [getUser, setAppLoaded, token]);
+
+  if (!appLoaded)
+    return <LoadingComponent content="Loading Home Country Plate..." />;
   return (
     <>
       <ToastContainer position="bottom-right" />

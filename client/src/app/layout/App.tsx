@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, Fragment } from "react";
 import { HomePage } from "../../features/home/HomePage";
 import { Navbar } from "../../features/navbar/Navbar";
 import {
@@ -16,6 +16,7 @@ import { ToastContainer } from "react-toastify";
 import { RootStoreContext } from "../stores/rootStore";
 import LoadingComponent from "./LoadingComponent";
 import { observer } from "mobx-react-lite";
+import ModalContainer from "../common/modals/ModalContainer";
 
 const App: React.FC<RouteComponentProps> = ({ location }) => {
   const rootStore = useContext(RootStoreContext);
@@ -30,14 +31,11 @@ const App: React.FC<RouteComponentProps> = ({ location }) => {
     }
   }, [getUser, setAppLoaded, token]);
 
-  // useEffect(() => {
-  //   setAppLoaded();
-  // }, [setAppLoaded]);
-
   if (!appLoaded)
     return <LoadingComponent content="Loading Home Country Plate..." />;
   return (
-    <>
+    <Fragment>
+      <ModalContainer />
       <ToastContainer position="bottom-right" />
       <Navbar />
       <Route exact path="/" component={HomePage} />
@@ -60,7 +58,7 @@ const App: React.FC<RouteComponentProps> = ({ location }) => {
           </>
         )}
       />
-    </>
+    </Fragment>
   );
 };
 

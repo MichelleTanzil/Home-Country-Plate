@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { Menu, Container, Button } from "semantic-ui-react";
+import { RootStoreContext } from "../../app/stores/rootStore";
+import LoginForm from "../user/LoginForm";
+import RegisterForm from "../user/RegisterForm";
 
 export const Navbar = () => {
+  const rootStore = useContext(RootStoreContext);
+  const { isLoggedIn, user } = rootStore.userStore;
+  const { openModal } = rootStore.modalStore;
+
   return (
     <Menu inverted fixed="top">
       <Container>
@@ -28,10 +35,20 @@ export const Navbar = () => {
         </Menu.Item>
         <Menu.Menu position="right">
           <Menu.Item>
-            <Button inverted color="green" content="Login"></Button>
+            <Button
+              inverted
+              color="green"
+              content="Login"
+              onClick={() => openModal(<LoginForm />)}
+            ></Button>
           </Menu.Item>
           <Menu.Item>
-            <Button inverted color="green" content="Register"></Button>
+            <Button
+              inverted
+              color="green"
+              content="Register"
+              onClick={() => openModal(<RegisterForm />)}
+            ></Button>
           </Menu.Item>
         </Menu.Menu>
       </Container>

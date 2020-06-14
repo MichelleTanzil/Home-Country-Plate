@@ -8,7 +8,6 @@ import {
   withRouter,
 } from "react-router-dom";
 import { Container } from "semantic-ui-react";
-import ProductList from "../../features/products/dashboard/ProductList";
 import ProductDetails from "../../features/products/details/ProductDetails";
 import NotFound from "./NotFound";
 import ProductForm from "../../features/products/form/ProductForm";
@@ -17,6 +16,7 @@ import { RootStoreContext } from "../stores/rootStore";
 import LoadingComponent from "./LoadingComponent";
 import { observer } from "mobx-react-lite";
 import ModalContainer from "../common/modals/ModalContainer";
+import ProductDashboard from "../../features/products/dashboard/ProductDashboard";
 
 const App: React.FC<RouteComponentProps> = ({ location }) => {
   const rootStore = useContext(RootStoreContext);
@@ -45,7 +45,7 @@ const App: React.FC<RouteComponentProps> = ({ location }) => {
           <>
             <Container style={{ marginTop: "7em" }}>
               <Switch>
-                <Route exact path="/products" component={ProductList} />
+                <Route exact path="/products" component={ProductDashboard} />
                 <Route path="/products/:id" component={ProductDetails} />
                 <Route
                   key={location.key}

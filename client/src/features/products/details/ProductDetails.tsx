@@ -1,18 +1,8 @@
 import React, { useContext, useEffect } from "react";
-import {
-  Header,
-  Card,
-  Icon,
-  Image,
-  Grid,
-  Button,
-  Segment,
-  Divider,
-} from "semantic-ui-react";
+import { Icon, Grid, Button } from "semantic-ui-react";
 import { RouteComponentProps } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
-import { Link } from "react-router-dom";
 import { RootStoreContext } from "../../../app/stores/rootStore";
 import ProductDetailedImages from "./ProductDetailedImages";
 import ProductDetailedInfo from "./ProductDetailedInfo";

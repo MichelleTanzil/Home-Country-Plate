@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
-import { NavLink } from "react-router-dom";
-import { Menu, Container, Button } from "semantic-ui-react";
+import { NavLink, Link } from "react-router-dom";
+import { Menu, Container, Button, Image, Dropdown } from "semantic-ui-react";
 import { RootStoreContext } from "../../app/stores/rootStore";
 import LoginForm from "../user/LoginForm";
 import RegisterForm from "../user/RegisterForm";
 
 export const Navbar = () => {
   const rootStore = useContext(RootStoreContext);
-  const { isLoggedIn, user } = rootStore.userStore;
+  const { isLoggedIn, user, logout } = rootStore.userStore;
   const { openModal } = rootStore.modalStore;
 
   return (
@@ -25,7 +25,7 @@ export const Navbar = () => {
           ></Button>
         </Menu.Item>
         <Menu.Item>
-          {/* TODO: Move this later on */}
+          {/* TODO: Move this to selling page later on */}
           <Button
             primary
             as={NavLink}
@@ -33,24 +33,45 @@ export const Navbar = () => {
             content="Add new dish"
           ></Button>
         </Menu.Item>
-        <Menu.Menu position="right">
-          <Menu.Item>
-            <Button
-              inverted
-              color="green"
-              content="Login"
-              onClick={() => openModal(<LoginForm />)}
-            ></Button>
+        {isLoggedIn && user ? (
+          <Menu.Item position="right">
+            <Image
+              avatar
+              spaced="right"
+              src={user.image || "/assets/userPlaceholder.png"}
+            />
+            <Dropdown pointing="top left" text={user.displayName}>
+              <Dropdown.Menu>
+                <Dropdown.Item
+                  as={Link}
+                  to={`/profile/${user.username}`}
+                  text="My profile"
+                  icon="user"
+                />
+                <Dropdown.Item onClick={logout} text="Logout" icon="power" />
+              </Dropdown.Menu>
+            </Dropdown>
           </Menu.Item>
-          <Menu.Item>
-            <Button
-              inverted
-              color="green"
-              content="Register"
-              onClick={() => openModal(<RegisterForm />)}
-            ></Button>
-          </Menu.Item>
-        </Menu.Menu>
+        ) : (
+          <Menu.Menu position="right">
+            <Menu.Item>
+              <Button
+                inverted
+                color="green"
+                content="Login"
+                onClick={() => openModal(<LoginForm />)}
+              ></Button>
+            </Menu.Item>
+            <Menu.Item>
+              <Button
+                inverted
+                color="green"
+                content="Register"
+                onClick={() => openModal(<RegisterForm />)}
+              ></Button>
+            </Menu.Item>
+          </Menu.Menu>
+        )}
       </Container>
     </Menu>
   );

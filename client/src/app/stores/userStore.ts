@@ -23,8 +23,8 @@ export default class UserStore {
         this.user = user;
       });
       this.rootStore.commonStore.setToken(user.token);
-      // this.rootStore.modalStore.closeModal();
-      history.push("/");
+      this.rootStore.modalStore.closeModal();
+      history.push("/products");
     } catch (error) {
       throw error;
     }
@@ -34,8 +34,8 @@ export default class UserStore {
     try {
       const user = await agent.User.register(values);
       this.rootStore.commonStore.setToken(user.token);
-      // this.rootStore.modalStore.closeModal();
-      history.push("/");
+      this.rootStore.modalStore.closeModal();
+      history.push("/products");
     } catch (error) {
       throw error;
     }
@@ -52,8 +52,7 @@ export default class UserStore {
     }
   };
 
-  @action
-  logout = () => {
+  @action logout = () => {
     this.rootStore.commonStore.setToken(null);
     this.user = null;
     history.push("/");

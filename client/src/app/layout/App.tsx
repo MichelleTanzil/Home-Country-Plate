@@ -17,6 +17,7 @@ import LoadingComponent from "./LoadingComponent";
 import { observer } from "mobx-react-lite";
 import ModalContainer from "../common/modals/ModalContainer";
 import ProductDashboard from "../../features/products/dashboard/ProductDashboard";
+import ProfilePage from "../../features/profiles/ProfilePage";
 
 const App: React.FC<RouteComponentProps> = ({ location }) => {
   const rootStore = useContext(RootStoreContext);
@@ -52,6 +53,8 @@ const App: React.FC<RouteComponentProps> = ({ location }) => {
                   path={["/createDish", "/manage/:id"]}
                   component={ProductForm}
                 />
+                <Route path="/profile/:username" component={ProfilePage} />
+
                 <Route component={NotFound} />
               </Switch>
             </Container>

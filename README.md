@@ -6,11 +6,13 @@ As immigrants and California residents, we sympathize and share the food craving
 Home Country Plate introduces home cooks around your area to purchase a variety of meals delivered or be picked up.
 
 ## Techonologies Used
-  * ASP .NET - CORS Architecture
-  * React
-  * SQLite - Temporary Database
+
+- ASP .NET - CQRS Architecture
+- React
+- SQLite - Temporary Database
+- Cloudinary - Cloud Storage for large files
 
 ## Creators
+
 Michelle Tanzil
 Nadia Nguyen
-

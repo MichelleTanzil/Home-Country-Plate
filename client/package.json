@@ -16,6 +16,7 @@
     "final-form": "^4.19.1",
     "mobx": "^5.15.4",
     "mobx-react-lite": "^2.0.6",
+    "pure-react-carousel": "^1.27.1",
     "react": "^16.13.1",
     "react-currency-input-field": "^1.0.1",
     "react-dom": "^16.13.1",

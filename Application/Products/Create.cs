@@ -5,6 +5,7 @@ using Application.Interfaces;
 using Domain;
 using FluentValidation;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Persistence;
 
 namespace Application.Products
@@ -58,6 +59,17 @@ namespace Application.Products
         };
 
         _context.Products.Add(newProduct);
+
+        var user = await _context.Users.SingleOrDefaultAsync(x => x.UserName == _userAccessor.GetCurrentUsername());
+
+        var chef = new UserProduct
+        {
+          AppUser = user,
+          Product = newProduct,
+          IsChef = true,
+        };
+
+        _context.UserProducts.Add(chef);
 
         var success = await _context.SaveChangesAsync();
 

@@ -40,5 +40,17 @@ namespace API.Controllers
     {
       return await Mediator.Send(new Delete.Command { Id = id });
     }
+
+    [HttpPost("{id}/like")]
+    public async Task<ActionResult<Unit>> Like(Guid id)
+    {
+      return await Mediator.Send(new Like.Command { Id = id });
+    }
+
+    [HttpDelete("{id}/like")]
+    public async Task<ActionResult<Unit>> Unlike(Guid id)
+    {
+      return await Mediator.Send(new Unlike.Command { Id = id });
+    }
   }
 }

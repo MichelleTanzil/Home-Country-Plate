@@ -25,8 +25,6 @@ namespace Application.Products
       public async Task<List<ProductDto>> Handle(Query request, CancellationToken cancellationToken)
       {
         var products = await _context.Products
-          .Include(x => x.UserProducts)
-          .ThenInclude(x => x.AppUser)
           .ToListAsync();
         return _mapper.Map<List<Product>, List<ProductDto>>(products);
       }

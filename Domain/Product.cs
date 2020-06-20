@@ -13,6 +13,6 @@ namespace Domain
     public string City { get; set; }
     public string State { get; set; }
     public float Price { get; set; }
-    public ICollection<UserProduct> UserProducts { get; set; }
+    public virtual ICollection<UserProduct> UserProducts { get; set; }
   }
 }

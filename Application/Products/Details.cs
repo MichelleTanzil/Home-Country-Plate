@@ -30,9 +30,7 @@ namespace Application.Products
       public async Task<ProductDto> Handle(Query request, CancellationToken cancellationToken)
       {
         var product = await _context.Products
-          .Include(x => x.UserProducts)
-          .ThenInclude(x => x.AppUser)
-          .SingleOrDefaultAsync(x => x.Id == request.Id);
+          .FindAsync(request.Id);
         if (product == null)
           throw new RestException(HttpStatusCode.NotFound, new { product = "Not Found" });
 

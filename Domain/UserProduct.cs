@@ -10,5 +10,4 @@ namespace Domain
     public virtual Product Product { get; set; }
     public bool IsChef { get; set; }
   }
-
 }

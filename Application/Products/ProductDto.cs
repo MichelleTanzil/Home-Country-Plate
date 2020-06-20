@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
-namespace Domain
+namespace Application.Products
 {
-  public class Product
+  public class ProductDto
   {
     public Guid Id { get; set; }
     public string Title { get; set; }
@@ -13,6 +14,8 @@ namespace Domain
     public string City { get; set; }
     public string State { get; set; }
     public float Price { get; set; }
-    public virtual ICollection<UserProduct> UserProducts { get; set; }
+
+    [JsonPropertyName("likes")]
+    public ICollection<LikesDto> UserProducts { get; set; }
   }
 }

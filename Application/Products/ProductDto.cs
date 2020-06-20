@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Application.Products
 {
@@ -13,6 +14,8 @@ namespace Application.Products
     public string City { get; set; }
     public string State { get; set; }
     public float Price { get; set; }
-    public ICollection<ProductDto> Likes { get; set; }
+
+    [JsonPropertyName("likes")]
+    public ICollection<LikesDto> UserProducts { get; set; }
   }
 }

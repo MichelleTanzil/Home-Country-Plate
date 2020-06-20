@@ -16,6 +16,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Persistence;
+using AutoMapper;
 
 namespace API
 {
@@ -46,6 +47,8 @@ namespace API
         });
       });
       services.AddMediatR(typeof(List.Handler).Assembly);
+      // Automapper service to map many-to-many relationshios
+      services.AddAutoMapper(typeof(List.Handler));
       services.AddControllers(opt =>
       { // To make any request to be dependent on user's JWT, uncomment the lines bellow
         // var policy = new AuthorizationPolicyBuilder ().RequireAuthenticatedUser ().Build (); // every request requires authenticated user

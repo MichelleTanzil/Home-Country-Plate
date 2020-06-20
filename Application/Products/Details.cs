@@ -3,6 +3,7 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Errors;
+using AutoMapper;
 using Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -19,8 +20,10 @@ namespace Application.Products
     public class Handler : IRequestHandler<Query, ProductDto>
     {
       private readonly DataContext _context;
-      public Handler(DataContext context)
+      private readonly IMapper _mapper;
+      public Handler(DataContext context, IMapper mapper)
       {
+        _mapper = mapper;
         _context = context;
       }
 
@@ -32,10 +35,9 @@ namespace Application.Products
           .SingleOrDefaultAsync(x => x.Id == request.Id);
         if (product == null)
           throw new RestException(HttpStatusCode.NotFound, new { product = "Not Found" });
-        return new ProductDto
-        {
 
-        };
+        var productToReturn = _mapper.Map<Product, ProductDto>(product);
+        return productToReturn;
       }
     }
   }

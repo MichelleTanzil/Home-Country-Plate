@@ -17,6 +17,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Persistence;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API
 {
@@ -63,6 +64,16 @@ namespace API
       var identityBuilder = new IdentityBuilder(builder.UserType, builder.Services);
       identityBuilder.AddEntityFrameworkStores<DataContext>();
       identityBuilder.AddSignInManager<SignInManager<AppUser>>();
+
+      services.AddAuthorization(opt =>
+      {
+        opt.AddPolicy("IsProductChef", policy =>
+        {
+          policy.Requirements.Add(new IsChefRequirement());
+        });
+      });
+
+      services.AddTransient<IAuthorizationHandler, IsChefRequirementHandler>();
 
       var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["TokenKey"]));
 

@@ -7,9 +7,10 @@ export interface IProduct {
   city: string;
   state: string;
   price: number | null;
+  likes: ILiker[];
 }
 
-export class ProductFormValues implements IProduct {
+export class ProductFormValues implements Partial<IProduct> {
   id: string = "";
   title: string = "";
   image: string = "";
@@ -18,4 +19,11 @@ export class ProductFormValues implements IProduct {
   city: string = "";
   state: string = "";
   price: number | null = null;
+}
+
+export interface ILiker {
+  username: string;
+  displayName: string;
+  image: string;
+  isHost: boolean;
 }

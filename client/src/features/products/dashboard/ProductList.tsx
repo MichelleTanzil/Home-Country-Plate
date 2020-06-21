@@ -1,14 +1,15 @@
-import React, { useContext, Fragment } from "react";
-import { Item, Grid, Header, GridColumn } from "semantic-ui-react";
+import React, { useContext } from "react";
+import { Grid, Header, Segment, Container } from "semantic-ui-react";
 import { observer } from "mobx-react-lite";
 import { RootStoreContext } from "../../../app/stores/rootStore";
 import ProductListItem from "./ProductListItem";
+import ProductListItemLikes from "./ProductListItemLikes";
 
 const ProductList: React.FC = () => {
   const rootStore = useContext(RootStoreContext);
   const { productsByCategories } = rootStore.productStore;
   return (
-    <Fragment>
+    <Container>
       {productsByCategories.map(([group, products]) => (
         <Grid key={group}>
           <Grid.Row>
@@ -22,12 +23,13 @@ const ProductList: React.FC = () => {
             {products.map((product) => (
               <Grid.Column width={3}>
                 <ProductListItem key={product.id} product={product} />
+                <ProductListItemLikes likers={product.likes} />
               </Grid.Column>
             ))}
           </Grid.Row>
         </Grid>
       ))}
-    </Fragment>
+    </Container>
   );
 };
 

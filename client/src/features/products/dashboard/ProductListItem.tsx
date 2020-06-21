@@ -25,7 +25,7 @@ const ProductListItem: React.FC<{ product: IProduct }> = ({ product }) => {
         <List.Icon name="dollar" />
         <List.Content>{product.price}</List.Content>
       </List.Item>
-      <Button animated="vertical" color="teal" size="big" fluid>
+      <Button animated="vertical" color="teal" size="large" fluid>
         <Button.Content hidden>Add to cart</Button.Content>
         <Button.Content visible>
           <Icon name="shop" />

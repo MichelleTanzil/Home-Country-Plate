@@ -7,6 +7,8 @@ export interface IProduct {
   city: string;
   state: string;
   price: number | null;
+  isLiked: boolean;
+  isChef: boolean;
   likes: ILiker[];
 }
 
@@ -25,5 +27,5 @@ export interface ILiker {
   username: string;
   displayName: string;
   image: string;
-  isHost: boolean;
+  isChef: boolean;
 }

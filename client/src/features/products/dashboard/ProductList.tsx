@@ -23,7 +23,7 @@ const ProductList: React.FC = () => {
             {products.map((product) => (
               <Grid.Column width={3}>
                 <ProductListItem key={product.id} product={product} />
-                <ProductListItemLikes likers={product.likes} />
+                <ProductListItemLikes product={product} />
               </Grid.Column>
             ))}
           </Grid.Row>

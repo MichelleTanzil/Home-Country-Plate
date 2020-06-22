@@ -1,23 +1,27 @@
-import React from "react";
-import { List, Image, Button, Icon, Label } from "semantic-ui-react";
-import { ILiker } from "../../../app/models/product";
+import React, { useContext } from "react";
+import { Button, Icon, Label } from "semantic-ui-react";
+import { ILiker, IProduct } from "../../../app/models/product";
+import { RootStoreContext } from "../../../app/stores/rootStore";
+import { observer } from "mobx-react-lite";
 
 interface IProps {
-  likers: ILiker[];
+  product: IProduct;
 }
 
-const ProductListItemLikes: React.FC<IProps> = ({ likers }) => {
+const ProductListItemLikes: React.FC<IProps> = ({ product }) => {
+  const rootStore = useContext(RootStoreContext);
+  const chef: ILiker = product.likes.filter((x) => x.isChef)[0];
   return (
     <Button as="div" labelPosition="right" fluid>
-      <Button color="orange">
+      <Button color="orange" active>
         <Icon name="heart" />
         Like
       </Button>
       <Label as="a" basic color="orange" pointing="left">
-        {likers.length}
+        {product.likes.length}
       </Label>
     </Button>
   );
 };
 
-export default ProductListItemLikes;
+export default observer(ProductListItemLikes);

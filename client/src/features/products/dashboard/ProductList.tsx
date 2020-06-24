@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Grid, Header, Segment, Container } from "semantic-ui-react";
+import { Grid, Header, Container } from "semantic-ui-react";
 import { observer } from "mobx-react-lite";
 import { RootStoreContext } from "../../../app/stores/rootStore";
 import ProductListItem from "./ProductListItem";

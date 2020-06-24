@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Segment,
   Header,
@@ -8,10 +8,14 @@ import {
   Popup,
   Image,
 } from "semantic-ui-react";
-import { IProduct } from "../../../app/models/product";
+import { IProduct, ILiker } from "../../../app/models/product";
 import { Link } from "react-router-dom";
+import { RootStoreContext } from "../../../app/stores/rootStore";
+import { observer } from "mobx-react-lite";
 
 const ProductDetailedInfo: React.FC<{ product: IProduct }> = ({ product }) => {
+  const rootStore = useContext(RootStoreContext);
+  const chef: ILiker = product.likes.filter((x) => x.isChef)[0];
   return (
     <Segment>
       <Header as="h1" textAlign="center">
@@ -60,4 +64,4 @@ const ProductDetailedInfo: React.FC<{ product: IProduct }> = ({ product }) => {
   );
 };
 
-export default ProductDetailedInfo;
+export default observer(ProductDetailedInfo);

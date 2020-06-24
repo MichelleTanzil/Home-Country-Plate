@@ -1,26 +1,52 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Button, Icon, Label } from "semantic-ui-react";
-import { ILiker, IProduct } from "../../../app/models/product";
-import { RootStoreContext } from "../../../app/stores/rootStore";
+import { IProduct } from "../../../app/models/product";
 import { observer } from "mobx-react-lite";
+import { Link } from "react-router-dom";
 
-interface IProps {
-  product: IProduct;
-}
-
-const ProductListItemLikes: React.FC<IProps> = ({ product }) => {
-  const rootStore = useContext(RootStoreContext);
-  const chef: ILiker = product.likes.filter((x) => x.isChef)[0];
+const ProductListItemLikes: React.FC<{ product: IProduct }> = ({ product }) => {
   return (
-    <Button as="div" labelPosition="right" fluid>
-      <Button color="orange" active>
-        <Icon name="heart" />
-        Like
-      </Button>
-      <Label as="a" basic color="orange" pointing="left">
-        {product.likes.length}
-      </Label>
-    </Button>
+    <Button.Group>
+      {product.isChef ? (
+        <Button
+          labelPosition="right"
+          fluid
+          as={Link}
+          to={`/manage/${product.id}`}
+          color="red"
+        >
+          <Button color="red" active>
+            <Icon name="heart" />
+            You are the chef
+          </Button>
+          <Label as="a" basic color="red" pointing="left">
+            {product.likes.length}
+          </Label>
+          {product.likes.length}
+        </Button>
+      ) : product.isLiked ? (
+        //  loading={loading} onClick={cancelAttendance}
+        <Button as="div" labelPosition="right" fluid>
+          <Button color="orange" active>
+            <Icon name="heart" />
+            Unlike
+          </Button>
+          <Label as="a" basic color="orange" pointing="left">
+            {product.likes.length}
+          </Label>
+        </Button>
+      ) : (
+        <Button as="div" labelPosition="right" fluid>
+          <Button color="orange" active>
+            <Icon name="heart" />
+            Like
+          </Button>
+          <Label as="a" basic color="orange" pointing="left">
+            {product.likes.length}
+          </Label>
+        </Button>
+      )}
+    </Button.Group>
   );
 };
 

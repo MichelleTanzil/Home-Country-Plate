@@ -7,6 +7,7 @@ import { RootStoreContext } from "../../../app/stores/rootStore";
 import ProductDetailedImages from "./ProductDetailedImages";
 import ProductDetailedInfo from "./ProductDetailedInfo";
 import ProductDetailedSellerInfo from "./ProductDetailedSellerInfo";
+import ProductLikeButton from "../../common/ProductLikeButton";
 
 interface DetailParams {
   id: string;
@@ -29,21 +30,26 @@ const ProductDetails: React.FC<RouteComponentProps<DetailParams>> = ({
     );
   return (
     <Grid>
-      <Grid.Column width={8}>
-        <ProductDetailedImages />
-      </Grid.Column>
-      <Grid.Column width={8}>
-        <ProductDetailedInfo product={product} />
-        <Button animated="vertical" color="teal" fluid size="large">
-          <Button.Content hidden>Add to cart</Button.Content>
-          <Button.Content visible>
-            <Icon name="shop" size="large" />
-          </Button.Content>
-        </Button>
-      </Grid.Column>
-      <Grid.Column width={6}>
-        <ProductDetailedSellerInfo />
-      </Grid.Column>
+      <Grid.Row>
+        <Grid.Column width={8}>
+          <ProductDetailedImages />
+          <ProductLikeButton product={product} />
+        </Grid.Column>
+        <Grid.Column width={8}>
+          <ProductDetailedInfo product={product} />
+          <Button animated="vertical" color="teal" fluid size="large">
+            <Button.Content hidden>Add to cart</Button.Content>
+            <Button.Content visible>
+              <Icon name="shop" size="large" />
+            </Button.Content>
+          </Button>
+        </Grid.Column>
+      </Grid.Row>
+      <Grid.Row>
+        <Grid.Column width={6}>
+          <ProductDetailedSellerInfo />
+        </Grid.Column>
+      </Grid.Row>
     </Grid>
   );
 };

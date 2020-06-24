@@ -1,10 +1,10 @@
 import React from "react";
 import { Button, Icon, Label } from "semantic-ui-react";
-import { IProduct } from "../../../app/models/product";
+import { IProduct } from "../../app/models/product";
 import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
 
-const ProductListItemLikes: React.FC<{ product: IProduct }> = ({ product }) => {
+const ProductLikeButton: React.FC<{ product: IProduct }> = ({ product }) => {
   return (
     <Button.Group>
       {product.isChef ? (
@@ -16,22 +16,22 @@ const ProductListItemLikes: React.FC<{ product: IProduct }> = ({ product }) => {
           color="red"
         >
           <Button color="red" active>
-            <Icon name="heart" />
-            You are the chef
+            <Icon name="edit" />
+            Edit Dish
           </Button>
           <Label as="a" basic color="red" pointing="left">
-            {product.likes.length}
+            {product.likes.length} {product.likes.length < 2 ? "like" : "likes"}
           </Label>
           {product.likes.length}
         </Button>
       ) : product.isLiked ? (
         //  loading={loading} onClick={cancelAttendance}
         <Button as="div" labelPosition="right" fluid>
-          <Button color="orange" active>
+          <Button color="blue" active>
             <Icon name="heart" />
             Unlike
           </Button>
-          <Label as="a" basic color="orange" pointing="left">
+          <Label as="a" basic color="blue" pointing="left">
             {product.likes.length}
           </Label>
         </Button>
@@ -50,4 +50,4 @@ const ProductListItemLikes: React.FC<{ product: IProduct }> = ({ product }) => {
   );
 };
 
-export default observer(ProductListItemLikes);
+export default observer(ProductLikeButton);

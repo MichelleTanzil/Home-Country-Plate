@@ -5,6 +5,7 @@ import agent from "../api/agent";
 import { history } from "../..";
 import { toast } from "react-toastify";
 import { RootStore } from "./rootStore";
+import { setProductProps } from "../common/util/util";
 
 export default class ProductStore {
   rootStore: RootStore;
@@ -42,11 +43,11 @@ export default class ProductStore {
 
   @action loadProducts = async () => {
     this.loadingInitial = true;
-
     try {
       const products = await agent.Products.list();
       runInAction("loading products", () => {
         products.forEach((product) => {
+          setProductProps(product, this.rootStore.userStore.user);
           this.productRegistry.set(product.id, product);
         });
         this.loadingInitial = false;
@@ -69,6 +70,7 @@ export default class ProductStore {
       try {
         const product = await agent.Products.details(id);
         runInAction("loading product", () => {
+          setProductProps(product, this.rootStore.userStore.user);
           this.product = product;
           this.productRegistry.set(product.id, product);
           this.loadingInitial = false;

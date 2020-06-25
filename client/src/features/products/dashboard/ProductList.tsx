@@ -5,7 +5,7 @@ import { RootStoreContext } from "../../../app/stores/rootStore";
 import ProductListItem from "./ProductListItem";
 import ProductLikeButton from "../../common/ProductLikeButton";
 
-const ProductList: React.FC = () => {
+const ProductList = () => {
   const rootStore = useContext(RootStoreContext);
   const { productsByCategories } = rootStore.productStore;
   return (

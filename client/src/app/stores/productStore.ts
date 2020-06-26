@@ -159,7 +159,6 @@ export default class ProductStore {
   };
 
   @action likeProduct = async (id: string) => {
-    this.loading = true;
     try {
       let product = this.getProduct(id);
       if (this.rootStore.userStore.user) {
@@ -169,24 +168,20 @@ export default class ProductStore {
           product.likes.push(liker);
           product.isLiked = true;
           this.productRegistry.set(id, product);
-          this.loading = false;
         });
       } else {
         runInAction(() => {
-          this.loading = false;
           toast.error("Please log in or register to unlike this dish.");
         });
       }
     } catch (error) {
       runInAction(() => {
-        this.loading = false;
       });
       toast.error("Problem with liking this dish");
     }
   };
 
   @action unlikeProduct = async (id: string) => {
-    this.loading = true;
     try {
       let product = this.getProduct(id);
       await agent.Products.unlike(id);
@@ -198,17 +193,14 @@ export default class ProductStore {
           );
           product.isLiked = false;
           this.productRegistry.set(id, product);
-          this.loading = false;
         });
       } else {
         runInAction(() => {
-          this.loading = false;
           toast.error("Please log in or register to unlike this dish.");
         });
       }
     } catch (error) {
       runInAction(() => {
-        this.loading = false;
       });
       toast.error("Problem with unliking this dish");
     }

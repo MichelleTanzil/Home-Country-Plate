@@ -22,7 +22,7 @@ const ProductLikeButton: React.FC<{ product: IProduct }> = ({ product }) => {
           to={`/manage/${product.id}`}
           color="red"
         >
-          <Button color="red" active onClick={() => setLoading(true)}>
+          <Button color="red" active>
             <Icon name="edit" />
             Edit Dish
           </Button>
@@ -36,7 +36,7 @@ const ProductLikeButton: React.FC<{ product: IProduct }> = ({ product }) => {
           <Button
             color="blue"
             active
-            onClick={() => unlikeProduct(product.id)}
+            onClick={() => {setLoading(true); unlikeProduct(product.id).then(()=> setLoading(false)); }}
             loading={loading}
           >
             <Icon name="heart" />
@@ -51,7 +51,7 @@ const ProductLikeButton: React.FC<{ product: IProduct }> = ({ product }) => {
           <Button
             color="orange"
             active
-            onClick={() => likeProduct(product.id)}
+            onClick={() => {setLoading(true); likeProduct(product.id).then(() => setLoading(false)); }}
             loading={loading}
           >
             <Icon name="heart" />

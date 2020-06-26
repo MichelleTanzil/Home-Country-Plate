@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Button, Icon, Label } from "semantic-ui-react";
 import { IProduct } from "../../app/models/product";
 import { observer } from "mobx-react-lite";
@@ -7,7 +7,11 @@ import { RootStoreContext } from "../../app/stores/rootStore";
 
 const ProductLikeButton: React.FC<{ product: IProduct }> = ({ product }) => {
   const rootStore = useContext(RootStoreContext);
-  const { likeProduct, unlikeProduct, loading } = rootStore.productStore;
+  const { likeProduct, unlikeProduct } = rootStore.productStore;
+
+  const [loading, setLoading] = useState(false);
+
+  console.log(loading)
   return (
     <Button.Group key={product.id}>
       {product.isChef ? (
@@ -18,7 +22,7 @@ const ProductLikeButton: React.FC<{ product: IProduct }> = ({ product }) => {
           to={`/manage/${product.id}`}
           color="red"
         >
-          <Button color="red" active>
+          <Button color="red" active onClick={() => setLoading(true)}>
             <Icon name="edit" />
             Edit Dish
           </Button>

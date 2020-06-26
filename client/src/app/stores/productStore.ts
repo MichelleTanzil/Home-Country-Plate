@@ -1,4 +1,4 @@
-import { observable, action, runInAction, computed } from "mobx";
+import { observable, action, runInAction } from "mobx";
 import { SyntheticEvent } from "react";
 import { IProduct, ILiker } from "../models/product";
 import agent from "../api/agent";
@@ -96,8 +96,12 @@ export default class ProductStore {
   };
 
   @action createProduct = async (product: IProduct) => {
-    console.log("product from PRODUCTSTORE", product);
     this.submitting = true;
+    const liker = createLike(this.rootStore.userStore.user!);
+    liker.isChef = true;
+    let likes = [];
+    likes.push(liker);
+    product.likes = likes;
     try {
       await agent.Products.create(product);
       runInAction("creating product", () => {
@@ -168,7 +172,10 @@ export default class ProductStore {
           this.loading = false;
         });
       } else {
-        toast.error("Please log in or register to like this dish.");
+        runInAction(() => {
+          this.loading = false;
+          toast.error("Please log in or register to unlike this dish.");
+        });
       }
     } catch (error) {
       runInAction(() => {
@@ -194,7 +201,10 @@ export default class ProductStore {
           this.loading = false;
         });
       } else {
-        toast.error("Please log in or register to unlike this dish.");
+        runInAction(() => {
+          this.loading = false;
+          toast.error("Please log in or register to unlike this dish.");
+        });
       }
     } catch (error) {
       runInAction(() => {

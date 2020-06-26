@@ -3,7 +3,6 @@ import { Grid, Header, Container } from "semantic-ui-react";
 import { observer } from "mobx-react-lite";
 import { RootStoreContext } from "../../../app/stores/rootStore";
 import ProductListItem from "./ProductListItem";
-import ProductLikeButton from "../../common/ProductLikeButton";
 
 const ProductList = () => {
   const rootStore = useContext(RootStoreContext);
@@ -23,7 +22,6 @@ const ProductList = () => {
             {products.map((product) => (
               <Grid.Column width={4}>
                 <ProductListItem key={product.id} product={product} />
-                <ProductLikeButton key={product.id} product={product} />
               </Grid.Column>
             ))}
           </Grid.Row>

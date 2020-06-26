@@ -1,4 +1,4 @@
-import { observable, action, runInAction, computed } from "mobx";
+import { observable, action, runInAction } from "mobx";
 import { SyntheticEvent } from "react";
 import { IProduct, ILiker } from "../models/product";
 import agent from "../api/agent";
@@ -172,7 +172,10 @@ export default class ProductStore {
           this.loading = false;
         });
       } else {
-        toast.error("Please log in or register to like this dish.");
+        runInAction(() => {
+          this.loading = false;
+          toast.error("Please log in or register to unlike this dish.");
+        });
       }
     } catch (error) {
       runInAction(() => {
@@ -198,7 +201,10 @@ export default class ProductStore {
           this.loading = false;
         });
       } else {
-        toast.error("Please log in or register to unlike this dish.");
+        runInAction(() => {
+          this.loading = false;
+          toast.error("Please log in or register to unlike this dish.");
+        });
       }
     } catch (error) {
       runInAction(() => {

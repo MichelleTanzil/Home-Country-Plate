@@ -32,7 +32,9 @@ const ProductListItem: React.FC<{ product: IProduct }> = ({ product }) => {
           <Icon name="shop" />
         </Button.Content>
       </Button>
-      <ProductLikeButton product={product} />
+      <List.Item>
+        <ProductLikeButton product={product} />
+      </List.Item>
     </List>
   );
 };

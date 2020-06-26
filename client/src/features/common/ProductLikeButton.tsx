@@ -9,7 +9,7 @@ const ProductLikeButton: React.FC<{ product: IProduct }> = ({ product }) => {
   const rootStore = useContext(RootStoreContext);
   const { likeProduct, unlikeProduct, loading } = rootStore.productStore;
   return (
-    <Button.Group>
+    <Button.Group key={product.id}>
       {product.isChef ? (
         <Button
           labelPosition="right"

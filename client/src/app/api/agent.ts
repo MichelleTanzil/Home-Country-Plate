@@ -72,6 +72,8 @@ const Products = {
   update: (product: IProduct) =>
     requests.put(`/products/${product.id}`, product),
   delete: (id: string) => requests.delete(`/products/${id}`),
+  like: (id: string) => requests.post(`/products/${id}/like`, {}),
+  unlike: (id: string) => requests.delete(`/products/${id}/like`),
 };
 
 const User = {

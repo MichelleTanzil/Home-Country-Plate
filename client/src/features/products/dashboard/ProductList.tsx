@@ -23,7 +23,7 @@ const ProductList = () => {
             {products.map((product) => (
               <Grid.Column width={4}>
                 <ProductListItem key={product.id} product={product} />
-                <ProductLikeButton product={product} />
+                <ProductLikeButton key={product.id} product={product} />
               </Grid.Column>
             ))}
           </Grid.Row>

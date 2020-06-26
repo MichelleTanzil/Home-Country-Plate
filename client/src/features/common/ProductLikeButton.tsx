@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button, Icon, Label } from "semantic-ui-react";
 import { IProduct } from "../../app/models/product";
 import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
+import { RootStoreContext } from "../../app/stores/rootStore";
 
 const ProductLikeButton: React.FC<{ product: IProduct }> = ({ product }) => {
+  const rootStore = useContext(RootStoreContext);
+  const { likeProduct, unlikeProduct, loading } = rootStore.productStore;
   return (
     <Button.Group>
       {product.isChef ? (
@@ -25,9 +28,13 @@ const ProductLikeButton: React.FC<{ product: IProduct }> = ({ product }) => {
           {product.likes.length}
         </Button>
       ) : product.isLiked ? (
-        //  loading={loading} onClick={cancelAttendance}
         <Button as="div" labelPosition="right" fluid>
-          <Button color="blue" active>
+          <Button
+            color="blue"
+            active
+            onClick={() => unlikeProduct(product.id)}
+            loading={loading}
+          >
             <Icon name="heart" />
             Unlike
           </Button>
@@ -37,7 +44,12 @@ const ProductLikeButton: React.FC<{ product: IProduct }> = ({ product }) => {
         </Button>
       ) : (
         <Button as="div" labelPosition="right" fluid>
-          <Button color="orange" active>
+          <Button
+            color="orange"
+            active
+            onClick={() => likeProduct(product.id)}
+            loading={loading}
+          >
             <Icon name="heart" />
             Like
           </Button>

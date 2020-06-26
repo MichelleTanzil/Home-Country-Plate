@@ -9,7 +9,8 @@ namespace Persistence
     public DataContext(DbContextOptions options) : base(options) { }
     public DbSet<Product> Products { get; set; }
     public DbSet<UserProduct> UserProducts { get; set; }
-
+    public DbSet<Cart> UserCart { get; set; }
+    public DbSet<Order> UserOrders { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -26,6 +27,11 @@ namespace Persistence
       .HasOne(p => p.Product)
       .WithMany(up => up.UserProducts)
       .HasForeignKey(ap => ap.ProductId);
+
+      builder.Entity<AppUser>()
+      .HasOne(c => c.UserCart)
+      .WithOne(p => p.AppUser)
+      .HasForeignKey<Cart>(ap => ap.UserId);
     }
   }
 }

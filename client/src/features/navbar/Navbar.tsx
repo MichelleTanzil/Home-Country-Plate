@@ -9,7 +9,7 @@ export const Navbar = () => {
   const rootStore = useContext(RootStoreContext);
   const { isLoggedIn, user, logout } = rootStore.userStore;
   const { openModal } = rootStore.modalStore;
-
+  console.log(user?.username)
   return (
     <Menu inverted fixed="top">
       <Container>

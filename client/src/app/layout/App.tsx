@@ -54,7 +54,6 @@ const App: React.FC<RouteComponentProps> = ({ location }) => {
                   component={ProductForm}
                 />
                 <Route path="/profile/:username" component={ProfilePage} />
-
                 <Route component={NotFound} />
               </Switch>
             </Container>

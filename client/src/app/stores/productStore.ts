@@ -1,11 +1,11 @@
 import { observable, action, runInAction, computed } from "mobx";
 import { SyntheticEvent } from "react";
-import { IProduct } from "../models/product";
+import { IProduct, ILiker } from "../models/product";
 import agent from "../api/agent";
 import { history } from "../..";
 import { toast } from "react-toastify";
 import { RootStore } from "./rootStore";
-import { setProductProps } from "../common/util/util";
+import { setProductProps, createLike } from "../common/util/util";
 
 export default class ProductStore {
   rootStore: RootStore;
@@ -18,8 +18,9 @@ export default class ProductStore {
   @observable deleteTarget = "";
   @observable loadingInitial = false;
   @observable submitting = false;
+  @observable loading = false;
 
-  @computed get productsByCategories() {
+  get productsByCategories() {
     return this.groupProductsByCategory(
       Array.from(this.productRegistry.values())
     );
@@ -41,6 +42,7 @@ export default class ProductStore {
     );
   }
 
+  // Load all dishes from the back end
   @action loadProducts = async () => {
     this.loadingInitial = true;
     try {
@@ -60,6 +62,7 @@ export default class ProductStore {
     }
   };
 
+  // Load one dish from the back end
   @action loadProduct = async (id: string) => {
     let product = this.getProduct(id);
     if (product) {
@@ -129,7 +132,7 @@ export default class ProductStore {
     }
   };
 
-  @action deleteActivity = async (
+  @action deleteProduct = async (
     event: SyntheticEvent<HTMLButtonElement>,
     id: string
   ) => {
@@ -148,6 +151,56 @@ export default class ProductStore {
         this.deleteTarget = "";
       });
       console.log(error);
+    }
+  };
+
+  @action likeProduct = async (id: string) => {
+    this.loading = true;
+    try {
+      let product = this.getProduct(id);
+      if (this.rootStore.userStore.user) {
+        let liker = createLike(this.rootStore.userStore.user);
+        await agent.Products.like(id);
+        runInAction(() => {
+          product.likes.push(liker);
+          product.isLiked = true;
+          this.productRegistry.set(id, product);
+          this.loading = false;
+        });
+      } else {
+        toast.error("Please log in or register to like this dish.");
+      }
+    } catch (error) {
+      runInAction(() => {
+        this.loading = false;
+      });
+      toast.error("Problem with liking this dish");
+    }
+  };
+
+  @action unlikeProduct = async (id: string) => {
+    this.loading = true;
+    try {
+      let product = this.getProduct(id);
+      await agent.Products.unlike(id);
+      if (this.rootStore.userStore.user) {
+        runInAction(() => {
+          product.likes = product.likes.filter(
+            (p: ILiker) =>
+              p.username !== this.rootStore.userStore.user!.username
+          );
+          product.isLiked = false;
+          this.productRegistry.set(id, product);
+          this.loading = false;
+        });
+      } else {
+        toast.error("Please log in or register to unlike this dish.");
+      }
+    } catch (error) {
+      runInAction(() => {
+        this.loading = false;
+      });
+      toast.error("Problem with unliking this dish");
     }
   };
 }

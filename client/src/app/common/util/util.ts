@@ -1,4 +1,4 @@
-import { IProduct } from "../../models/product";
+import { IProduct, ILiker } from "../../models/product";
 import { IUser } from "../../models/user";
 
 export const setProductProps = (product: IProduct, user: IUser | null) => {
@@ -9,4 +9,13 @@ export const setProductProps = (product: IProduct, user: IUser | null) => {
     );
   }
   return product;
+};
+
+export const createLike = (user: IUser): ILiker => {
+  return {
+    displayName: user.displayName,
+    isChef: false,
+    username: user.username,
+    image: user.image!,
+  };
 };

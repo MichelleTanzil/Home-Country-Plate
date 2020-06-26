@@ -5,7 +5,7 @@ import { RootStoreContext } from "../../../app/stores/rootStore";
 import ProductListItem from "./ProductListItem";
 import ProductLikeButton from "../../common/ProductLikeButton";
 
-const ProductList: React.FC = () => {
+const ProductList = () => {
   const rootStore = useContext(RootStoreContext);
   const { productsByCategories } = rootStore.productStore;
   return (
@@ -23,7 +23,7 @@ const ProductList: React.FC = () => {
             {products.map((product) => (
               <Grid.Column width={4}>
                 <ProductListItem key={product.id} product={product} />
-                <ProductLikeButton product={product} />
+                <ProductLikeButton key={product.id} product={product} />
               </Grid.Column>
             ))}
           </Grid.Row>

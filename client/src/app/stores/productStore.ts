@@ -96,8 +96,12 @@ export default class ProductStore {
   };
 
   @action createProduct = async (product: IProduct) => {
-    console.log("product from PRODUCTSTORE", product);
     this.submitting = true;
+    const liker = createLike(this.rootStore.userStore.user!);
+    liker.isChef = true;
+    let likes = [];
+    likes.push(liker);
+    product.likes = likes;
     try {
       await agent.Products.create(product);
       runInAction("creating product", () => {

@@ -3,6 +3,7 @@ import { observer } from "mobx-react-lite";
 import { IProduct } from "../../../app/models/product";
 import { List, Button, Icon, Image } from "semantic-ui-react";
 import { Link } from "react-router-dom";
+import ProductLikeButton from "../../common/ProductLikeButton";
 
 const ProductListItem: React.FC<{ product: IProduct }> = ({ product }) => {
   return (
@@ -31,6 +32,7 @@ const ProductListItem: React.FC<{ product: IProduct }> = ({ product }) => {
           <Icon name="shop" />
         </Button.Content>
       </Button>
+      <ProductLikeButton product={product} />
     </List>
   );
 };

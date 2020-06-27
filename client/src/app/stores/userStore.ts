@@ -24,6 +24,9 @@ export default class UserStore {
       });
       this.rootStore.commonStore.setToken(user.token);
       this.rootStore.modalStore.closeModal();
+      if (history.location.pathname === "/products") {
+        history.push("/");
+      }
       history.push("/products");
     } catch (error) {
       throw error;
@@ -38,6 +41,9 @@ export default class UserStore {
       });
       this.rootStore.commonStore.setToken(user.token);
       this.rootStore.modalStore.closeModal();
+      if (history.location.pathname === "/products") {
+        history.push("/");
+      }
       history.push("/products");
     } catch (error) {
       throw error;

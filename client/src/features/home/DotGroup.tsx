@@ -8,7 +8,7 @@ interface IProps {
 
 const DotGroup: React.FC<IProps> = ({ slides }) => (
   <Container textAlign="center">
-    <Button.Group size="mini">
+    <Button.Group size="medium">
       {Array.from(Array(slides).keys()).map((slide) => (
         <Button as={Dot} key={slide} icon="circle" slide={slide} />
       ))}

@@ -43,7 +43,7 @@ const App: React.FC<RouteComponentProps> = ({ location }) => {
       <Route
         path={"/(.+)"}
         render={() => (
-          <>
+          <Fragment>
             <Container style={{ marginTop: "7em" }}>
               <Switch>
                 <Route exact path="/products" component={ProductDashboard} />
@@ -58,7 +58,7 @@ const App: React.FC<RouteComponentProps> = ({ location }) => {
                 <Route component={NotFound} />
               </Switch>
             </Container>
-          </>
+          </Fragment>
         )}
       />
     </Fragment>

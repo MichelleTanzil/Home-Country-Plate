@@ -18,6 +18,7 @@ using Microsoft.IdentityModel.Tokens;
 using Persistence;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Infrastructure.Photos;
 
 namespace API
 {
@@ -90,6 +91,7 @@ namespace API
 
       services.AddScoped<IJwtGenerator, JwtGenerator>(); //when we inject the inteface in our construcors of classes we weill have to have access to the methods within it. And when we use the methods we actually use the concrete one.
       services.AddScoped<IUserAccessor, UserAccessor>(); // now we can get the username everywhere in the app
+      services.Configure<CloudinarySettings>(Configuration.GetSection("Cloudinary")); //inject Cloudinary into services to use them in the app
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

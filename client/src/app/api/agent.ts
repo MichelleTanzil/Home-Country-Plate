@@ -4,6 +4,7 @@ import { history } from "../..";
 import { toast } from "react-toastify";
 import { IUser, IUserFormValues } from "../models/user";
 import { IProfile, IPhoto } from "../models/profile";
+import { ICart, ICartItem } from "../models/cart";
 
 axios.defaults.baseURL = "http://localhost:5000/api";
 
@@ -93,8 +94,14 @@ const Profiles = {
   deletePhoto: (id: string) => requests.delete(`/photos/${id}`),
 };
 
+const Cart = {
+  get: (username: string): Promise<ICart> => requests.get(`cart/${username}`),
+  // addToCart : (item : ICartItem) : Promise
+};
+
 export default {
   Products,
   User,
   Profiles,
+  Cart
 };

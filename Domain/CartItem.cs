@@ -1,9 +1,9 @@
-namespace Domain
-{
-    public class CartItem
-    {
-        public int Id {get;set;}
-        public virtual Product product { get; set; }
+namespace Domain {
+    public class CartItem {
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string Image { get; set; }
+        public float Price { get; set; }
         public int quantity { get; set; }
     }
 }

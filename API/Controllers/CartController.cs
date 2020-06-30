@@ -1,14 +1,15 @@
 using System;
 using System.Threading.Tasks;
 using Application.UserCart;
+using Domain;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers {
     public class CartController : BaseController {
-        [HttpGet ("{id}")]
-        public async Task<ActionResult<CartDTO>> Details (Guid id) {
-            return await Mediator.Send (new Details.Query { Id = id });
+        [HttpGet]
+        public async Task<ActionResult<CartDTO>> Details () {
+            return await Mediator.Send (new Details.Query ());
         }
 
         [HttpPost]

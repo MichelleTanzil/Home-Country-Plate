@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20200630171309_cart db")]
+    partial class cartdb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -122,9 +124,6 @@ namespace Persistence.Migrations
                         .HasColumnType("REAL");
 
                     b.Property<string>("Title")
-
-                    b.Property<Guid?>("productId")
-
                         .HasColumnType("TEXT");
 
                     b.Property<int>("quantity")
@@ -133,9 +132,6 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CartId");
-
-                    b.HasIndex("productId");
-
 
                     b.ToTable("CartItem");
                 });
@@ -163,33 +159,6 @@ namespace Persistence.Migrations
 
                     b.ToTable("UserOrders");
                 });
-
-            modelBuilder.Entity("Domain.Photo", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("AppUserId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("IsMain")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<Guid?>("ProductId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Url")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AppUserId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("Photos");
-                });
-
 
             modelBuilder.Entity("Domain.Product", b =>
                 {
@@ -381,10 +350,6 @@ namespace Persistence.Migrations
                     b.HasOne("Domain.Cart", null)
                         .WithMany("ItemsInCart")
                         .HasForeignKey("CartId");
-
-                    b.HasOne("Domain.Product", "product")
-                        .WithMany()
-                        .HasForeignKey("productId");
                 });
 
             modelBuilder.Entity("Domain.Order", b =>
@@ -397,18 +362,6 @@ namespace Persistence.Migrations
                         .WithMany()
                         .HasForeignKey("PurchaseId");
                 });
-
-            modelBuilder.Entity("Domain.Photo", b =>
-                {
-                    b.HasOne("Domain.AppUser", null)
-                        .WithMany("UserPhotos")
-                        .HasForeignKey("AppUserId");
-
-                    b.HasOne("Domain.Product", null)
-                        .WithMany("ProductPhotos")
-                        .HasForeignKey("ProductId");
-                });
-
 
             modelBuilder.Entity("Domain.UserProduct", b =>
                 {

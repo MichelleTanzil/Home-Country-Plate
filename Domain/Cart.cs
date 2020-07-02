@@ -6,9 +6,13 @@ using System.Collections.Generic;
 namespace Domain {
     public class Cart {
         public Guid Id { get; set; }
-        public virtual ICollection<CartItem> ItemsInCart { get; set; }
+        public virtual List<CartItem> ItemsInCart { get; set; }
         public virtual AppUser AppUser { get; set; }
         public string UserId { get; set; }
         public float Total { get; set; }
+
+        public Cart(){
+            ItemsInCart = new List<CartItem>();
+        }
     }
 }

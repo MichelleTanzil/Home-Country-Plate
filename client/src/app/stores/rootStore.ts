@@ -5,6 +5,7 @@ import ModalStore from "./modalStore";
 import ProfileStore from "./profileStore";
 import { createContext } from "react";
 import { configure } from "mobx";
+import CartStore from "./cartStore";
 
 configure({ enforceActions: "always" });
 
@@ -14,6 +15,7 @@ export class RootStore {
   userStore: UserStore;
   modalStore: ModalStore;
   profileStore: ProfileStore;
+  cartStore: CartStore;
 
   constructor() {
     this.productStore = new ProductStore(this);
@@ -21,6 +23,7 @@ export class RootStore {
     this.userStore = new UserStore(this);
     this.modalStore = new ModalStore(this);
     this.profileStore = new ProfileStore(this);
+    this.cartStore = new CartStore(this, this.productStore);
   }
 }
 

@@ -18,19 +18,22 @@ import { observer } from "mobx-react-lite";
 import ModalContainer from "../common/modals/ModalContainer";
 import ProductDashboard from "../../features/products/dashboard/ProductDashboard";
 import ProfilePage from "../../features/profiles/ProfilePage";
+import { CartPage } from "../../features/cart/dashboard/CartPage";
 
 const App: React.FC<RouteComponentProps> = ({ location }) => {
   const rootStore = useContext(RootStoreContext);
   const { appLoaded, setAppLoaded, token } = rootStore.commonStore;
-  const { getUser } = rootStore.userStore;
+  const { getUser, user } = rootStore.userStore;
+  const { loadCart } = rootStore.cartStore;
 
   useEffect(() => {
     if (token) {
       setAppLoaded();
+      loadCart();
     } else {
       setAppLoaded();
     }
-  }, [getUser, setAppLoaded, token]);
+  }, [getUser, setAppLoaded, token, loadCart]);
 
   if (!appLoaded)
     return <LoadingComponent content="Loading Home Country Plate..." />;
@@ -54,6 +57,7 @@ const App: React.FC<RouteComponentProps> = ({ location }) => {
                   component={ProductForm}
                 />
                 <Route path="/profile/:username" component={ProfilePage} />
+                {user && <Route path="/cart" component={CartPage} />}
                 <Route component={NotFound} />
               </Switch>
             </Container>

@@ -95,13 +95,14 @@ const Profiles = {
 };
 
 const Cart = {
-  get: (username: string): Promise<ICart> => requests.get(`cart/${username}`),
-  // addToCart : (item : ICartItem) : Promise
+  get: (): Promise<ICart> => requests.get("/cart"),
+  addToCart: (product: ICartItem) : Promise<ICartItem> =>
+    requests.post(`/cart/${product.productId}`, product.quantity),
 };
 
 export default {
   Products,
   User,
   Profiles,
-  Cart
+  Cart,
 };

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { NavLink, Link } from "react-router-dom";
-import { Menu, Container, Button, Image, Dropdown } from "semantic-ui-react";
+import { Menu, Container, Button, Image, Dropdown, Icon, Label } from "semantic-ui-react";
 import { RootStoreContext } from "../../app/stores/rootStore";
 import LoginForm from "../user/LoginForm";
 import RegisterForm from "../user/RegisterForm";
@@ -8,6 +8,7 @@ import RegisterForm from "../user/RegisterForm";
 export const Navbar = () => {
   const rootStore = useContext(RootStoreContext);
   const { isLoggedIn, user, logout } = rootStore.userStore;
+  const { cart } = rootStore.cartStore;
   const { openModal } = rootStore.modalStore;
   console.log(user?.username)
   return (
@@ -35,6 +36,14 @@ export const Navbar = () => {
         </Menu.Item>
         {isLoggedIn && user ? (
           <Menu.Item position="right">
+            <Menu.Item>
+              <Button as={NavLink} to="/cart" icon>
+                <Icon name='shopping cart' />
+                {cart && <Label color='red' floating style={{padding:"3px"}}>
+                  {cart?.items.length}
+                </Label>}
+              </Button>
+            </Menu.Item>
             <Image
               avatar
               spaced="right"
@@ -53,25 +62,25 @@ export const Navbar = () => {
             </Dropdown>
           </Menu.Item>
         ) : (
-          <Menu.Menu position="right">
-            <Menu.Item>
-              <Button
-                inverted
-                color="green"
-                content="Login"
-                onClick={() => openModal(<LoginForm />)}
-              ></Button>
-            </Menu.Item>
-            <Menu.Item>
-              <Button
-                inverted
-                color="green"
-                content="Register"
-                onClick={() => openModal(<RegisterForm />)}
-              ></Button>
-            </Menu.Item>
-          </Menu.Menu>
-        )}
+            <Menu.Menu position="right">
+              <Menu.Item>
+                <Button
+                  inverted
+                  color="green"
+                  content="Login"
+                  onClick={() => openModal(<LoginForm />)}
+                ></Button>
+              </Menu.Item>
+              <Menu.Item>
+                <Button
+                  inverted
+                  color="green"
+                  content="Register"
+                  onClick={() => openModal(<RegisterForm />)}
+                ></Button>
+              </Menu.Item>
+            </Menu.Menu>
+          )}
       </Container>
     </Menu>
   );

@@ -12,8 +12,9 @@ namespace API.Controllers {
             return await Mediator.Send (new Details.Query ());
         }
 
-        [HttpPost]
-        public async Task<ActionResult<Unit>> Create (Add.Command command) {
+        [HttpPost ("{id}")]
+        public async Task<ActionResult<Unit>> Create (Guid id, Add.Command command) {
+            command.ProductId = id;
             return await Mediator.Send (command);
         }
     }

@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20200629223358_PhotoEntityAdded")]
+    partial class PhotoEntityAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -115,19 +117,7 @@ namespace Persistence.Migrations
                     b.Property<Guid?>("CartId")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Image")
-                        .HasColumnType("TEXT");
-
-                    b.Property<float>("Price")
-                        .HasColumnType("REAL");
-
-                    b.Property<Guid>("ProductId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Title")
-
                     b.Property<Guid?>("productId")
-
                         .HasColumnType("TEXT");
 
                     b.Property<int>("quantity")
@@ -138,7 +128,6 @@ namespace Persistence.Migrations
                     b.HasIndex("CartId");
 
                     b.HasIndex("productId");
-
 
                     b.ToTable("CartItem");
                 });
@@ -192,7 +181,6 @@ namespace Persistence.Migrations
 
                     b.ToTable("Photos");
                 });
-
 
             modelBuilder.Entity("Domain.Product", b =>
                 {
@@ -411,7 +399,6 @@ namespace Persistence.Migrations
                         .WithMany("ProductPhotos")
                         .HasForeignKey("ProductId");
                 });
-
 
             modelBuilder.Entity("Domain.UserProduct", b =>
                 {

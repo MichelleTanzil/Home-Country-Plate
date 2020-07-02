@@ -1,3 +1,4 @@
+using System;
 using Application.Interfaces;
 using Application.Photos;
 using CloudinaryDotNet;
@@ -30,11 +31,16 @@ namespace Infrastructure.Photos
         {
           var uploadParams = new ImageUploadParams
           {
-            File = new FileDescription(file.FileName, stream)
+            File = new FileDescription(file.FileName, stream),
+            Transformation = new Transformation().Height(500).Width(500).Crop("fill").Gravity("face")
           };
           uploadResult = _cloudinary.Upload(uploadParams);
         }
       }
+
+      if (uploadResult.Error != null)
+        throw new Exception(uploadResult.Error.Message);
+
       return new PhotoUploadResult
       {
         PublicId = uploadResult.PublicId,
@@ -44,7 +50,11 @@ namespace Infrastructure.Photos
 
     public string DeletePhoto(string publicId)
     {
-      throw new System.NotImplementedException();
+      var deleteParams = new DeletionParams(publicId);
+
+      var result = _cloudinary.Destroy(deleteParams);
+
+      return result.Result == "ok" ? result.Result : null;
     }
   }
 }

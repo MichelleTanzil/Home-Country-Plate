@@ -17,15 +17,13 @@ namespace Application.UserCart {
         public class Handler : IRequestHandler<Query, CartDTO> {
             private readonly DataContext _context;
             private readonly IUserAccessor _userAccessor;
-            private readonly IMapper _mapper;
             public Handler (DataContext context, IUserAccessor userAccessor, IMapper mapper) {
                 _userAccessor = userAccessor;
                 _context = context;
-                _mapper = mapper;
             }
 
             public async Task<CartDTO> Handle (Query request, CancellationToken cancellationToken) {
-                var user = await _context.Users.Include(a => a.UserCart).ThenInclude(a => a.ItemsInCart).SingleOrDefaultAsync (x => x.UserName == _userAccessor.GetCurrentUsername ());
+                var user = await _context.Users.Include (a => a.UserCart).ThenInclude (a => a.ItemsInCart).SingleOrDefaultAsync (x => x.UserName == _userAccessor.GetCurrentUsername ());
                 var cart = user.UserCart;
                 if (cart == null)
                     throw new RestException (HttpStatusCode.NotFound, new { cart = "Not found" });

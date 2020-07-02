@@ -3,26 +3,44 @@ import agent from "../api/agent";
 import { history } from "../..";
 import { toast } from "react-toastify";
 import { RootStore } from "./rootStore";
+import { ICartItem, ICart } from "../models/cart";
+import ProductStore from "./productStore";
+import { IProduct } from "../models/product";
 
 export default class CartStore {
   rootStore: RootStore;
-  constructor(rootStore: RootStore) {
+  productStore: ProductStore;
+  constructor(rootStore: RootStore, productStore: ProductStore) {
     this.rootStore = rootStore;
+    this.productStore = productStore;
   }
-  @observable cartRegistry = new Map();
+  @observable cart: ICart | null = null;
   @observable loadingInitial = false;
 
   @action loadCart = async () => {
     this.loadingInitial = true;
-    var username = this.rootStore.userStore.user?.username;
     try {
-      const cart = await agent.Cart.get(username!);
+      const cart = await agent.Cart.get();
       runInAction(() => {
-        cart.cartItems.forEach((items) => {
-          this.cartRegistry.set(items.product.id, items);
-        });
+        this.cart = cart;
+        this.loadingInitial = false;
       });
-      this.loadingInitial = false;
+    } catch (error) {
+      runInAction(() => {
+        this.loadingInitial = false;
+      });
+      console.log(error);
+    }
+  };
+
+  @action addToCart = async (product: ICartItem) => {
+    this.loadingInitial = true;
+    try {
+      await agent.Cart.addToCart(product);
+      runInAction(() => {
+        this.cart?.items.push(product);
+        this.loadingInitial = false;
+      });
     } catch (error) {
       runInAction(() => {
         this.loadingInitial = false;

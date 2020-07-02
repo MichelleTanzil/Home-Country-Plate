@@ -34,6 +34,7 @@ namespace Application.UserCart {
                 var user = await _context.Users.SingleOrDefaultAsync (x => x.UserName == _userAccessor.GetCurrentUsername ());
                 var product = await _context.Products.FindAsync (request.ProductId);
                 var cartItem = new CartItem {
+                    ProductId = product.Id,
                     Image = product.Image,
                     Price = product.Price,
                     Title = product.Title,
@@ -50,13 +51,15 @@ namespace Application.UserCart {
                     };
 
                     cart.ItemsInCart.Add (cartItem);
-
                     _context.UserCart.Add (cart);
                 } else { // if there are items in the cart
                     var ItemInCart = user.UserCart.ItemsInCart.FirstOrDefault (x => x.Title == product.Title);
-                    if (ItemInCart != null) { // if the same item already exist
+                    var cart = user.UserCart;
+                    if (ItemInCart != null && ItemInCart.quantity != request.Quantity) { // if the same item already exist, but quantity is different
+                        cart.Total += (request.Quantity - ItemInCart.quantity) * cartItem.Price; // updating the total price
                         ItemInCart.quantity = request.Quantity;
-                    } else {
+                    } else { // Item doesnt exist in the cart, just add it
+                        cart.Total += request.Quantity * product.Price;
                         user.UserCart.ItemsInCart.Add (cartItem);
                     }
                 }

@@ -30,9 +30,10 @@ namespace API.Controllers
     }
 
     [HttpPost("product/{id}")]
-    public async Task<ActionResult<Unit>> AddToProduct([FromForm] AddToProduct.Command command, string id)
+    public async Task<ActionResult<Unit>> AddToProduct([FromForm] AddToProduct.Command command, Guid id)
     {
-      return await Mediator.Send(new AddToProduct.Command { Id = id });
+      command.Id = id;
+      return await Mediator.Send(command);
     }
   }
 }

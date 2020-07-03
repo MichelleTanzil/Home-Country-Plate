@@ -17,7 +17,7 @@ namespace Application.Photos.ProductImages
     public class Command : IRequest
     {
       public IFormFile File { get; set; }
-      public string Id { get; set; }
+      public Guid Id { get; set; }
     }
     public class Handler : IRequestHandler<Command>
     {
@@ -47,6 +47,7 @@ namespace Application.Photos.ProductImages
         {
           photo.IsMain = true;
         }
+
         product.ProductPhotos.Add(photo);
 
         var success = await _context.SaveChangesAsync();

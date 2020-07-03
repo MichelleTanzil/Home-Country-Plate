@@ -1,6 +1,7 @@
+using System;
 using System.Threading.Tasks;
-using Application.ProductImages.Photos;
-using Application.UserImages.Photos;
+using Application.Photos.ProductImages;
+using Application.Photos.UserImages;
 using Domain;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -28,10 +29,10 @@ namespace API.Controllers
       return await Mediator.Send(new SetMain.Command { Id = id });
     }
 
-    [HttpPost("product")]
-    public async Task<ActionResult<Photo>> AddToProduct([FromForm] AddToProduct.Command command)
+    [HttpPost("product/{id}")]
+    public async Task<ActionResult<Unit>> AddToProduct([FromForm] AddToProduct.Command command, string id)
     {
-      return await Mediator.Send(command);
+      return await Mediator.Send(new AddToProduct.Command { Id = id });
     }
   }
 }

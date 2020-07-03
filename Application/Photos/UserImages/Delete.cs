@@ -9,7 +9,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
-namespace Application.UserImages.Photos
+namespace Application.Photos.UserImages
 {
   public class Delete
   {
@@ -30,8 +30,6 @@ namespace Application.UserImages.Photos
       }
       public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
       {
-        //handler logic
-
         var user = await _context.Users.SingleOrDefaultAsync(x => x.UserName == _userAccessor.GetCurrentUsername());
 
         var photo = user.UserPhotos.FirstOrDefault(x => x.Id == request.Id);

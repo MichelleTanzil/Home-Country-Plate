@@ -1,38 +1,40 @@
 using System;
 using System.Linq;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
-using Application.Interfaces;
 using Domain;
+using Application.Errors;
+using Application.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
 using Persistence;
 
-namespace Application.Photos
+namespace Application.ProductImages.Photos
 {
-  public class Add
+  public class AddToProduct
   {
     public class Command : IRequest<Photo>
     {
       public IFormFile File { get; set; }
+      public Guid Id { get; set; }
     }
     public class Handler : IRequestHandler<Command, Photo>
     {
       private readonly DataContext _context;
-      private readonly IUserAccessor _userAccessor;
       private readonly IPhotoAccessor _photoAccessor;
-      public Handler(DataContext context, IUserAccessor userAccessor, IPhotoAccessor photoAccessor)
+      public Handler(DataContext context, IPhotoAccessor photoAccessor)
       {
         _photoAccessor = photoAccessor;
-        _userAccessor = userAccessor;
         _context = context;
       }
       public async Task<Photo> Handle(Command request, CancellationToken cancellationToken)
       {
         var photoUploadResult = _photoAccessor.AddPhoto(request.File);
-
-        var user = await _context.Users.SingleOrDefaultAsync(x => x.UserName == _userAccessor.GetCurrentUsername());
+        var product = await _context.Products
+          .FindAsync(request.Id);
+        if (product == null)
+          throw new RestException(HttpStatusCode.NotFound, new { product = "Not Found" });
 
         var photo = new Photo
         {
@@ -40,11 +42,11 @@ namespace Application.Photos
           Id = photoUploadResult.PublicId
         };
 
-        if (!user.UserPhotos.Any(x => x.IsMain))
+        if (product.ProductPhotos.Any(x => x.IsMain))
         {
           photo.IsMain = true;
         }
-        user.UserPhotos.Add(photo);
+        product.ProductPhotos.Add(photo);
 
         var success = await _context.SaveChangesAsync();
 

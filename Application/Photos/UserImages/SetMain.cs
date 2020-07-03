@@ -9,9 +9,9 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
-namespace Application.Photos
+namespace Application.UserImages.Photos
 {
-  public class Delete
+  public class SetMain
   {
     public class Command : IRequest
     {
@@ -21,10 +21,8 @@ namespace Application.Photos
     {
       private readonly DataContext _context;
       private readonly IUserAccessor _userAccessor;
-      private readonly IPhotoAccessor _photoAccessor;
-      public Handler(DataContext context, IUserAccessor userAccessor, IPhotoAccessor photoAccessor)
+      public Handler(DataContext context, IUserAccessor userAccessor)
       {
-        _photoAccessor = photoAccessor;
         _userAccessor = userAccessor;
         _context = context;
       }
@@ -39,15 +37,10 @@ namespace Application.Photos
         if (photo == null)
           throw new RestException(HttpStatusCode.NotFound, new { Photo = "Not found" });
 
-        if (photo.IsMain)
-          throw new RestException(HttpStatusCode.BadRequest, new { Photo = "You cannot delete your main photo" });
+        var currentMain = user.UserPhotos.FirstOrDefault(x => x.IsMain);
 
-        var result = _photoAccessor.DeletePhoto(photo.Id);
-
-        if (result == null)
-          throw new Exception("Problem deleting photo");
-
-        user.UserPhotos.Remove(photo);
+        currentMain.IsMain = false;
+        photo.IsMain = true;
 
         var success = await _context.SaveChangesAsync() > 0;
         if (success) return Unit.Value;

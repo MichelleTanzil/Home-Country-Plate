@@ -38,11 +38,11 @@ namespace Application.UserCart {
                     Image = product.Image,
                     Price = product.Price,
                     Title = product.Title,
-                    quantity = request.Quantity
+                    quantity = 1
                 };
                 if (user.UserCart == null) { // If there are no items in the cart we create a new cart item
 
-                    float cartSum = (request.Quantity * product.Price);
+                    float cartSum = product.Price;
 
                     var cart = new Cart {
                         Id = request.Id,
@@ -55,13 +55,8 @@ namespace Application.UserCart {
                 } else { // if there are items in the cart
                     var ItemInCart = user.UserCart.ItemsInCart.FirstOrDefault (x => x.Title == product.Title);
                     var cart = user.UserCart;
-                    if (ItemInCart != null && ItemInCart.quantity != request.Quantity) { // if the same item already exist, but quantity is different
-                        cart.Total += (request.Quantity - ItemInCart.quantity) * cartItem.Price; // updating the total price
-                        ItemInCart.quantity = request.Quantity;
-                    } else { // Item doesnt exist in the cart, just add it
-                        cart.Total += request.Quantity * product.Price;
-                        user.UserCart.ItemsInCart.Add (cartItem);
-                    }
+                    cart.Total += product.Price;
+                    user.UserCart.ItemsInCart.Add (cartItem);
                 }
 
                 var success = await _context.SaveChangesAsync ();

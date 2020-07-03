@@ -1,13 +1,31 @@
-import React, { useContext, useEffect, Fragment } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { RootStoreContext } from '../../../app/stores/rootStore';
 import { Container } from 'semantic-ui-react';
-import { CartTable } from './CartTable';
+import CartTable from './CartTable';
+import { observer } from 'mobx-react-lite';
+import EmptyCart from './EmptyCart';
+import LoadingComponent from '../../../app/layout/LoadingComponent';
 
 
-export const CartPage = () => {
+const CartPage = () => {
+  const rootStore = useContext(RootStoreContext);
+  const { loadCart, cart, loadingInitial } = rootStore.cartStore;
+
+  useEffect(() => {
+    loadCart();
+  }, [loadCart, cart])
+  if (loadingInitial)
+  return <LoadingComponent content="Loading your cart..." />;
+
   return (
     <Container>
-      <CartTable />
+      {(cart === null || Object.is("", cart)) ?
+        <EmptyCart />
+        :
+        <CartTable />
+      }
     </Container>
   )
 }
+
+export default observer(CartPage);

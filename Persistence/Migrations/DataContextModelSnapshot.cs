@@ -125,9 +125,6 @@ namespace Persistence.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Title")
-
-                    b.Property<Guid?>("productId")
-
                         .HasColumnType("TEXT");
 
                     b.Property<int>("quantity")
@@ -136,9 +133,6 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CartId");
-
-                    b.HasIndex("productId");
-
 
                     b.ToTable("CartItem");
                 });
@@ -192,7 +186,6 @@ namespace Persistence.Migrations
 
                     b.ToTable("Photos");
                 });
-
 
             modelBuilder.Entity("Domain.Product", b =>
                 {
@@ -384,10 +377,6 @@ namespace Persistence.Migrations
                     b.HasOne("Domain.Cart", null)
                         .WithMany("ItemsInCart")
                         .HasForeignKey("CartId");
-
-                    b.HasOne("Domain.Product", "product")
-                        .WithMany()
-                        .HasForeignKey("productId");
                 });
 
             modelBuilder.Entity("Domain.Order", b =>
@@ -411,7 +400,6 @@ namespace Persistence.Migrations
                         .WithMany("ProductPhotos")
                         .HasForeignKey("ProductId");
                 });
-
 
             modelBuilder.Entity("Domain.UserProduct", b =>
                 {

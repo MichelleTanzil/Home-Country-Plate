@@ -15,7 +15,7 @@ interface IProps extends RouteComponentProps<RouteParams> {}
 
 const ProfilePage: React.FC<IProps> = ({ match }) => {
   const rootStore = useContext(RootStoreContext);
-  const { loadingProfile, profile, loadProfile } = rootStore.profileStore;
+  const { loadingProfile, loadProfile } = rootStore.profileStore;
 
   useEffect(() => {
     loadProfile(match.params.username);

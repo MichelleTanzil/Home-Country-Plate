@@ -1,5 +1,5 @@
 import React from "react";
-import { Segment, Container, Grid } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
 import ImageCarousel from "./ImageCarousel";
 
 export const HomePage = () => {

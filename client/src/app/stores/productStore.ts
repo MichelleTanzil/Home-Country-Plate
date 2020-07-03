@@ -47,6 +47,7 @@ export default class ProductStore {
     this.loadingInitial = true;
     try {
       const products = await agent.Products.list();
+      console.log(JSON.stringify(products));
       runInAction("loading products", () => {
         products.forEach((product) => {
           setProductProps(product, this.rootStore.userStore.user);
@@ -175,8 +176,6 @@ export default class ProductStore {
         });
       }
     } catch (error) {
-      runInAction(() => {
-      });
       toast.error("Problem with liking this dish");
     }
   };

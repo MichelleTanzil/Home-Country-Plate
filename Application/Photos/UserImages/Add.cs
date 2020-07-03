@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
-namespace Application.User.Photos
+namespace Application.UserImages.Photos
 {
   public class Add
   {

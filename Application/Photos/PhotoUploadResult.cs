@@ -1,4 +1,4 @@
-namespace Application.User.Photos
+namespace Application.Photos
 {
   public class PhotoUploadResult
   {

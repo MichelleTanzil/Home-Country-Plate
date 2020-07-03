@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
-using Application.Product.Photos;
-using Application.User.Photos;
+using Application.ProductImages.Photos;
+using Application.UserImages.Photos;
 using Domain;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

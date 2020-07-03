@@ -4,13 +4,13 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Domain;
-using global::Application.Errors;
-using global::Application.Interfaces;
+using Application.Errors;
+using Application.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Persistence;
 
-namespace Application.Product.Photos
+namespace Application.ProductImages.Photos
 {
   public class AddToProduct
   {

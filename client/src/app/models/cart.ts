@@ -11,10 +11,9 @@ export class BasicCart implements ICart {
 }
 
 export interface ICartItem {
-  id: number;
   productId: string;
   title: string;
-  image: string;
+  image: string | null;
   price: number | null;
   quantity: number;
 }

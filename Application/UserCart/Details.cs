@@ -1,11 +1,9 @@
-using System;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Errors;
 using Application.Interfaces;
 using AutoMapper;
-using Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
@@ -26,7 +24,7 @@ namespace Application.UserCart {
                 var user = await _context.Users.Include (a => a.UserCart).ThenInclude (a => a.ItemsInCart).SingleOrDefaultAsync (x => x.UserName == _userAccessor.GetCurrentUsername ());
                 var cart = user.UserCart;
                 if (cart == null)
-                    throw new RestException (HttpStatusCode.NotFound, new { cart = "Not found" });
+                    return null;
 
                 var cartToReturn = new CartDTO {
                     Id = cart.Id,

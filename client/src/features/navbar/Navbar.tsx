@@ -1,16 +1,17 @@
-import React, { useContext } from "react";
+import React, { useContext} from "react";
 import { NavLink, Link } from "react-router-dom";
-import { Menu, Container, Button, Image, Dropdown, Icon, Label } from "semantic-ui-react";
+import { Menu, Container, Button, Image, Dropdown, Icon } from "semantic-ui-react";
 import { RootStoreContext } from "../../app/stores/rootStore";
 import LoginForm from "../user/LoginForm";
 import RegisterForm from "../user/RegisterForm";
+import { observer } from "mobx-react-lite";
 
-export const Navbar = () => {
+const Navbar = () => {
   const rootStore = useContext(RootStoreContext);
   const { isLoggedIn, user, logout } = rootStore.userStore;
-  const { cart } = rootStore.cartStore;
   const { openModal } = rootStore.modalStore;
-  console.log(user?.username)
+
+
   return (
     <Menu inverted fixed="top">
       <Container>
@@ -39,9 +40,6 @@ export const Navbar = () => {
             <Menu.Item>
               <Button as={NavLink} to="/cart" icon>
                 <Icon name='shopping cart' />
-                {cart && <Label color='red' floating style={{padding:"3px"}}>
-                  {cart?.items.length}
-                </Label>}
               </Button>
             </Menu.Item>
             <Image
@@ -85,3 +83,5 @@ export const Navbar = () => {
     </Menu>
   );
 };
+
+export default observer(Navbar);

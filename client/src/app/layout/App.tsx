@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, Fragment } from "react";
 import { HomePage } from "../../features/home/HomePage";
-import { Navbar } from "../../features/navbar/Navbar";
+import Navbar from "../../features/navbar/Navbar";
 import {
   Route,
   Switch,
   RouteComponentProps,
-  withRouter,
+  withRouter
 } from "react-router-dom";
 import { Container } from "semantic-ui-react";
 import ProductDetails from "../../features/products/details/ProductDetails";
@@ -18,22 +18,21 @@ import { observer } from "mobx-react-lite";
 import ModalContainer from "../common/modals/ModalContainer";
 import ProductDashboard from "../../features/products/dashboard/ProductDashboard";
 import ProfilePage from "../../features/profiles/ProfilePage";
-import { CartPage } from "../../features/cart/dashboard/CartPage";
+import CartPage from "../../features/cart/dashboard/CartPage";
+import EmptyCart from "../../features/cart/dashboard/EmptyCart";
 
 const App: React.FC<RouteComponentProps> = ({ location }) => {
   const rootStore = useContext(RootStoreContext);
   const { appLoaded, setAppLoaded, token } = rootStore.commonStore;
-  const { getUser, user } = rootStore.userStore;
-  const { loadCart } = rootStore.cartStore;
+  const { getUser, isLoggedIn } = rootStore.userStore;
 
   useEffect(() => {
     if (token) {
       setAppLoaded();
-      loadCart();
     } else {
       setAppLoaded();
     }
-  }, [getUser, setAppLoaded, token, loadCart]);
+  }, [getUser, setAppLoaded, token]);
 
   if (!appLoaded)
     return <LoadingComponent content="Loading Home Country Plate..." />;
@@ -57,7 +56,8 @@ const App: React.FC<RouteComponentProps> = ({ location }) => {
                   component={ProductForm}
                 />
                 <Route path="/profile/:username" component={ProfilePage} />
-                {user && <Route path="/cart" component={CartPage} />}
+                {isLoggedIn && <Route path="/cart" component={CartPage} />}
+                <Route path="/cart/empty" component={EmptyCart}/>
                 <Route component={NotFound} />
               </Switch>
             </Container>

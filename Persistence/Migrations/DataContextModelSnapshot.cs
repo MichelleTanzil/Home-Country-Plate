@@ -126,9 +126,7 @@ namespace Persistence.Migrations
 
             b.Property<string>("Title");
 
-
-            b.Property<Guid?>("productId")
-
+                    b.Property<string>("Title")
                         .HasColumnType("TEXT");
 
             b.Property<int>("quantity")
@@ -138,11 +136,8 @@ namespace Persistence.Migrations
 
             b.HasIndex("CartId");
 
-            b.HasIndex("productId");
-
-
-            b.ToTable("CartItem");
-          });
+                    b.ToTable("CartItem");
+                });
 
       modelBuilder.Entity("Domain.Order", b =>
           {
@@ -194,12 +189,11 @@ namespace Persistence.Migrations
             b.ToTable("Photos");
           });
 
-
-      modelBuilder.Entity("Domain.Product", b =>
-          {
-            b.Property<Guid>("Id")
-                      .ValueGeneratedOnAdd()
-                      .HasColumnType("TEXT");
+            modelBuilder.Entity("Domain.Product", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
 
             b.Property<string>("Category")
                       .HasColumnType("TEXT");
@@ -354,131 +348,112 @@ namespace Persistence.Migrations
             b.ToTable("AspNetUserRoles");
           });
 
-      modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
-          {
-            b.Property<string>("UserId")
-                      .HasColumnType("TEXT");
+                    b.HasKey("UserId", "LoginProvider", "Name");
 
-            b.Property<string>("LoginProvider")
-                      .HasColumnType("TEXT");
+                    b.ToTable("AspNetUserTokens");
+                });
 
-            b.Property<string>("Name")
-                      .HasColumnType("TEXT");
+            modelBuilder.Entity("Domain.Cart", b =>
+                {
+                    b.HasOne("Domain.AppUser", "AppUser")
+                        .WithOne("UserCart")
+                        .HasForeignKey("Domain.Cart", "UserId");
+                });
 
-            b.Property<string>("Value")
-                      .HasColumnType("TEXT");
+            modelBuilder.Entity("Domain.CartItem", b =>
+                {
+                    b.HasOne("Domain.Cart", null)
+                        .WithMany("ItemsInCart")
+                        .HasForeignKey("CartId");
+                });
 
-            b.HasKey("UserId", "LoginProvider", "Name");
+            modelBuilder.Entity("Domain.Order", b =>
+                {
+                    b.HasOne("Domain.AppUser", "AppUser")
+                        .WithMany("UserOrders")
+                        .HasForeignKey("AppUserId");
 
-            b.ToTable("AspNetUserTokens");
-          });
+                    b.HasOne("Domain.Cart", "Purchase")
+                        .WithMany()
+                        .HasForeignKey("PurchaseId");
+                });
 
-      modelBuilder.Entity("Domain.Cart", b =>
-          {
-            b.HasOne("Domain.AppUser", "AppUser")
-                      .WithOne("UserCart")
-                      .HasForeignKey("Domain.Cart", "UserId");
-          });
+            modelBuilder.Entity("Domain.Photo", b =>
+                {
+                    b.HasOne("Domain.AppUser", null)
+                        .WithMany("UserPhotos")
+                        .HasForeignKey("AppUserId");
 
-      modelBuilder.Entity("Domain.CartItem", b =>
-          {
-            b.HasOne("Domain.Cart", null)
-                      .WithMany("ItemsInCart")
-                      .HasForeignKey("CartId");
+                    b.HasOne("Domain.Product", null)
+                        .WithMany("ProductPhotos")
+                        .HasForeignKey("ProductId");
+                });
 
-            b.HasOne("Domain.Product", "product")
-                      .WithMany()
-                      .HasForeignKey("productId");
-          });
+            modelBuilder.Entity("Domain.UserProduct", b =>
+                {
+                    b.HasOne("Domain.AppUser", "AppUser")
+                        .WithMany("UserProducts")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-      modelBuilder.Entity("Domain.Order", b =>
-          {
-            b.HasOne("Domain.AppUser", "AppUser")
-                      .WithMany("UserOrders")
-                      .HasForeignKey("AppUserId");
+                    b.HasOne("Domain.Product", "Product")
+                        .WithMany("UserProducts")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
 
-            b.HasOne("Domain.Cart", "Purchase")
-                      .WithMany()
-                      .HasForeignKey("PurchaseId");
-          });
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
 
-      modelBuilder.Entity("Domain.Photo", b =>
-          {
-            b.HasOne("Domain.AppUser", null)
-                      .WithMany("UserPhotos")
-                      .HasForeignKey("AppUserId");
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.HasOne("Domain.AppUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
 
-            b.HasOne("Domain.Product", null)
-                      .WithMany("ProductPhotos")
-                      .HasForeignKey("ProductId");
-          });
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.HasOne("Domain.AppUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
 
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-      modelBuilder.Entity("Domain.UserProduct", b =>
-          {
-            b.HasOne("Domain.AppUser", "AppUser")
-                      .WithMany("UserProducts")
-                      .HasForeignKey("AppUserId")
-                      .OnDelete(DeleteBehavior.Cascade)
-                      .IsRequired();
+                    b.HasOne("Domain.AppUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
 
-            b.HasOne("Domain.Product", "Product")
-                      .WithMany("UserProducts")
-                      .HasForeignKey("ProductId")
-                      .OnDelete(DeleteBehavior.Cascade)
-                      .IsRequired();
-          });
-
-      modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
-          {
-            b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
-                      .WithMany()
-                      .HasForeignKey("RoleId")
-                      .OnDelete(DeleteBehavior.Cascade)
-                      .IsRequired();
-          });
-
-      modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
-          {
-            b.HasOne("Domain.AppUser", null)
-                      .WithMany()
-                      .HasForeignKey("UserId")
-                      .OnDelete(DeleteBehavior.Cascade)
-                      .IsRequired();
-          });
-
-      modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
-          {
-            b.HasOne("Domain.AppUser", null)
-                      .WithMany()
-                      .HasForeignKey("UserId")
-                      .OnDelete(DeleteBehavior.Cascade)
-                      .IsRequired();
-          });
-
-      modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
-          {
-            b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
-                      .WithMany()
-                      .HasForeignKey("RoleId")
-                      .OnDelete(DeleteBehavior.Cascade)
-                      .IsRequired();
-
-            b.HasOne("Domain.AppUser", null)
-                      .WithMany()
-                      .HasForeignKey("UserId")
-                      .OnDelete(DeleteBehavior.Cascade)
-                      .IsRequired();
-          });
-
-      modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
-          {
-            b.HasOne("Domain.AppUser", null)
-                      .WithMany()
-                      .HasForeignKey("UserId")
-                      .OnDelete(DeleteBehavior.Cascade)
-                      .IsRequired();
-          });
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.HasOne("Domain.AppUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
 #pragma warning restore 612, 618
     }
   }

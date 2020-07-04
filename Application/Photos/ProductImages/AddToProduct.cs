@@ -37,13 +37,13 @@ namespace Application.Photos.ProductImages
         if (product == null)
           throw new RestException(HttpStatusCode.NotFound, new { product = "Not Found" });
 
-        var photo = new Photo
+        var photo = new ProductPhoto
         {
           Url = photoUploadResult.Url,
           Id = photoUploadResult.PublicId
         };
 
-        if (product.ProductPhotos.Any(x => x.IsMain))
+        if (!product.ProductPhotos.Any(x => x.IsMain))
         {
           photo.IsMain = true;
         }

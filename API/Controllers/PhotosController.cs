@@ -1,6 +1,7 @@
+using System;
 using System.Threading.Tasks;
-using Application.ProductImages.Photos;
-using Application.UserImages.Photos;
+using Application.Photos.ProductImages;
+using Application.Photos.UserImages;
 using Domain;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -10,7 +11,7 @@ namespace API.Controllers
   public class PhotosController : BaseController
   {
     [HttpPost("user")]
-    public async Task<ActionResult<Photo>> AddToUser([FromForm] Add.Command command)
+    public async Task<ActionResult<UserPhoto>> AddToUser([FromForm] Add.Command command)
     {
       return await Mediator.Send(command);
     }
@@ -28,10 +29,23 @@ namespace API.Controllers
       return await Mediator.Send(new SetMain.Command { Id = id });
     }
 
-    [HttpPost("product")]
-    public async Task<ActionResult<Photo>> AddToProduct([FromForm] AddToProduct.Command command)
+    [HttpPost("product/{id}")]
+    public async Task<ActionResult<Unit>> AddToProduct([FromForm] AddToProduct.Command command, Guid id)
     {
+      command.Id = id;
       return await Mediator.Send(command);
+    }
+
+    [HttpDelete("product/{productid}/{photoid}")]
+    public async Task<ActionResult<Unit>> DeleteFromProduct(string photoid, Guid productid)
+    {
+      return await Mediator.Send(new DeleteFromProduct.Command { ProductId = productid, PhotoId = photoid });
+    }
+
+    [HttpPost("product/{productid}/{photoid}/setmain")]
+    public async Task<ActionResult<Unit>> SetMainForProduct(string photoid, Guid productid)
+    {
+      return await Mediator.Send(new SetMainForProduct.Command { ProductId = productid, PhotoId = photoid });
     }
   }
 }

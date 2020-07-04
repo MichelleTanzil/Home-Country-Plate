@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using Domain;
 
 namespace Application.Products
 {
@@ -17,5 +18,9 @@ namespace Application.Products
 
     [JsonPropertyName("likes")]
     public ICollection<LikesDto> UserProducts { get; set; }
+
+    [JsonPropertyName("Photos")]
+    public ICollection<ProductPhoto> ProductPhotos { get; set; }
+
   }
 }

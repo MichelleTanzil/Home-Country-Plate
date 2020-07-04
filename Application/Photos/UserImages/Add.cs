@@ -9,15 +9,15 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
-namespace Application.UserImages.Photos
+namespace Application.Photos.UserImages
 {
   public class Add
   {
-    public class Command : IRequest<Photo>
+    public class Command : IRequest<UserPhoto>
     {
       public IFormFile File { get; set; }
     }
-    public class Handler : IRequestHandler<Command, Photo>
+    public class Handler : IRequestHandler<Command, UserPhoto>
     {
       private readonly DataContext _context;
       private readonly IUserAccessor _userAccessor;
@@ -28,13 +28,13 @@ namespace Application.UserImages.Photos
         _userAccessor = userAccessor;
         _context = context;
       }
-      public async Task<Photo> Handle(Command request, CancellationToken cancellationToken)
+      public async Task<UserPhoto> Handle(Command request, CancellationToken cancellationToken)
       {
         var photoUploadResult = _photoAccessor.AddPhoto(request.File);
 
         var user = await _context.Users.SingleOrDefaultAsync(x => x.UserName == _userAccessor.GetCurrentUsername());
 
-        var photo = new Photo
+        var photo = new UserPhoto
         {
           Url = photoUploadResult.Url,
           Id = photoUploadResult.PublicId

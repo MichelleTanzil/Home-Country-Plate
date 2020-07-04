@@ -35,5 +35,11 @@ namespace API.Controllers
       command.Id = id;
       return await Mediator.Send(command);
     }
+
+    [HttpDelete("product/{productid}/{photoid}")]
+    public async Task<ActionResult<Unit>> DeleteFromProduct(string photoid, Guid productid)
+    {
+      return await Mediator.Send(new DeleteFromProduct.Command { ProductId = productid, PhotoId = photoid });
+    }
   }
 }

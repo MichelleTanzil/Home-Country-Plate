@@ -41,5 +41,11 @@ namespace API.Controllers
     {
       return await Mediator.Send(new DeleteFromProduct.Command { ProductId = productid, PhotoId = photoid });
     }
+
+    [HttpPost("product/{productid}/{photoid}/setmain")]
+    public async Task<ActionResult<Unit>> SetMainForProduct(string photoid, Guid productid)
+    {
+      return await Mediator.Send(new SetMainForProduct.Command { ProductId = productid, PhotoId = photoid });
+    }
   }
 }

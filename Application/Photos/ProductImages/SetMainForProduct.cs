@@ -10,7 +10,7 @@ using Persistence;
 
 namespace Application.Photos.ProductImages
 {
-  public class DeleteFromProduct
+  public class SetMainForProduct
   {
     public class Command : IRequest
     {
@@ -38,15 +38,10 @@ namespace Application.Photos.ProductImages
         if (photo == null)
           throw new RestException(HttpStatusCode.NotFound, new { Photo = "Not found" });
 
-        if (photo.IsMain)
-          throw new RestException(HttpStatusCode.BadRequest, new { Photo = "You cannot delete your main photo" });
+        var currentMain = product.ProductPhotos.FirstOrDefault(x => x.IsMain);
 
-        var result = _photoAccessor.DeletePhoto(photo.Id);
-
-        if (result == null)
-          throw new Exception("Problem deleting photo");
-
-        product.ProductPhotos.Remove(photo);
+        currentMain.IsMain = false;
+        photo.IsMain = true;
 
         var success = await _context.SaveChangesAsync();
 

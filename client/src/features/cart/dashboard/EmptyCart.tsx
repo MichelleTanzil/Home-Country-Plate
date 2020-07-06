@@ -1,6 +1,6 @@
 import React from 'react'
 import { observer } from 'mobx-react-lite'
-import { Container, Header, Icon, Button } from 'semantic-ui-react'
+import { Container, Header, Icon } from 'semantic-ui-react'
 
 const EmptyCart = () => {
   return (

@@ -1,5 +1,4 @@
 using System.Linq;
-using Application.UserCart;
 using AutoMapper;
 using Domain;
 

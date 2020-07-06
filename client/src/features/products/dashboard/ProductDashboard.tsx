@@ -8,9 +8,13 @@ import ProductList from "./ProductList";
 const ProductDashboard = () => {
   const rootStore = useContext(RootStoreContext);
   const { loadProducts, loadingInitial } = rootStore.productStore;
+  const { loadCart } = rootStore.cartStore;
+  const { isLoggedIn } = rootStore.userStore;
   useEffect(() => {
     loadProducts();
-  }, [loadProducts]);
+    if (isLoggedIn)
+      loadCart();
+  }, [loadProducts, loadCart, isLoggedIn]);
 
   if (loadingInitial)
     return <LoadingComponent content="Loading delicious dishes..." />;

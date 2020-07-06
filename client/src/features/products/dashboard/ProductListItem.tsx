@@ -8,7 +8,7 @@ import { RootStoreContext } from "../../../app/stores/rootStore";
 
 const ProductListItem: React.FC<{ product: IProduct }> = ({ product }) => {
   const rootStore = useContext(RootStoreContext);
-  const { addToCart } = rootStore.cartStore;
+  const { addToCart, cart, removeFromCart, loadingInitial } = rootStore.cartStore;
   return (
     <List key={product.id}>
       <Image
@@ -29,12 +29,17 @@ const ProductListItem: React.FC<{ product: IProduct }> = ({ product }) => {
         <List.Icon name="dollar" />
         <List.Content>{product.price}</List.Content>
       </List.Item>
-      <Button animated="vertical" color="teal" size="large" fluid onClick={() => addToCart(product.id)}>
-        <Button.Content hidden >Add to cart</Button.Content>
-        <Button.Content visible>
-          <Icon name="shop" />
-        </Button.Content>
-      </Button>
+      {cart?.items.find(x => x.productId === product.id) ?
+        (<Button color="olive" size="large" fluid onClick={() => removeFromCart(product.id)} loading={loadingInitial}>
+          <Button.Content hidden >Remove from cart</Button.Content>
+        </Button>) :
+        (<Button animated="vertical" color="teal" size="large" fluid onClick={() => addToCart(product.id)} loading={loadingInitial}>
+          <Button.Content hidden >Add to cart</Button.Content>
+          <Button.Content visible>
+            <Icon name="shop" />
+          </Button.Content>
+        </Button>)
+      }
       <List.Item>
         <ProductLikeButton product={product} />
       </List.Item>

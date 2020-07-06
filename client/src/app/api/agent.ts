@@ -93,8 +93,8 @@ const Profiles = {
 
 const Cart = {
   get: (): Promise<ICart> => requests.get("/cart"),
-  addToCart: (id: string) =>
-    requests.post(`/cart/${id}`, {}),
+  addToCart: (id: string) => requests.post(`/cart/${id}`, {}),
+  remove: (id: string) => requests.post(`/cart/${id}/remove`, {}),
 };
 
 export default {

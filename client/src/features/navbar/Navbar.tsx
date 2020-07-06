@@ -1,4 +1,4 @@
-import React, { useContext} from "react";
+import React, { useContext } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { Menu, Container, Button, Image, Dropdown, Icon } from "semantic-ui-react";
 import { RootStoreContext } from "../../app/stores/rootStore";
@@ -37,11 +37,9 @@ const Navbar = () => {
         </Menu.Item>
         {isLoggedIn && user ? (
           <Menu.Item position="right">
-            <Menu.Item>
-              <Button as={NavLink} to="/cart" icon>
-                <Icon name='shopping cart' />
-              </Button>
-            </Menu.Item>
+            <Button as={NavLink} to="/cart" icon  style={{marginRight:'10px'}}>
+              <Icon link name='shopping cart'/>
+            </Button>
             <Image
               avatar
               spaced="right"

@@ -5,7 +5,6 @@ import { ICartItem, ICart } from "../models/cart";
 import ProductStore from "./productStore";
 import { IProduct } from "../models/product";
 import { toast } from "react-toastify";
-import { history } from "../..";
 
 export default class CartStore {
   rootStore: RootStore;
@@ -21,7 +20,6 @@ export default class CartStore {
     this.loadingInitial = true;
     try {
       const cart = await agent.Cart.get();
-      console.log(JSON.stringify(cart));
       runInAction(() => {
         this.cart = cart;
         this.loadingInitial = false;
@@ -37,23 +35,42 @@ export default class CartStore {
   @action addToCart = async (id: string) => {
     this.loadingInitial = true;
     var exists = this.cart?.items.find((a) => a.productId === id);
-    if (exists !== null) {
+    if (exists !== undefined) {
       toast.warn("Product is already in cart");
-      history.push("/products");
+    } else {
+      try {
+        await agent.Cart.addToCart(id);
+        var product: IProduct = this.productStore.getProduct(id);
+        runInAction(() => {
+          var cartItem: ICartItem = {
+            image: product.image,
+            price: product.price,
+            productId: id,
+            quantity: 1,
+            title: product.title,
+          };
+          this.cart?.items.push(cartItem);
+          this.loadingInitial = false;
+        });
+      } catch (error) {
+        runInAction(() => {
+          this.loadingInitial = false;
+        });
+        console.log(error);
+      }
     }
-    try {
-      await agent.Cart.addToCart(id);
-      var product: IProduct = this.productStore.getProduct(id);
-      runInAction(() => {
-        var cartItem: ICartItem = {
-          image: product.image,
-          price: product.price,
-          productId: id,
-          quantity: 1,
-          title: product.title,
-        };
+  };
 
-        this.cart?.items.push(cartItem);
+  remove(id: string) {}
+
+  @action removeFromCart = async (id: string) => {
+    this.loadingInitial = true;
+    try {
+      await agent.Cart.remove(id);
+      runInAction(() => {
+        this.cart!.items = this.cart?.items.filter(
+          (item) => item.productId !== id
+        )!;
         this.loadingInitial = false;
       });
     } catch (error) {

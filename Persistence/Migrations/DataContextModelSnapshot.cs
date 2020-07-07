@@ -161,39 +161,10 @@ namespace Persistence.Migrations
                     b.ToTable("UserOrders");
                 });
 
-            modelBuilder.Entity("Domain.Photo", b =>
+            modelBuilder.Entity("Domain.Product", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("AppUserId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("IsMain")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<Guid?>("ProductId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Url")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AppUserId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("Photos");
-                });
-
-
-                    b.ToTable("Products");
-                });
-
-            modelBuilder.Entity("Domain.ProductPhoto", b =>
-                {
-                    b.Property<string>("Id")
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Category")
@@ -220,6 +191,48 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("Domain.ProductPhoto", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsMain")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<Guid?>("ProductId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductPhotos");
+                });
+
+            modelBuilder.Entity("Domain.UserPhoto", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsMain")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("UserPhotos");
                 });
 
             modelBuilder.Entity("Domain.UserProduct", b =>
@@ -300,7 +313,7 @@ namespace Persistence.Migrations
 
                     b.Property<string>("ClaimValue")
                         .HasColumnType("TEXT");
-                        
+
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("TEXT");

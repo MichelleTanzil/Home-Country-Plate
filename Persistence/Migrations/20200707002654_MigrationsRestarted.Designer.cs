@@ -9,8 +9,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200706174924_mig")]
-    partial class mig
+    [Migration("20200707002654_MigrationsRestarted")]
+    partial class MigrationsRestarted
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -163,32 +163,6 @@ namespace Persistence.Migrations
                     b.ToTable("UserOrders");
                 });
 
-            modelBuilder.Entity("Domain.Photo", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("AppUserId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("IsMain")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<Guid?>("ProductId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Url")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AppUserId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("Photos");
-                });
-
             modelBuilder.Entity("Domain.Product", b =>
                 {
                     b.Property<Guid>("Id")
@@ -219,6 +193,48 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("Domain.ProductPhoto", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsMain")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<Guid?>("ProductId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductPhotos");
+                });
+
+            modelBuilder.Entity("Domain.UserPhoto", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsMain")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("UserPhotos");
                 });
 
             modelBuilder.Entity("Domain.UserProduct", b =>
@@ -392,15 +408,18 @@ namespace Persistence.Migrations
                         .HasForeignKey("PurchaseId");
                 });
 
-            modelBuilder.Entity("Domain.Photo", b =>
+            modelBuilder.Entity("Domain.ProductPhoto", b =>
+                {
+                    b.HasOne("Domain.Product", null)
+                        .WithMany("ProductPhotos")
+                        .HasForeignKey("ProductId");
+                });
+
+            modelBuilder.Entity("Domain.UserPhoto", b =>
                 {
                     b.HasOne("Domain.AppUser", null)
                         .WithMany("UserPhotos")
                         .HasForeignKey("AppUserId");
-
-                    b.HasOne("Domain.Product", null)
-                        .WithMany("ProductPhotos")
-                        .HasForeignKey("ProductId");
                 });
 
             modelBuilder.Entity("Domain.UserProduct", b =>

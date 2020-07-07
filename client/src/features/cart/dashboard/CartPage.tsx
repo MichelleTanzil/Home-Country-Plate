@@ -13,7 +13,7 @@ const CartPage = () => {
 
   useEffect(() => {
     loadCart();
-  }, [loadCart, cart])
+  }, [loadCart])
   if (loadingInitial)
   return <LoadingComponent content="Loading your cart..." />;
 

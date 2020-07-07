@@ -8,7 +8,6 @@ import ProductDetailedImages from "./ProductDetailedImages";
 import ProductDetailedInfo from "./ProductDetailedInfo";
 import ProductDetailedSellerInfo from "./ProductDetailedSellerInfo";
 import ProductLikeButton from "../../common/ProductLikeButton";
-
 interface DetailParams {
   id: string;
 }
@@ -47,7 +46,7 @@ const ProductDetails: React.FC<RouteComponentProps<DetailParams>> = ({
       </Grid.Row>
       <Grid.Row>
         <Grid.Column width={6}>
-          <ProductDetailedSellerInfo />
+          <ProductDetailedSellerInfo product={product} />
         </Grid.Column>
       </Grid.Row>
     </Grid>

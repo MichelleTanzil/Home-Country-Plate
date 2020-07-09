@@ -10,9 +10,16 @@ const ProductDetailedSellerInfo: React.FC<{ product: IProduct }> = ({
 
   return (
     <Card>
-      <Image src="/assets/userPlaceholder.png" size="small" />
+      <Image
+        src="/assets/userPlaceholder.png"
+        size="small"
+        as={Link}
+        to={`/profile/${chef.username}`}
+      />
       <Card.Content>
-        <Card.Header>{chef.displayName}</Card.Header>
+        <Card.Header>
+          <Link to={`/profile/${chef.username}`}>{chef.displayName}</Link>
+        </Card.Header>
         <Card.Meta>
           <span className="date">Joined in 2015</span>
         </Card.Meta>

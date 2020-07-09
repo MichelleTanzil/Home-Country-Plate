@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { Grid } from "semantic-ui-react";
-// import ProfileHeader from "./ProfileHeader";
-// import ProfileContent from "./ProfileContent";
+import ProfileHeader from "./ProfileHeader";
+import ProfileContent from "./ProfileContent";
 import { RootStoreContext } from "../../app/stores/rootStore";
 import { RouteComponentProps } from "react-router-dom";
 import LoadingComponent from "../../app/layout/LoadingComponent";
@@ -25,9 +25,8 @@ const ProfilePage: React.FC<IProps> = ({ match }) => {
   return (
     <Grid>
       <Grid.Column width={16}>
-        PROFILE!!!!!!
-        {/* <ProfileHeader profile={profile!} /> */}
-        {/* <ProfileContent /> */}
+        <ProfileHeader profile={profile!} />
+        <ProfileContent />
       </Grid.Column>
     </Grid>
   );

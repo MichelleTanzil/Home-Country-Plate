@@ -12,6 +12,9 @@ namespace Persistence
     public DbSet<Cart> UserCart { get; set; }
     public DbSet<Order> UserOrders { get; set; }
 
+    public DbSet<UserPhoto> UserPhotos { get; set; }
+    public DbSet<ProductPhoto> ProductPhotos { get; set; }
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
       base.OnModelCreating(builder);

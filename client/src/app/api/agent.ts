@@ -4,6 +4,7 @@ import { history } from "../..";
 import { toast } from "react-toastify";
 import { IUser, IUserFormValues } from "../models/user";
 import { IProfile, IPhoto } from "../models/profile";
+import { ICart } from "../models/cart";
 
 axios.defaults.baseURL = "http://localhost:5000/api";
 
@@ -20,6 +21,7 @@ axios.interceptors.request.use(
 
 axios.interceptors.response.use(undefined, (error) => {
   const { status, data, config } = error.response;
+  console.log(JSON.stringify(error, null, "\t")); // printing out the error message nicely
   if (error.message === "Network error" && error.response === undefined) {
     toast.error("Network error");
   }
@@ -33,6 +35,7 @@ axios.interceptors.response.use(undefined, (error) => {
   ) {
     history.push("/notfound");
   }
+
   if (status === 500) {
     toast.error("Server error - check the terminal for more info");
   }
@@ -40,11 +43,6 @@ axios.interceptors.response.use(undefined, (error) => {
 });
 
 const responseBody = (response: AxiosResponse) => response.data;
-
-const sleep = (ms: number) => (response: AxiosResponse) =>
-  new Promise<AxiosResponse>((resolve) =>
-    setTimeout(() => resolve(response), ms)
-  );
 
 const requests = {
   get: (url: string) => axios.get(url).then(responseBody),
@@ -93,8 +91,16 @@ const Profiles = {
   deletePhoto: (id: string) => requests.delete(`/photos/${id}`),
 };
 
+const Cart = {
+  get: (): Promise<ICart> => requests.get("/cart"),
+  addToCart: (id: string) => requests.post(`/cart/${id}`, {}),
+  remove: (id: string) => requests.post(`/cart/${id}/remove`, {}),
+  pay: () : Promise<string> => requests.post("/cart/checkout", {}),
+};
+
 export default {
   Products,
   User,
   Profiles,
+  Cart,
 };

@@ -11,7 +11,6 @@ const ProductLikeButton: React.FC<{ product: IProduct }> = ({ product }) => {
 
   const [loading, setLoading] = useState(false);
 
-  console.log(loading)
   return (
     <Button.Group key={product.id}>
       {product.isChef ? (

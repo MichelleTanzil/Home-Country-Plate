@@ -14,5 +14,7 @@ namespace Domain
     public string State { get; set; }
     public float Price { get; set; }
     public virtual ICollection<UserProduct> UserProducts { get; set; }
+    public virtual ICollection<ProductPhoto> ProductPhotos { get; set; } //1:m relationship with Photos
+
   }
 }

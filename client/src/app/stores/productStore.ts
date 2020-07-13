@@ -175,8 +175,6 @@ export default class ProductStore {
         });
       }
     } catch (error) {
-      runInAction(() => {
-      });
       toast.error("Problem with liking this dish");
     }
   };
@@ -200,8 +198,7 @@ export default class ProductStore {
         });
       }
     } catch (error) {
-      runInAction(() => {
-      });
+      runInAction(() => {});
       toast.error("Problem with unliking this dish");
     }
   };

@@ -95,6 +95,7 @@ const Cart = {
   get: (): Promise<ICart> => requests.get("/cart"),
   addToCart: (id: string) => requests.post(`/cart/${id}`, {}),
   remove: (id: string) => requests.post(`/cart/${id}/remove`, {}),
+  pay: () : Promise<string> => requests.post("/cart/checkout", {}),
 };
 
 export default {

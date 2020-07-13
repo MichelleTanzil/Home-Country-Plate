@@ -11,7 +11,6 @@ const Navbar = () => {
   const { isLoggedIn, user, logout } = rootStore.userStore;
   const { openModal } = rootStore.modalStore;
 
-
   return (
     <Menu inverted fixed="top">
       <Container>
@@ -37,8 +36,8 @@ const Navbar = () => {
         </Menu.Item>
         {isLoggedIn && user ? (
           <Menu.Item position="right">
-            <Button as={NavLink} to="/cart" icon  style={{marginRight:'10px'}}>
-              <Icon link name='shopping cart'/>
+            <Button as={Link} to="/cart" icon style={{ marginRight: '10px' }}>
+              <Icon link name='shopping cart' />
             </Button>
             <Image
               avatar

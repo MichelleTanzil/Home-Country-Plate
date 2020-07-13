@@ -1,13 +1,18 @@
 import React from "react";
 import { Card, Icon, Image } from "semantic-ui-react";
 import { Link } from "react-router-dom";
+import { ILiker, IProduct } from "../../../app/models/product";
 
-const ProductDetailedSellerInfo = () => {
+const ProductDetailedSellerInfo: React.FC<{ product: IProduct }> = ({
+  product,
+}) => {
+  const chef: ILiker = product.likes.filter((x) => x.isChef)[0];
+
   return (
     <Card>
       <Image src="/assets/userPlaceholder.png" size="small" />
       <Card.Content>
-        <Card.Header>Anonymous</Card.Header>
+        <Card.Header>{chef.displayName}</Card.Header>
         <Card.Meta>
           <span className="date">Joined in 2015</span>
         </Card.Meta>
@@ -17,16 +22,15 @@ const ProductDetailedSellerInfo = () => {
         </Card.Description>
       </Card.Content>
       <Card.Content extra>
-        {/* TODO: Link to user's profile */}
-        <Icon name="user" as={Link} to={`/products`} />
+        <Icon name="user" as={Link} to={`/profile/${chef.username}`} />
         22 Following
       </Card.Content>
       <Card.Content extra>
-        <Icon name="thumbs up" as={Link} to={`/products`} />
+        <Icon name="thumbs up" as={Link} to={`/profile/${chef.username}`} />
         11 Liked
       </Card.Content>
       <Card.Content extra>
-        <Icon name="food" as={Link} to={`/products`} />
+        <Icon name="food" as={Link} to={`/profile/${chef.username}`} />
         150 dishes sold
       </Card.Content>
     </Card>

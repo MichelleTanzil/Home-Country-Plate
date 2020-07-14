@@ -20,8 +20,8 @@ const ProductList = () => {
           </Grid.Row>
           <Grid.Row>
             {products.map((product) => (
-              <Grid.Column width={4}>
-                <ProductListItem key={product.id} product={product} />
+              <Grid.Column width={4} key={product.id}>
+                <ProductListItem product={product} />
               </Grid.Column>
             ))}
           </Grid.Row>

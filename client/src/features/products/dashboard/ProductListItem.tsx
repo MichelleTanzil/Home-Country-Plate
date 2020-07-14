@@ -8,9 +8,14 @@ import { RootStoreContext } from "../../../app/stores/rootStore";
 
 const ProductListItem: React.FC<{ product: IProduct }> = ({ product }) => {
   const rootStore = useContext(RootStoreContext);
-  const { addToCart, cart, removeFromCart, loadingInitial } = rootStore.cartStore;
+  const {
+    addToCart,
+    cart,
+    removeFromCart,
+    loadingInitial,
+  } = rootStore.cartStore;
   const chef: ILiker = product.likes.filter((x) => x.isChef)[0];
-  
+
   return (
     <List key={product.id}>
       <Image
@@ -33,21 +38,36 @@ const ProductListItem: React.FC<{ product: IProduct }> = ({ product }) => {
       </List.Item>
       <List.Item>
         <List.Icon name="food" />
-        <List.Content as={Link} to={`/profile/${chef.username}`}>
-          Cooked by {chef.displayName}
+        <List.Content>
+          Cooked by
+          <Link to={`/profile/${chef.username}`}> {chef.displayName}</Link>
         </List.Content>
       </List.Item>
-      {cart?.items.find(x => x.productId === product.id) ?
-        (<Button color="olive" size="large" fluid onClick={() => removeFromCart(product.id)} loading={loadingInitial}>
-          <Button.Content hidden >Remove from cart</Button.Content>
-        </Button>) :
-        (<Button animated="vertical" color="teal" size="large" fluid onClick={() => addToCart(product.id)} loading={loadingInitial}>
-          <Button.Content hidden >Add to cart</Button.Content>
+      {cart?.items.find((x) => x.productId === product.id) ? (
+        <Button
+          color="olive"
+          size="large"
+          fluid
+          onClick={() => removeFromCart(product.id)}
+          loading={loadingInitial}
+        >
+          <Button.Content hidden>Remove from cart</Button.Content>
+        </Button>
+      ) : (
+        <Button
+          animated="vertical"
+          color="teal"
+          size="large"
+          fluid
+          onClick={() => addToCart(product.id)}
+          loading={loadingInitial}
+        >
+          <Button.Content hidden>Add to cart</Button.Content>
           <Button.Content visible>
             <Icon name="shop" />
           </Button.Content>
-        </Button>)
-      }
+        </Button>
+      )}
       <List.Item>
         <ProductLikeButton product={product} />
       </List.Item>

@@ -7,7 +7,7 @@ interface IProps {
 }
 
 const dropzoneStyles = {
-  border: "dashed 3px",
+  border: "dashed 2px",
   borderColor: "#eee",
   borderRadius: "5px",
   paddingTop: "30px",
@@ -16,7 +16,7 @@ const dropzoneStyles = {
 };
 
 const dropzoneActive = {
-  borderColor: "green",
+  borderColor: "#6B97B4",
 };
 
 const PhotoWidgetDropZone: React.FC<IProps> = ({ setFiles }) => {

@@ -22,6 +22,7 @@ const ProfileContent = () => {
       menu={{ fluid: true, vertical: true }}
       menuPosition="right"
       panes={panes}
+      activeIndex={1}
     />
   );
 };

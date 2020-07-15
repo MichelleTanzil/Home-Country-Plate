@@ -19,8 +19,11 @@ export default class ProductStore {
   @observable loadingInitial = false;
   @observable submitting = false;
   @observable loading = false;
+  // Loading indicator for uploading photo from product
   @observable uploadingProductPhoto = false;
+  // Loading indicator for setting main photo from product
   @observable loadingPhoto = false;
+  // Loading indicator for deleting photo from product
   @observable deletingPhoto = false;
 
   get productsByCategories() {

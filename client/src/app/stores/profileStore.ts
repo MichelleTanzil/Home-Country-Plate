@@ -44,9 +44,8 @@ export default class ProfileStore {
     try {
       const photo = await agent.Profiles.uploadPhoto(file);
       runInAction(() => {
-        if (this.profile) {
-          this.profile.photos.push(photo);
-        }
+        if (this.profile) this.profile.photos.push(photo);
+
         if (photo.isMain && this.rootStore.userStore.user) {
           this.rootStore.userStore.user.image = photo.url;
           this.profile!.image = photo.url;

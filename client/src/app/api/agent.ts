@@ -72,6 +72,12 @@ const Products = {
   delete: (id: string) => requests.delete(`/products/${id}`),
   like: (id: string) => requests.post(`/products/${id}/like`, {}),
   unlike: (id: string) => requests.delete(`/products/${id}/like`),
+  uploadPhoto: (photo: Blob, productId: string): Promise<IPhoto> =>
+    requests.postForm(`/photos/product/${productId}`, photo),
+  deletePhoto: (productId: string, photoId: string) =>
+    requests.delete(`/photos/product/${productId}/${photoId}`),
+  setMainPhoto: (productId: string, photoId: string) =>
+    requests.post(`/photos/product/${productId}/${photoId}/setMain`, {}),
 };
 
 const User = {
@@ -86,9 +92,9 @@ const Profiles = {
   get: (username: string): Promise<IProfile> =>
     requests.get(`/profiles/${username}`),
   uploadPhoto: (photo: Blob): Promise<IPhoto> =>
-    requests.postForm(`/photos`, photo),
-  setMainPhoto: (id: string) => requests.post(`/photos/${id}/setMain`, {}),
-  deletePhoto: (id: string) => requests.delete(`/photos/${id}`),
+    requests.postForm(`/photos/user`, photo),
+  setMainPhoto: (id: string) => requests.post(`/photos/user/${id}/setMain`, {}),
+  deletePhoto: (id: string) => requests.delete(`/photos/user/${id}`),
 };
 
 const Cart = {

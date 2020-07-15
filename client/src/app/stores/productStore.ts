@@ -19,6 +19,7 @@ export default class ProductStore {
   @observable loadingInitial = false;
   @observable submitting = false;
   @observable loading = false;
+  @observable uploadingProductPhoto = true;
 
   get productsByCategories() {
     return this.groupProductsByCategory(
@@ -200,6 +201,18 @@ export default class ProductStore {
     } catch (error) {
       runInAction(() => {});
       toast.error("Problem with unliking this dish");
+    }
+  };
+
+  @action uploadPhoto = async (id: string, file: Blob) => {
+    this.uploadingProductPhoto = true;
+    try {
+      let product = this.getProduct(id);
+    } catch (error) {
+      toast.error("Problem uploading the photo");
+      runInAction(() => {
+        this.uploadingProductPhoto = false;
+      });
     }
   };
 }

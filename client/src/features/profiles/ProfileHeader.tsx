@@ -26,7 +26,7 @@ const ProfileHeader: React.FC<IProps> = ({ profile }) => {
               <Item.Image
                 avatar
                 size="small"
-                src={profile.image || "/assets/user.png"}
+                src={profile.image || "/assets/userPlaceholder.png"}
               />
               <Item.Content verticalAlign="middle">
                 <Header as="h1">{profile.displayName}</Header>

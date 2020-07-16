@@ -5,8 +5,6 @@ import { ICartItem, ICart } from "../models/cart";
 import ProductStore from "./productStore";
 import { IProduct } from "../models/product";
 import { toast } from "react-toastify";
-import { CardElement } from "@stripe/react-stripe-js";
-import { Stripe, StripeElements, StripeCardElement } from "@stripe/stripe-js";
 
 export default class CartStore {
   rootStore: RootStore;

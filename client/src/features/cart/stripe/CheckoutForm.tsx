@@ -1,14 +1,12 @@
-import React, { useContext, SyntheticEvent, useState } from 'react';
-import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
-import { Button, Loader } from 'semantic-ui-react';
-import { observer } from 'mobx-react-lite';
-import { RootStoreContext } from '../../../app/stores/rootStore';
-import { toast } from 'react-toastify';
-import agent from '../../../app/api/agent';
-
+import React, { useContext, SyntheticEvent } from "react";
+import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import { Button } from "semantic-ui-react";
+import { observer } from "mobx-react-lite";
+import { RootStoreContext } from "../../../app/stores/rootStore";
+import { toast } from "react-toastify";
+import agent from "../../../app/api/agent";
 
 const CheckoutForm = () => {
-
   const rootStore = useContext(RootStoreContext);
 
   const elements = useElements();
@@ -27,9 +25,9 @@ const CheckoutForm = () => {
         card: elements?.getElement(CardElement)!,
         billing_details: {
           name: rootStore.userStore.user?.displayName,
-        }
-      }
-    })
+        },
+      },
+    });
     if (result?.error) {
       toast.error("error in payment proccess");
       console.log(result.error.message);
@@ -38,15 +36,14 @@ const CheckoutForm = () => {
         toast.success("payment procccess");
       }
     }
-  }
+  };
 
   return (
-    <form onSubmit={onSub} >
+    <form onSubmit={onSub}>
       <CardElement />
       <Button>Submit</Button>
     </form>
   );
 };
-
 
 export default observer(CheckoutForm);

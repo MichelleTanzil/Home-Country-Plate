@@ -10,6 +10,7 @@ export interface IProduct {
   isLiked: boolean;
   isChef: boolean;
   likes: ILiker[];
+  photos: IPhoto[];
 }
 
 export class ProductFormValues implements Partial<IProduct> {
@@ -28,4 +29,10 @@ export interface ILiker {
   displayName: string;
   image: string;
   isChef: boolean;
+}
+
+export interface IPhoto {
+  id: string;
+  url: string;
+  isMain: boolean;
 }

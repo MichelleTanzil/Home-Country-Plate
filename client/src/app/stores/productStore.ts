@@ -1,6 +1,6 @@
 import { observable, action, runInAction } from "mobx";
 import { SyntheticEvent } from "react";
-import { IProduct, ILiker } from "../models/product";
+import { IProduct, ILiker, IPhoto } from "../models/product";
 import agent from "../api/agent";
 import { history } from "../..";
 import { toast } from "react-toastify";
@@ -19,6 +19,12 @@ export default class ProductStore {
   @observable loadingInitial = false;
   @observable submitting = false;
   @observable loading = false;
+  // Loading indicator for uploading photo from product
+  @observable uploadingProductPhoto = false;
+  // Loading indicator for setting main photo from product
+  @observable loadingPhoto = false;
+  // Loading indicator for deleting photo from product
+  @observable deletingPhoto = false;
 
   get productsByCategories() {
     return this.groupProductsByCategory(
@@ -200,6 +206,60 @@ export default class ProductStore {
     } catch (error) {
       runInAction(() => {});
       toast.error("Problem with unliking this dish");
+    }
+  };
+
+  @action uploadPhoto = async (id: string, file: Blob) => {
+    this.uploadingProductPhoto = true;
+    try {
+      let product = this.getProduct(id);
+      const photo = await agent.Products.uploadPhoto(file, id);
+      runInAction(() => {
+        if (product) product.photos.push(photo);
+        this.uploadingProductPhoto = false;
+      });
+    } catch (error) {
+      toast.error("Problem uploading the photo for the product");
+      runInAction(() => {
+        this.uploadingProductPhoto = false;
+      });
+    }
+  };
+
+  @action deletePhoto = async (id: string, photo: IPhoto) => {
+    this.deletingPhoto = true;
+    try {
+      let product = this.getProduct(id);
+      await agent.Products.deletePhoto(id, photo.id);
+      runInAction(() => {
+        product.photos = product.photos.filter(
+          (p: IPhoto) => p.id !== photo.id
+        );
+        this.deletingPhoto = false;
+      });
+    } catch (error) {
+      toast.error("Problem deleting the photo for the product");
+      runInAction(() => {
+        this.deletingPhoto = false;
+      });
+    }
+  };
+
+  @action setMainPhoto = async (id: string, photo: IPhoto) => {
+    this.loadingPhoto = true;
+    try {
+      let product = this.getProduct(id);
+      await agent.Products.setMainPhoto(id, photo.id);
+      runInAction(() => {
+        product.photos.find((p: IPhoto) => p.isMain).isMain = false;
+        product.photos.find((p: IPhoto) => p.id === photo.id).isMain = true;
+        this.loadingPhoto = false;
+      });
+    } catch (error) {
+      toast.error("Problem setting photo as main for the product");
+      runInAction(() => {
+        this.loadingPhoto = false;
+      });
     }
   };
 }

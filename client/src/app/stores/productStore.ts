@@ -21,10 +21,8 @@ export default class ProductStore {
   @observable loading = false;
   // Loading indicator for uploading photo from product
   @observable uploadingProductPhoto = false;
-  // Loading indicator for setting main photo from product
+  // Loading indicator for setting main photo or deleting from product
   @observable loadingPhoto = false;
-  // Loading indicator for deleting photo from product
-  @observable deletingPhoto = false;
 
   get productsByCategories() {
     return this.groupProductsByCategory(
@@ -220,6 +218,7 @@ export default class ProductStore {
       });
     } catch (error) {
       toast.error("Problem uploading the photo for the product");
+      console.log(`error: ${error}`);
       runInAction(() => {
         this.uploadingProductPhoto = false;
       });
@@ -227,7 +226,7 @@ export default class ProductStore {
   };
 
   @action deletePhoto = async (id: string, photo: IPhoto) => {
-    this.deletingPhoto = true;
+    this.loadingPhoto = true;
     try {
       let product = this.getProduct(id);
       await agent.Products.deletePhoto(id, photo.id);
@@ -235,12 +234,12 @@ export default class ProductStore {
         product.photos = product.photos.filter(
           (p: IPhoto) => p.id !== photo.id
         );
-        this.deletingPhoto = false;
+        this.loadingPhoto = false;
       });
     } catch (error) {
       toast.error("Problem deleting the photo for the product");
       runInAction(() => {
-        this.deletingPhoto = false;
+        this.loadingPhoto = false;
       });
     }
   };

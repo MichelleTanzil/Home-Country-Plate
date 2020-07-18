@@ -71,7 +71,7 @@ const ProductDetailedPhotos: React.FC<{ product: IProduct }> = ({
                           name={photo.id}
                           disabled={photo.isMain}
                           onClick={(e) => {
-                            deletePhoto(photo.id, photo);
+                            deletePhoto(photo.id, product.id);
                             setDeleteTarget(e.currentTarget.name);
                           }}
                           loading={loadingPhoto && deleteTarget === photo.id}

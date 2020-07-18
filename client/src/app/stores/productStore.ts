@@ -225,15 +225,13 @@ export default class ProductStore {
     }
   };
 
-  @action deletePhoto = async (id: string, photo: IPhoto) => {
+  @action deletePhoto = async (photoid: string, productid: string) => {
     this.loadingPhoto = true;
     try {
-      let product = this.getProduct(id);
-      await agent.Products.deletePhoto(id, photo.id);
+      let product = this.getProduct(productid);
+      await agent.Products.deletePhoto(productid, photoid);
       runInAction(() => {
-        product.photos = product.photos.filter(
-          (p: IPhoto) => p.id !== photo.id
-        );
+        product.photos = product.photos.filter((p: IPhoto) => p.id !== photoid);
         this.loadingPhoto = false;
       });
     } catch (error) {

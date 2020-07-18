@@ -244,14 +244,14 @@ export default class ProductStore {
     }
   };
 
-  @action setMainPhoto = async (id: string, photo: IPhoto) => {
+  @action setMainPhoto = async (photoid: string, productid: string) => {
     this.loadingPhoto = true;
     try {
-      let product = this.getProduct(id);
-      await agent.Products.setMainPhoto(id, photo.id);
+      let product = this.getProduct(productid);
+      await agent.Products.setMainPhoto(productid, photoid);
       runInAction(() => {
         product.photos.find((p: IPhoto) => p.isMain).isMain = false;
-        product.photos.find((p: IPhoto) => p.id === photo.id).isMain = true;
+        product.photos.find((p: IPhoto) => p.id === photoid).isMain = true;
         this.loadingPhoto = false;
       });
     } catch (error) {

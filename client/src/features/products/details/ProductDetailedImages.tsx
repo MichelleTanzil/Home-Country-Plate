@@ -1,6 +1,7 @@
 import React from "react";
 import { Image } from "semantic-ui-react";
 import { IProduct } from "../../../app/models/product";
+import { observer } from "mobx-react-lite";
 
 const ProductImageStyle = {
   display: "block",
@@ -18,4 +19,4 @@ const ProductDetailedImages: React.FC<{ product: IProduct }> = ({
     />
   );
 };
-export default ProductDetailedImages;
+export default observer(ProductDetailedImages);

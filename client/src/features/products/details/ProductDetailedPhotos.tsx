@@ -58,7 +58,7 @@ const ProductDetailedPhotos: React.FC<{ product: IProduct }> = ({
                         <Button
                           name={photo.id}
                           onClick={(e) => {
-                            setMainPhoto(photo.id, photo);
+                            setMainPhoto(photo.id, product.id);
                             setTarget(e.currentTarget.name);
                           }}
                           disabled={photo.isMain}

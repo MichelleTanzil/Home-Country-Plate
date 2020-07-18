@@ -19,7 +19,7 @@ namespace Application.Products
     [JsonPropertyName("likes")]
     public ICollection<LikesDto> UserProducts { get; set; }
 
-    [JsonPropertyName("Photos")]
+    [JsonPropertyName("photos")]
     public ICollection<ProductPhoto> ProductPhotos { get; set; }
 
   }

@@ -8,6 +8,7 @@ import ProductDetailedImages from "./ProductDetailedImages";
 import ProductDetailedInfo from "./ProductDetailedInfo";
 import ProductDetailedSellerInfo from "./ProductDetailedSellerInfo";
 import ProductLikeButton from "../../common/ProductLikeButton";
+import ProductDetailedPhotos from "./ProductDetailedPhotos";
 interface DetailParams {
   id: string;
 }
@@ -30,11 +31,11 @@ const ProductDetails: React.FC<RouteComponentProps<DetailParams>> = ({
   return (
     <Grid>
       <Grid.Row>
-        <Grid.Column width={8}>
-          <ProductDetailedImages />
+        <Grid.Column width={6}>
+          <ProductDetailedImages product={product} />
           <ProductLikeButton product={product} />
         </Grid.Column>
-        <Grid.Column width={8}>
+        <Grid.Column width={10}>
           <ProductDetailedInfo product={product} />
           <Button animated="vertical" color="teal" fluid size="large">
             <Button.Content hidden>Add to cart</Button.Content>
@@ -47,6 +48,9 @@ const ProductDetails: React.FC<RouteComponentProps<DetailParams>> = ({
       <Grid.Row>
         <Grid.Column width={6}>
           <ProductDetailedSellerInfo product={product} />
+        </Grid.Column>
+        <Grid.Column width={10}>
+          <ProductDetailedPhotos product={product} />
         </Grid.Column>
       </Grid.Row>
     </Grid>

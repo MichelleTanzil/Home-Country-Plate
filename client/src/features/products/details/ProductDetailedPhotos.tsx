@@ -51,38 +51,37 @@ const ProductDetailedPhotos: React.FC<{ product: IProduct }> = ({
             <Card.Group itemsPerRow={5}>
               {product.photos &&
                 product.photos.map((photo) => (
-                  <p>{photo.url}</p>
-                  // <Card key={photo.id}>
-                  //   <Image src={photo.url} />
-                  //   {product.isChef && (
-                  //     <Button.Group fluid widths={2}>
-                  //       <Button
-                  //         name={photo.id}
-                  //         onClick={(e) => {
-                  //           setMainPhoto(photo.id, photo);
-                  //           setTarget(e.currentTarget.name);
-                  //         }}
-                  //         disabled={photo.isMain}
-                  //         loading={loadingPhoto && target === photo.id}
-                  //         basic
-                  //         positive
-                  //         content="Main"
-                  //       />
-                  //       <Button
-                  //         name={photo.id}
-                  //         disabled={photo.isMain}
-                  //         onClick={(e) => {
-                  //           deletePhoto(photo.id, photo);
-                  //           setDeleteTarget(e.currentTarget.name);
-                  //         }}
-                  //         loading={loadingPhoto && deleteTarget === photo.id}
-                  //         basic
-                  //         negative
-                  //         icon="trash"
-                  //       />
-                  //     </Button.Group>
-                  //   )}
-                  // </Card>
+                  <Card key={photo.id}>
+                    <Image src={photo.url} />
+                    {product.isChef && (
+                      <Button.Group fluid widths={2}>
+                        <Button
+                          name={photo.id}
+                          onClick={(e) => {
+                            setMainPhoto(photo.id, photo);
+                            setTarget(e.currentTarget.name);
+                          }}
+                          disabled={photo.isMain}
+                          loading={loadingPhoto && target === photo.id}
+                          basic
+                          positive
+                          content="Main"
+                        />
+                        <Button
+                          name={photo.id}
+                          disabled={photo.isMain}
+                          onClick={(e) => {
+                            deletePhoto(photo.id, photo);
+                            setDeleteTarget(e.currentTarget.name);
+                          }}
+                          loading={loadingPhoto && deleteTarget === photo.id}
+                          basic
+                          negative
+                          icon="trash"
+                        />
+                      </Button.Group>
+                    )}
+                  </Card>
                 ))}
             </Card.Group>
           )}

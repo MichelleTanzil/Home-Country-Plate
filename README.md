@@ -25,6 +25,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- markdownlint-disable -->
 <table>
   <tr>
+    <td align="center"><a href="https://github.com/natrng"><img src="https://avatars0.githubusercontent.com/u/42013142?v=4" width="100px;" alt=""/><br /><sub><b>Nadia Nguyen</b></sub></a><br /><a href="https://github.com/MichelleTanzil/Home-Country-Plate/commits?author=natrng" title="Code">💻</a></td>
     <td align="center"><a href="https://tanzil.dev/"><img src="https://avatars3.githubusercontent.com/u/36688809?v=4" width="100px;" alt=""/><br /><sub><b>Michelle Tanzil</b></sub></a><br /><a href="https://github.com/MichelleTanzil/Home-Country-Plate/commits?author=MichelleTanzil" title="Code">💻</a></td>
   </tr>
 </table>

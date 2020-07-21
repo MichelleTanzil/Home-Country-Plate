@@ -39,8 +39,7 @@ const ProductListItem: React.FC<{ product: IProduct }> = ({ product }) => {
       <List.Item>
         <List.Icon name="food" />
         <List.Content>
-          Cooked by
-          <Link to={`/profile/${chef.username}`}> {chef.displayName}</Link>
+          Cooked by <a href={`/profile/${chef.username}`}>{chef.displayName}</a>
         </List.Content>
       </List.Item>
       {cart?.items.find((x) => x.productId === product.id) ? (

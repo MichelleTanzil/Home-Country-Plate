@@ -11,8 +11,9 @@ const ProductDetailedSellerInfo: React.FC<{ product: IProduct }> = ({
   return (
     <Card>
       <Image
-        src="/assets/userPlaceholder.png"
-        size="small"
+        avatar
+        size="large"
+        src={chef.image || "/assets/userPlaceholder.png"}
         as={Link}
         to={`/profile/${chef.username}`}
       />

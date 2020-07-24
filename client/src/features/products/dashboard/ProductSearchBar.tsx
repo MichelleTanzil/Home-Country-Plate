@@ -13,20 +13,19 @@ const ProductSearchBar = () => {
   const [value, setValue] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleResultSelect = (e: any, { result: {} }) => setBarState();
-  const handleSearchChange = (e: any, { result: {} }) => setBarState();
+  // const handleResultSelect = (e: any, { result: {} }) => setBarState();
+  // const handleSearchChange = (e: any, { result: {} }) => setBarState();
 
   return (
-    <Search
-      loading={loading}
-      onResultSelect={handleResultSelect}
-      onSearchChange={_.debounce(handleSearchChange, 500, {
-        leading: true,
-      })}
-      results={results}
-      value={value}
-      showNoResults
-    />
+    <div></div>
+    // <Search
+    //   loading={loading}
+    //   onResultSelect={handleResultSelect}
+    //   onSearchChange={handleSearchChange}
+    //   results={results}
+    //   value={value}
+    //   showNoResults
+    // />
   );
 };
 

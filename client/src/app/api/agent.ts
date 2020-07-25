@@ -95,13 +95,16 @@ const Profiles = {
     requests.postForm(`/photos/user`, photo),
   setMainPhoto: (id: string) => requests.post(`/photos/user/${id}/setMain`, {}),
   deletePhoto: (id: string) => requests.delete(`/photos/user/${id}`),
+  update: (profile: Partial<IProfile>) => {
+    requests.put(`/profiles/`, profile);
+  },
 };
 
 const Cart = {
   get: (): Promise<ICart> => requests.get("/cart"),
   addToCart: (id: string) => requests.post(`/cart/${id}`, {}),
   remove: (id: string) => requests.post(`/cart/${id}/remove`, {}),
-  pay: () : Promise<string> => requests.post("/cart/checkout", {}),
+  pay: (): Promise<string> => requests.post("/cart/checkout", {}),
 };
 
 export default {

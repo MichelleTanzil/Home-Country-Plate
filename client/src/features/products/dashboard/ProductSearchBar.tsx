@@ -6,7 +6,7 @@ import { IProduct } from "../../../app/models/product";
 
 const ProductSearchBar = () => {
   const rootStore = useContext(RootStoreContext);
-  const { products } = rootStore.productStore;
+  const { productsByCategories } = rootStore.productStore;
 
   const [barState, setBarState] = useState();
   const [results, setResults] = useState<IProduct[]>([]);

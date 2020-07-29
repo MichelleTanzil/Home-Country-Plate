@@ -1,31 +1,48 @@
 import React, { useContext, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { RootStoreContext } from "../../../app/stores/rootStore";
-import { Search, Grid, Header, Segment } from "semantic-ui-react";
+import { Search } from "semantic-ui-react";
 import { IProduct } from "../../../app/models/product";
+import _ from "lodash";
 
 const ProductSearchBar = () => {
   const rootStore = useContext(RootStoreContext);
   const { productsByCategories } = rootStore.productStore;
 
-  const [barState, setBarState] = useState();
   const [results, setResults] = useState<IProduct[]>([]);
   const [value, setValue] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // const handleResultSelect = (e: any, { result: {} }) => setBarState();
-  // const handleSearchChange = (e: any, { result: {} }) => setBarState();
+  const handleResultSelect = (event: React.MouseEvent, result: IProduct) =>
+    setValue([...results, result]);
+  const handleSearchChange = (event: React.MouseEvent, value: string) => {
+    setLoading(true);
+    setTimeout(() => {
+      if (value.length < 1) {
+        setLoading(false);
+        setResults([]);
+        setValue("");
+      }
+      const re = new RegExp(_.escapeRegExp(value), "i");
+      const isMatch = (result: IProduct) => re.test(result.title);
+      setLoading(false);
+      setResults(_.filter(productsByCategories, isMatch));
+    }, 300);
+  };
 
   return (
-    <div></div>
-    // <Search
-    //   loading={loading}
-    //   onResultSelect={handleResultSelect}
-    //   onSearchChange={handleSearchChange}
-    //   results={results}
-    //   value={value}
-    //   showNoResults
-    // />
+    <Search
+      loading={loading}
+      onResultSelect={() => handleResultSelect}
+      onSearchChange={() =>
+        _.debounce(handleSearchChange, 500, {
+          leading: true,
+        })
+      }
+      results={results}
+      value={value}
+      showNoResults={true}
+    />
   );
 };
 

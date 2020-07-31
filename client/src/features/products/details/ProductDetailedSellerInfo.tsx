@@ -11,10 +11,12 @@ const ProductDetailedSellerInfo: React.FC<{ product: IProduct }> = ({
   return (
     <Card>
       <Image
-        src="/assets/userPlaceholder.png"
+        circular
         size="small"
+        src={chef.image || "/assets/userPlaceholder.png"}
         as={Link}
         to={`/profile/${chef.username}`}
+        centered
       />
       <Card.Content>
         <Card.Header>
@@ -23,22 +25,24 @@ const ProductDetailedSellerInfo: React.FC<{ product: IProduct }> = ({
         <Card.Meta>
           <span className="date">Joined in 2015</span>
         </Card.Meta>
-        <Card.Description>
-          Anonymous is a cook who has been cooking for decades specializing in
-          burgers.
-        </Card.Description>
       </Card.Content>
       <Card.Content extra>
-        <Icon name="user" as={Link} to={`/profile/${chef.username}`} />
-        22 Following
+        <a href={`/profile/${chef.username}`}>
+          <Icon name="user" />
+          22 Following
+        </a>
       </Card.Content>
       <Card.Content extra>
-        <Icon name="thumbs up" as={Link} to={`/profile/${chef.username}`} />
-        11 Liked
+        <a href={`/profile/${chef.username}`}>
+          <Icon name="thumbs up" />
+          11 Liked
+        </a>
       </Card.Content>
       <Card.Content extra>
-        <Icon name="food" as={Link} to={`/profile/${chef.username}`} />
-        150 dishes sold
+        <a href={`/profile/${chef.username}`}>
+          <Icon name="food" />
+          150 dishes sold
+        </a>
       </Card.Content>
     </Card>
   );

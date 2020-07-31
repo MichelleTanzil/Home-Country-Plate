@@ -9,27 +9,7 @@
   "imageSize": 100,
   "commit": true,
   "commitConvention": "gitmoji",
-  "contributors": [
-    {
-
-      "login": "natrng",
-      "name": "Nadia Nguyen",
-      "avatar_url": "https://avatars0.githubusercontent.com/u/42013142?v=4",
-      "profile": "https://github.com/natrng",
-       "contributions": [
-        "code"
-      ]
-      },
-  {
-      "login": "MichelleTanzil",
-      "name": "Michelle Tanzil",
-      "avatar_url": "https://avatars3.githubusercontent.com/u/36688809?v=4",
-      "profile": "https://tanzil.dev/",
-      "contributions": [
-        "code"
-      ]
-    }
+  "contributors": [],
   "contributorsPerLine": 7,
   "skipCi": true
-
 }

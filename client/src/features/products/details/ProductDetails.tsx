@@ -31,11 +31,11 @@ const ProductDetails: React.FC<RouteComponentProps<DetailParams>> = ({
   return (
     <Grid>
       <Grid.Row>
-        <Grid.Column width={6}>
+        <Grid.Column width={6} stretched>
           <ProductDetailedImages product={product} />
           <ProductLikeButton product={product} />
         </Grid.Column>
-        <Grid.Column width={10}>
+        <Grid.Column width={7}>
           <ProductDetailedInfo product={product} />
           <Button animated="vertical" color="teal" fluid size="large">
             <Button.Content hidden>Add to cart</Button.Content>
@@ -44,12 +44,12 @@ const ProductDetails: React.FC<RouteComponentProps<DetailParams>> = ({
             </Button.Content>
           </Button>
         </Grid.Column>
-      </Grid.Row>
-      <Grid.Row>
-        <Grid.Column width={6}>
+        <Grid.Column width={3}>
           <ProductDetailedSellerInfo product={product} />
         </Grid.Column>
-        <Grid.Column width={10}>
+      </Grid.Row>
+      <Grid.Row>
+        <Grid.Column width={13}>
           <ProductDetailedPhotos product={product} />
         </Grid.Column>
       </Grid.Row>

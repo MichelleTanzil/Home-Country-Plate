@@ -1,4 +1,4 @@
-import { observable, action, runInAction } from "mobx";
+import { observable, action, runInAction, computed } from "mobx";
 import { SyntheticEvent } from "react";
 import { IProduct, ILiker, IPhoto } from "../models/product";
 import agent from "../api/agent";
@@ -13,7 +13,6 @@ export default class ProductStore {
     this.rootStore = rootStore;
   }
   @observable productRegistry = new Map();
-  @observable products: IProduct[] = [];
   @observable product: IProduct | null = null;
   @observable deleteTarget = "";
   @observable loadingInitial = false;
@@ -24,7 +23,7 @@ export default class ProductStore {
   // Loading indicator for setting main photo or deleting from product
   @observable loadingPhoto = false;
 
-  get productsByCategories() {
+  @computed get productsByCategories() {
     return this.groupProductsByCategory(
       Array.from(this.productRegistry.values())
     );

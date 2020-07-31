@@ -11,8 +11,23 @@ namespace Application.Products
 {
   public class List
   {
-    public class Query : IRequest<List<ProductDto>> { }
-    public class Handler : IRequestHandler<Query, List<ProductDto>>
+    public class ProductsEnvelope
+    {
+      public List<ProductDto> Products { get; set; }
+      public int ProductCount { get; set; }
+    }
+    public class Query : IRequest<ProductsEnvelope>
+    {
+      public Query(int? limit, int? offset)
+      {
+        Limit = limit;
+        Offset = offset;
+
+      }
+      public int? Limit { get; set; }
+      public int? Offset { get; set; }
+    }
+    public class Handler : IRequestHandler<Query, ProductsEnvelope>
     {
       private readonly DataContext _context;
       private readonly IMapper _mapper;
@@ -22,11 +37,11 @@ namespace Application.Products
         _context = context;
       }
 
-      public async Task<List<ProductDto>> Handle(Query request, CancellationToken cancellationToken)
+      public async Task<ProductsEnvelope> Handle(Query request, CancellationToken cancellationToken)
       {
         var products = await _context.Products
           .ToListAsync();
-        return _mapper.Map<List<Product>, List<ProductDto>>(products);
+        return _mapper.Map<List<Product>, ProductsEnvelope>(products);
       }
     }
   }

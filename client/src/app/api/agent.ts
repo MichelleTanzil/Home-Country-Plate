@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { IProduct } from "../models/product";
+import { IProduct, IProductsEnvelope } from "../models/product";
 import { history } from "../..";
 import { toast } from "react-toastify";
 import { IUser, IUserFormValues } from "../models/user";
@@ -61,7 +61,8 @@ const requests = {
 };
 
 const Products = {
-  list: (): Promise<IProduct[]> => requests.get("/products"),
+  list: (limit?: number, page?: number): Promise<IProductsEnvelope> =>
+    requests.get(`/products?limit=${limit}&offset=${page ? page * limit! : 0}`),
   details: (id: string) => requests.get(`/products/${id}`),
   create: (product: IProduct) => {
     console.log("PRODUCT FROM AGENT.TS", product);

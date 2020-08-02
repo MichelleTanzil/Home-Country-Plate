@@ -1,3 +1,8 @@
+export interface IProductsEnvelope {
+  products: IProduct[];
+  productCount: number;
+}
+
 export interface IProduct {
   id: string;
   title: string;

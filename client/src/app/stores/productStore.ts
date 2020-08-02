@@ -7,6 +7,8 @@ import { toast } from "react-toastify";
 import { RootStore } from "./rootStore";
 import { setProductProps, createLike } from "../common/util/util";
 
+const LIMIT = 2;
+
 export default class ProductStore {
   rootStore: RootStore;
   constructor(rootStore: RootStore) {
@@ -22,6 +24,17 @@ export default class ProductStore {
   @observable uploadingProductPhoto = false;
   // Loading indicator for setting main photo or deleting from product
   @observable loadingPhoto = false;
+  // For paging
+  @observable productCount = 0;
+  @observable page = 0;
+
+  @computed get totalPages() {
+    return Math.ceil(this.productCount / LIMIT);
+  }
+
+  @action setPage = (page: number) => {
+    this.page = page;
+  };
 
   @computed get productsByCategories() {
     return this.groupProductsByCategory(
@@ -49,12 +62,14 @@ export default class ProductStore {
   @action loadProducts = async () => {
     this.loadingInitial = true;
     try {
-      const products = await agent.Products.list();
+      const productsEnvelope = await agent.Products.list(LIMIT, this.page);
+      const { products, productCount } = productsEnvelope;
       runInAction("loading products", () => {
         products.forEach((product) => {
           setProductProps(product, this.rootStore.userStore.user);
           this.productRegistry.set(product.id, product);
         });
+        this.productCount = productCount;
         this.loadingInitial = false;
       });
     } catch (error) {

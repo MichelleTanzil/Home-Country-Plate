@@ -7,6 +7,7 @@ import ProductListItem from "./ProductListItem";
 const ProductList = () => {
   const rootStore = useContext(RootStoreContext);
   const { productsByCategories } = rootStore.productStore;
+  console.log(`productsByCategories: ${productsByCategories}`);
   return (
     <Container>
       {productsByCategories.map(([group, products]) => (

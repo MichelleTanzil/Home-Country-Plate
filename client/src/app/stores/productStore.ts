@@ -1,4 +1,4 @@
-import { observable, action, runInAction, computed } from "mobx";
+import { observable, action, runInAction, computed, reaction } from "mobx";
 import { SyntheticEvent } from "react";
 import { IProduct, ILiker, IPhoto } from "../models/product";
 import agent from "../api/agent";
@@ -13,6 +13,15 @@ export default class ProductStore {
   rootStore: RootStore;
   constructor(rootStore: RootStore) {
     this.rootStore = rootStore;
+
+    reaction(
+      () => this.predicate.keys(),
+      () => {
+        this.page = 0;
+        this.productRegistry.clear();
+        this.loadProducts();
+      }
+    );
   }
   @observable productRegistry = new Map();
   @observable product: IProduct | null = null;
@@ -27,6 +36,7 @@ export default class ProductStore {
   // For paging
   @observable productCount = 0;
   @observable page = 0;
+  @observable predicate = new Map();
 
   @computed get totalPages() {
     return Math.ceil(this.productCount / LIMIT);
@@ -35,6 +45,13 @@ export default class ProductStore {
   @action setPage = (page: number) => {
     this.page = page;
   };
+
+  // @action setPredicate = (predicate: string, value: string | Date) => {
+  //   this.predicate.clear();
+  //   if (predicate !== "all") {
+  //     this.predicate.set(predicate, value);
+  //   }
+  // };
 
   @computed get productsByCategories() {
     return this.groupProductsByCategory(
@@ -64,6 +81,7 @@ export default class ProductStore {
     try {
       const productsEnvelope = await agent.Products.list(LIMIT, this.page);
       const { products, productCount } = productsEnvelope;
+      console.log(`productsEnvelope: ${JSON.stringify(productsEnvelope)}`);
       runInAction("loading products", () => {
         products.forEach((product) => {
           setProductProps(product, this.rootStore.userStore.user);

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -39,9 +40,18 @@ namespace Application.Products
 
       public async Task<ProductsEnvelope> Handle(Query request, CancellationToken cancellationToken)
       {
-        var products = await _context.Products
-          .ToListAsync();
-        return _mapper.Map<List<Product>, ProductsEnvelope>(products);
+
+        var queryable = _context.Products.AsQueryable();
+
+        var products = await queryable
+        .Skip(request.Offset ?? 0)
+        .Take(request.Limit ?? 3).ToListAsync();
+
+        return new ProductsEnvelope
+        {
+          Products = _mapper.Map<List<Product>, List<ProductDto>>(products),
+          ProductCount = queryable.Count()
+        };
       }
     }
   }

@@ -1,4 +1,4 @@
-# Home Country Plate
+# Home Country Plate - Under Development
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 
@@ -13,12 +13,30 @@ Home Country Plate introduces home cooks around your area to purchase a variety 
 
 ## Techonologies Used
 
+---
+
 - ASP .NET - CQRS Architecture
 - React
 - SQLite - Temporary Database
 - Cloudinary - Cloud Storage for large files
 
+## Usage
+
+---
+
+### Prerequisites:
+
+- .NET Core 3.1
+- Node
+
+### Running the application:
+
+- Open a terminal, navigate to the client folder, `cd client`. Then, install the node dependencies, `npm i`. Finally, to run the application, `npm run start`.
+- In a second terminal, navigate to the API folder, `cd API`. Then run the application using `dotnet watch run`
+
 ## Contributors ✨
+
+---
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 

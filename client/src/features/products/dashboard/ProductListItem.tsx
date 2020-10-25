@@ -42,7 +42,7 @@ const ProductListItem: React.FC<{ product: IProduct }> = ({ product }) => {
           Cooked by <a href={`/profile/${chef.username}`}>{chef.displayName}</a>
         </List.Content>
       </List.Item>
-      {cart?.items.find((x) => x.productId === product.id) ? (
+      {/* {cart?.items.find((x) => x.productId === product.id) ? (
         <Button
           color="olive"
           size="large"
@@ -66,7 +66,7 @@ const ProductListItem: React.FC<{ product: IProduct }> = ({ product }) => {
             <Icon name="shop" />
           </Button.Content>
         </Button>
-      )}
+      )} */}
       <List.Item>
         <ProductLikeButton product={product} />
       </List.Item>

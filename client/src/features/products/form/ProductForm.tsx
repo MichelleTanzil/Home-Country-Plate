@@ -142,8 +142,6 @@ const ProductForm: React.FC<RouteComponentProps<DetailParams>> = ({
                   type="number"
                   component={PriceInput}
                 />
-                {/* TODO: Image upload */}
-                <p>Image upload goes here</p>
                 <Button
                   loading={submitting}
                   disabled={loading || invalid || pristine}
